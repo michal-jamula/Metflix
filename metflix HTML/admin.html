@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+		<!-- Load header -->
+		<script type='text/javascript'>
+			$(document).ready(function () {
+				$("#header").load("./page_layout/header.html");
+			});
+		</script>
+	
+		<!-- Load admin sidebar -->
+		<script type='text/javascript'>
+			$(document).ready(function () {
+				$("#admin-side-panel").load("./page_layout/admin_sidebar.html");
+			});
+		</script>
+
+	
+		<title>index.html</title>
+
+		<link rel="stylesheet" href="/admin/assets/css/portal.css"/>
+		
+
+	
+	</head>
+
+<body class="app">
+
+	<header class="app-header fixed-top" id="admin_sidebar">
+		<div id="header"></div>
+		<div id="admin-side-panel"></div>
+	</header>
+
+
+
+
+	<div class="app-wrapper" style="border: 3px solid red;">
+		<h1 class="display-2">Overview Here</h1>
+	</div>
+
+
+
+
+
+
+	<!-- Javascript -->
+	<script src="assets/plugins/popper.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+	<!-- Page Specific JS -->
+	<script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

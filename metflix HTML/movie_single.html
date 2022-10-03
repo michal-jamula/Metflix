@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Load header -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#header").load("./page_layout/header.html");
+        });
+    </script>
+
+
+    <!-- Load footer -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#footer").load("./page_layout/footer.html");
+        });
+    </script>
+
+    <title>index.html</title>
+
+</head>
+
+
+
+<body>
+    <!-- Load Header -->
+    <header>
+        <div id="header"></div>
+    </header>
+
+
+
+    <section id="landing">
+
+        <!-- Main content 1 -->
+        <div class="bg-image" style="background-image: url('img/landing-background.jpg'); height: 70vh;">
+            <div class="mask" style=" background-color: rgba(0, 0, 0, 0.675); height:70vh;">
+
+
+                <!-- Set padding and/or margin on x-axis to 0 as this causes extra whitespace
+                on the right side of the page -->
+                <div class=" row text-light text-center" style="border: 2px solid red; height: 70vh;">
+
+                    
+                    <h4 class="display-6 text-outline-gray fw-semibold my-4"><span class="align-middle"></span></h4>
+
+                    <span class="align-middle"><h4 class="display-6 ">--Video here--</h4></span>
+
+                </div>
+            </div>
+        </div> <!-- end of main content 1-->
+
+
+        <div class="container text-white ">
+            <p>Video description Video description Video description Video description Video description Video description
+                 Video description Video description Video description Video description Video description Video description Video description Video description </p>
+        </div>
+
+
+
+    </section>
+
+
+
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+</body>
+
+</html>

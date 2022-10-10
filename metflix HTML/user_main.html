@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Carousel</title>
+
+    <!-- This is needed for the carousel to work-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
@@ -30,7 +29,7 @@
         });
        </script>
        
-       <title>user.html</title>
+       <title>user_main.html</title>
 
 </head>
 
@@ -42,23 +41,36 @@
     <div id="header"></div>
 </header>
 
-
-    <div class="container-fluid"> 
-        <h1 class="display-1 my-4 text-center text-white">Comedy Movies</h1>
+    <!-- TODO: Fix the mobile functionality of this part-->
+    <!-- The first item should not be deleted as it has the most functionality -->
+    <div class="container-fluid my-5 py-3"> 
+        <h1 class="display-5 pt-5 pb-4 text-white">Comedy Movies</h1>
         <div class="owl-carousel owl-theme">
-            <div class="card bg-dark h-75">
-                <a href="./movie_single.html" style="text-decoration: none;">
-                <img src="./img/movies_square/souls-movie-square.jpg" class="card-img-top img-thumbnail" alt="image" />
-                <h4 class="text-center text-white display-5 pt-4">Movie Title 1</h4>
-                </a>
-            </div>
-            <div class="card bg-dark h-75" >
-                <a href="./movie_single.html" style="text-decoration: none;">
-                    <img src="./img/movies_square/zero-movie-square.jpg" class="card-img-top img-thumbnail" alt="image" />
-                <h4 class="text-center text-white display-5 pt-4">Movie Title 1</h4>
-                </a>
-            </a>
-            </div>
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <a href="index.html" ><div class="text subtext text-wrap" >Sophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div></a>
+                </div>
+              </div>
+
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <div class="text subtext text-wrap ">Sophie reflects on the shared joy and private melancholy of a holiday she took with her fatherSophie reflects on the shared joy and private melancholy of a holiday she took with her fatherSophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div>
+                </div>
+              </div>
+
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <div class="text subtext text-wrap ">Sophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div>
+                  </div>
+              </div>
+
+
             <div class="item">
                 <h4><img src="images/city.jpg" alt="image" /></h4>
             </div>
@@ -98,17 +110,34 @@
 
 
 
-    <div class="container-fluid"> 
-        <h1 class="display-1 my-4 text-center text-white">Action Movies</h1>
+    <div class="container-fluid my-5 py-3"> 
+        <h1 class="display-5 pt-5 pb-4  text-white">Action Movies</h1>
         <div class="owl-carousel owl-theme">
-            <div class="card bg-dark h-75">
-                <img src="./img/movies_square/souls-movie-square.jpg" class="card-img-top img-thumbnail" alt="image" />
-                <h4 class="text-center text-white display-5 pt-4">Movie Title 1</h4>
-            </div>
-            <div class="card bg-dark h-75">
-                <img src="./img/movies_square/zero-movie-square.jpg" class="card-img-top img-thumbnail" alt="image" />
-                <h4 class="text-center text-white display-5 pt-4">Movie Title 1</h4>
-            </div>
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <a href="index.html" ><div class="text subtext text-wrap" >Sophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div></a>
+                </div>
+              </div>
+
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <div class="text subtext text-wrap ">Sophie reflects on the shared joy and private melancholy of a holiday she took with her fatherSophie reflects on the shared joy and private melancholy of a holiday she took with her fatherSophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div>
+                </div>
+              </div>
+
+            <div class="container text-center">
+                <img src="./img/movies_square/zero-movie-square.jpg" alt="Avatar" class="">
+                <div class=" container movie-icon-overlay">
+                  <div class="text fs-1" >Movie Title</div>
+                  <div class="text subtext text-wrap ">Sophie reflects on the shared joy and private melancholy of a holiday she took with her father twenty years earlier. Memories real and imagined fill the gaps between as she tries to reconcile the father she knew with the man she didn't.</div>
+                  </div>
+              </div>
+
+
             <div class="item">
                 <h4><img src="images/city.jpg" alt="image" /></h4>
             </div>
@@ -165,9 +194,15 @@
                         items: 1
                     },
                     600: {
+                        items: 2
+                    },
+                    880: {
                         items: 3
                     },
                     1000: {
+                        items: 4
+                    },
+                    1400: {
                         items: 5
                     }
                 }
@@ -178,7 +213,7 @@
 
 
 <footer>
-    <div class="bottom-0" id="footer">
+    <div class="" id="footer">
         
     </div>
 

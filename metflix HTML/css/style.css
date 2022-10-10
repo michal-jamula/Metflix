@@ -30,8 +30,12 @@ nav {
 }
 
 
-* {
-    //outline: red solid 1px !important;
+.border-red {
+    outline: red solid 1px !important;
+}
+
+.border-blue{
+    outline: blue solid 1px !important;
 }
 
 .card-registration {
@@ -43,25 +47,6 @@ nav {
 }
 
 
-
-.btn {
-    border-radius: 2px;
-    background-color: #311432;
-    border: 1px solid rgba(255, 255, 255, 0.265);
-    outline: 0px solid black;
-    color: white !important;
-    font-weight: 500;
-}
-
-.btn:hover {
-    background-color: #290916;
-    border: 1px solid rgba(255, 255, 255, 0.265);
-}
-
-.btn:focus {
-    background-color: rgb(41, 9, 22);
-    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.265);
-}
 
 
 
@@ -91,25 +76,80 @@ nav {
 
 
 
+.movie-icon-overlay {
+    position:fixed;
+    bottom: 0;
+    background-color: black;
+    opacity: 85%;
+    overflow:visible;
+    width: 100%;
+    height: 25%;
+    transition: .5s ease;
+    
+  }
+  
+  .container:hover .movie-icon-overlay {
+    height: 100%;
+    opacity: 95%
+  }
+  
+  .text {
+    white-space: nowrap; 
+    color: white;
+    position: relative;
+    top: 15%;
+    font-size: 1rem; /* Use this to alter description text size... Might have to adjust based on breakpoints*/
+  }
+
+  .subtext {
+    visibility: hidden;
+  }
+
+  .container:hover .movie-icon-overlay .text{
+    visibility: hidden;
+  }
+
+  .container:hover .movie-icon-overlay .subtext {
+    top: 0;
+    opacity: 85%;
+    position: absolute;
+    visibility: visible;
+}
+
+
+.single-movie-main {
+
+}
+
+* {
+    //border: 1px solid red !important;
+}
+
+
+
+
+.accordion-item, .accordion-header, .accordion-button {
+    background-color: rgba(56, 59, 63, 0.95);
+    color: white;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #290916;
+    color: white
+}
 
 
 
 
 
+.owl-prev, .owl-next, .owl-dot {
+    visibility: hidden;
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+/* The following CSS is needed to ensure the admin sidepanel is working.*/
 
 
 
@@ -661,11 +701,7 @@ nav {
     }
 }
 
-.app-page-title {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    margin-bottom: 1.5rem
-}
+
 
 .app-card {
     position: relative;
@@ -686,22 +722,8 @@ nav {
     top: 0
 }
 
-.app-card .app-card-header {
-    border-bottom: 1px solid #e7e9ed
-}
 
-.app-card .app-card-title {
-    font-size: 1.125rem;
-    margin-bottom: 0
-}
 
-.app-card .card-header-action {
-    font-size: .875rem
-}
-
-.app-card .card-header-action a:hover {
-    text-decoration: underline
-}
 
 .app-card .form-select-holder {
     display: inline-block
@@ -1321,3 +1343,5 @@ nav {
         width: 100%
     }
 }
+
+

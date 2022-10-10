@@ -5,8 +5,11 @@
 
 ## Program Overview:
 
+This is my attempt in making an "online streaming service". I don't have any formal or informal requirements. The idea is to start small and keep on expanding the functionality as I expand my knowledge and learn new concepts.
+<br>
+
 This website is a demonstration of my skills. I'm building the website with Bootstrap and basic HTML, CSS and JS.
-For the backend I'm using Java, Spring, thymeleaf, hibernate, jpa and other related frameworks to make the website function as expected.
+For the backend I'm using Java, Spring, thymeleaf, hibernate, jpa and other related frameworks to make the website function.
 
 <br>
 
@@ -26,8 +29,8 @@ Note: The program is not meant to represent optimal security measurements, Sprin
 <br><br>
 
 ## Future plans:
-1. ~~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~~ This part is mostly finished now
-2. Clean up the HTML, CSS code, comment appropriately and get rid of useless code
+1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ This part is mostly finished now
+2. ~~Clean up the HTML, CSS code, comment appropriately and get rid of useless code~~ Finished
 3. Start a spring boot project and setup what i can (jpa entities with h2 database, thymeleaf, spring-boot server, controller etc)
 4. Integrate everything together and make sure the basic functionality is there
 5. Implement spring security to authorise and authenticate users
@@ -36,5 +39,12 @@ Note: The program is not meant to represent optimal security measurements, Sprin
 
 
 <br><br>
+
+
+## Update History:
+10/10/2022 HTML CSS mostly finished, looking like the end product is likely to look.
+
+
+
 
 Created by Michal Jamula

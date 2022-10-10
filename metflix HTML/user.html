@@ -2,30 +2,30 @@
 <html lang="en">
 
 
-      <head>
+<head>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-        <!-- Load header -->
-        <script type='text/javascript'>
-            $(document).ready(function(){
-             $( "#header" ).load( "./page_layout/header.html" );
-            });
-           </script>
-    
-    
-    
-    
-        <!-- Load footer -->
-        <script type='text/javascript'>
-            $(document).ready(function(){
-             $( "#footer" ).load( "./page_layout/footer.html" );
-            });
-           </script>
-           
-           <title>user.html</title>
-    
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Load header -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#header").load("./page_layout/header.html");
+        });
+    </script>
+
+
+
+
+    <!-- Load footer -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#footer").load("./page_layout/footer.html");
+        });
+    </script>
+
+    <title>user.html</title>
+
+</head>
 
 
 
@@ -35,25 +35,19 @@
         <div id="header"></div>
     </header>
 
-
-<div>
-
     <div class="container">
 
-        <!-- First column-->
-        <div class="row mt-5" >
+        <!-- Row containing columns -->
+        <div class="row mt-5">
 
-            
+            <!-- First column-->
             <div class="col-md-5">
                 <div class="row">
 
                     <!-- First card-->
-                    <div class="col-12 p-0 px-3 py-3 mb-3 user-card text-white">
-
-                        <div class="d-flex flex-column align-items-center" >
-                            <img class="photo"
-                                 src="./img/face_image_sample.png"
-                                 alt="user photo">
+                    <div class="col-12 p-0 px-3 py-3 my-4 mb-5 user-card text-white">
+                        <div class="d-flex flex-column align-items-center">
+                            <img class="photo" src="./img/face_image_sample.png" alt="user photo">
                             <p class="fw-bold h4 mt-3">John Doe</p>
                             <p>Full Stack Developer</p>
                             <p class="mb-3">Soma,San Francisco, CA</p>
@@ -61,7 +55,7 @@
                     </div>
 
                     <!-- Second card-->
-                    <div class="col-12 p-0 px-2 pb-3 my-3 user-card text-white">
+                    <div class="col-12 px-2 pb-3 my-2 mb-4 user-card text-white">
 
                         <div class="d-flex justify-content-center border-bottom py-2 px-3">
                             <p class="display-5 fs-1">Subscription:</p>
@@ -76,11 +70,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- End of first column -->
 
             <!-- Second Column-->
-            <div class="col-md-7 ps-md-4">
-                <div class="row">
+            <div class="col-md-7 ps-md-4 my-4 mb-5">
+                <div class="row offset-lg-1">
                     <div class="col-12 px-3 mb-3 pb-3 user-card text-white">
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2">Full Name</p>
@@ -108,18 +102,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> <!-- End of second column-->
+        </div> <!-- end of row containing columns -->
     </div>
 
-</div>
 
 
-<footer>
-    <div class="" id="footer">
-        
-    </div>
-
-</footer>
+    <footer>
+        <div class="" id="footer"></div>
+    </footer>
 </body>
+
 </html>

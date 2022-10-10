@@ -1,30 +1,30 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
+<head>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-        <!-- Load header -->
-        <script type='text/javascript'>
-            $(document).ready(function(){
-             $( "#header" ).load( "./page_layout/header.html" );
-            });
-           </script>
-    
-    
-    
-    
-        <!-- Load footer -->
-        <script type='text/javascript'>
-            $(document).ready(function(){
-             $( "#footer" ).load( "./page_layout/footer.html" );
-            });
-           </script>
-           
-           <title>login.html</title>
-    
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Load header -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#header").load("./page_layout/header.html");
+        });
+    </script>
+
+
+
+
+    <!-- Load footer -->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#footer").load("./page_layout/footer.html");
+        });
+    </script>
+
+    <title>login.html</title>
+
+</head>
 
 
 <body class="bg-img" style="background-image: url('img/landing-background.jpg');">
@@ -33,50 +33,55 @@
         <div id="header"></div>
     </header>
 
-<section>
+    <section>
         <!-- Modal -->
-            <div class="modal-dialog  mt-5 ">
-                <div class="modal-content user-card text-white ">
-                    <div class="modal-header text-center login-modal-transparency">
-                        <p class=" fs-2 text-center mx-auto" id="loginModalLabel">Login</p>
-                    </div>
-                    <div class="modal-body login-modal-transparency" >
-                        <form>
-                            <label for="inputEmail" class="form-label">Email:</label>
-                            <input type="email" id="inputEmail" class="form-control">
-    
-                            <label for="inputPassword" class="form-label">Password:</label>
-                            <input type="password" id="inputPassword" class="form-control" pattern=".{6,}">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Remember Me
-                                </label>
-                            </div>
-
-                            <p class="text-center mt-5">Don't have an account?
-                                <a href="registration.html">Sign Up</a>
-                            </p>
-                            <p class="text-center">Forgot your password? <a href="registration.html">Reset here</a></p>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer d-flex flex login-modal-transparency">
-                        <button type="button" class="btn">Login</button>
-                    </div>
+        <div class="modal-dialog py-5 my-5 ">
+            <div class="modal-content user-card text-white">
+                <div class="modal-header text-center login-modal-transparency">
+                    <p class="mx-auto display-1 fw-bolder fs-2 " id="loginModalLabel">Login</p>
                 </div>
+                <div class="modal-body login-modal-transparency py-4">
+                    <form>
+                        <label for="inputEmail" class="form-label pt-3">Email:</label>
+                        <input type="email" id="inputEmail" class="form-control">
+
+                        <label for="inputPassword" class="form-label pt-4">Password:</label>
+                        <input type="password" id="inputPassword" class="form-control" pattern=".{6,}">
+                        <div class="form-check py-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Remember Me
+                            </label>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer login-modal-transparency">
+                    <div class="flex-column flex-fill">
+                        <div class="d-flex justify-content-end pe-4 pb-3">
+                            <button type="button" class="btn btn-lg">Login</button>
+                        </div>
+                        <p class="text-center pt-3 ">Don't have an account? <a href="registration.html">Sign Up</a></p>
+
+                        <p class="text-center pt-1 ">Forgot your password? <a href="registration.html">Reset here</a>
+                    </div>
+                </div> <!-- End of modal footer-->
             </div>
-</section>
+        </div> <!-- End of modal -->
+        </div>
+    </section>
 
-<footer>
-    <div class="bottom-0" id="footer">
-        
-    </div>
+    <footer>
+        <div class="bottom-0" id="footer">
 
-</footer>
+        </div>
+
+    </footer>
 
 
 
 
 </body>
+
 </html>

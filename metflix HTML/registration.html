@@ -38,69 +38,60 @@
                     <div class="col-xl-10  card-body p-md-5 mx-auto">
 
                         <form>
-                        <h3 class="mb-5 text-uppercase">New user registration form</h3>
+                            <h3 class="mb-5 text-uppercase">New user registration form</h3>
 
-                        <!-- Name -->
-                        <div class="row">
-                        <div class="form-outline mb-4 col">
-                            <label class="form-label" for="name">Name</label>
-                            <input type="text" id="name" class="form-control form-control-lg" />
-                        </div>
+                            <!-- Name -->
+                            <div class="row">
+                                <div class="form-outline mb-4 col">
+                                    <label class="form-label" for="name">Name</label>
+                                    <input type="text" id="name" class="form-control form-control-lg" />
+                                </div>
 
-                        <!-- Email -->
-                        <div class="form-outline mb-4 col">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="text" id="email" class="form-control form-control-lg" />
-                        </div>
-                    </div>
+                                <!-- Email -->
+                                <div class="form-outline mb-4 col">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="text" id="email" class="form-control form-control-lg" />
+                                </div>
+                            </div>
 
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="address">Address</label>
-                            <input type="text" id="address" class="form-control form-control-lg"/>
-                        </div>
+                            <!-- Address -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="address">Address</label>
+                                <input type="text" id="address" class="form-control form-control-lg" />
+                            </div>
 
-                        <!-- Address 
-                        <Label class="form-label" for="countryCode">Country</Label>
-                        <select class="select form-select form-control form-control-lg" id="countryCode">
-                            <option value="1">Country</option>
-                            <option value="2">Option 1</option>
-                            <option value="3">Option 2</option>
-                            <option value="4">Option 3</option>
-                        </select>-->
+                            <!-- Date of birth -->
+                            <label for="dob">Pick Date</label>
+                            <div class="form-outline mb-4">
+                                <input type="date" class="datepicker_input form-control border-1" id="dob" required
+                                    placeholder="DD/MM/YYYY" />
+                            </div>
 
+                            <!--Number -->
+                            <label class="form-label" for="mobile">Mobile number</label>
+                            <div class="form-outline mb-4 d-flex">
+                                <i class="bi bi-calendar-date input-group-text">Hello</i>
+                                <input type="tel" id="mobile" class="form-control form-control-lg" />
+                            </div>
 
-                        <!-- Date of birth -->
-                        <label for="dob">Pick Date</label>
-                        <div class="form-outline mb-4">
-                            <input type="date" class="datepicker_input form-control border-1" id="dob" required
-                                placeholder="DD/MM/YYYY" />
-                        </div>
+                            <!-- password -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" class="form-control form-control-lg" />
+                            </div>
 
-                        <!--Number -->
-                        <label class="form-label" for="mobile">Mobile number</label>
-                        <div class="form-outline mb-4 d-flex">
-                            <i class="bi bi-calendar-date input-group-text">Hello</i>
-                            <input type="tel" id="mobile" class="form-control form-control-lg" />
-                        </div>
+                            <!-- password confirmation -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password2">Confirm Password</label>
+                                <input type="password" id="password2" class="form-control form-control-lg" />
+                            </div>
 
-                        <!-- password -->
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="password">Password</label>
-                            <input type="password" id="password" class="form-control form-control-lg" />
-                        </div>
+                            <!-- bottom buttons -->
+                            <div class="d-flex justify-content-end pt-3">
+                                <button type="button" class="btn btn-lg ms-2">Submit form</button>
+                            </div>
 
-                        <!-- password confirmation -->
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="password2">Confirm Password</label>
-                            <input type="password" id="password2" class="form-control form-control-lg" />
-                        </div>
-
-                        <!-- bottom buttons -->
-                        <div class="d-flex justify-content-end pt-3">
-                            <button type="button" class="btn btn-lg ms-2">Submit form</button>
-                        </div>
-
-                    </form>
+                        </form>
                     </div>
                 </div>
             </div>

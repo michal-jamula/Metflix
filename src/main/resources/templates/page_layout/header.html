@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" th:href="@{/css/style.css}" >
+    </head>
+
+
+<div th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <div class="container">
+
+        <a href="" class="navbar-brand justify-content-center">
+            <!--suppress RequiredAttributes -->
+            <img th:src="@{/img/icons/yt.png}"  width="38" height="38" class="d-inline-block"
+                 alt="website icon">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" 
+        aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+        <div class="collapse navbar-collapse p-0 m-0 " id="navbarCollapse">
+            <ul class="nav navbar-nav mr-auto nav-tabs d-inline-flex container-fluid text-center">
+                <li class="nav-item">
+                    <a th:href="@{/index}"
+                       th:class="${#httpServletRequest.getRequestURL().toString().endsWith('index')
+                               ? 'nav-link active bg-dark' : 'nav-link'}"  >Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/registration}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('registration')
+                               ? 'nav-link active bg-dark' : 'nav-link'}">Register</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/admin}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('admin')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Admin</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a th:href="@{/user}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('user')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">User</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/login}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('login')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/user_main}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('user_main')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">user_main</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/movie_single}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movie_single')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">movie_single</a>
+                </li>
+
+
+
+
+<!--                <li class="nav-item">-->
+<!--                    <a href="./registration.html" class="nav-link">Register</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a href="./admin_movies.html" class="nav-link">Admin</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a href="./user.html" class="nav-link">User</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a href="./login.html" class="nav-link">Login</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a href="./user_main.html" class="nav-link">user_main</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a href="./movie_single.html" class="nav-link">movie_single</a>-->
+<!--                </li>-->
+
+            </ul>
+
+
+        </div>
+
+
+
+
+
+    </div>
+</nav>
+
+
+</div>

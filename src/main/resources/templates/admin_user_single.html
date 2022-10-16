@@ -1,43 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="page_layout/layout">
+
 <head>
 	<title>admin_user_single</title>
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-	<!-- Load header -->
-	<script type='text/javascript'>
-		$(document).ready(function () {
-			$("#header").load("./page_layout/header.html");
-		});
-	</script>
-
-
-	<!-- Load admin sidebar -->
-	<script type='text/javascript'>
-		$(document).ready(function () {
-			$("#admin-side-panel").load("./page_layout/admin_sidebar.html");
-		});
-	</script>
-
-
 </head>
 
 
 
 
-<body class="app">
-
-	<!--Import headers -->
-	<header class="app-header fixed-top" id="admin_sidebar">
-		<div id="header"></div>
-		<div id="admin-side-panel"></div>
-	</header>
-
-
-
+<body class="app" layout:fragment="main-content">
 
 	<!-- THis is also a template, and the visuals and implementation might change over time-->
     
@@ -70,7 +43,7 @@
 								    <div class="row justify-content-between align-items-center">
 									    <div class="col-auto">
 										    <div class="item-label mb-2"><strong>Photo</strong></div>
-										    <div class="item-data"><img class="profile-image" src="./img/face_image_sample.png" alt=""></div>
+										    <div class="item-data"><img class="profile-image" th:src="@{img/icons/face_image_male.png}" alt=""></div>
 									    </div>
 									    <div class="col text-end">
 										    <a class="btn-sm app-btn-secondary" href="#">Change</a>

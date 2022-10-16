@@ -1,37 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
 
 <head>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Load header -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#header").load("./page_layout/header.html");
-        });
-    </script>
-
-    <!-- Load footer -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#footer").load("./page_layout/footer.html");
-        });
-    </script>
 
     <title>registration.html</title>
 
 </head>
 
 
-<body class="bg-image" style="background-image: url('img/landing-background.jpg');">
+<body>
 
-    <header>
-        <div id="header"></div>
-    </header>
 
     <!-- Main content -->
-    <section class="h-100 ">
+    <section class="h-100 bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
         <div class="container py-5 h-100 ">
             <div class="row d-flex justify-content-center align-items-center h-50">
                 <div class="card card-registration text-light">
@@ -97,12 +83,6 @@
             </div>
         </div>
     </section>
-
-
-
-    <footer>
-        <div id="footer"></div>
-    </footer>
 
 
 </body>

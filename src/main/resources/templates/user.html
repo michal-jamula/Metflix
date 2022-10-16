@@ -1,41 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
 
 
 <head>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Load header -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#header").load("./page_layout/header.html");
-        });
-    </script>
-
-
-
-
-    <!-- Load footer -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#footer").load("./page_layout/footer.html");
-        });
-    </script>
-
     <title>user.html</title>
-
 </head>
 
 
 
 <body>
 
-    <header>
-        <div id="header"></div>
-    </header>
-
-    <div class="container">
+    <section class="container" layout:fragment="main-content">
 
         <!-- Row containing columns -->
         <div class="row mt-5">
@@ -47,7 +24,7 @@
                     <!-- First card-->
                     <div class="col-12 p-0 px-3 py-3 my-4 mb-5 user-card text-white">
                         <div class="d-flex flex-column align-items-center">
-                            <img class="photo" src="./img/face_image_sample.png" alt="user photo">
+                            <img class="photo" th:src="@{/img/icons/face_image_male.png}" alt="user photo">
                             <p class="fw-bold h4 mt-3">John Doe</p>
                             <p>Full Stack Developer</p>
                             <p class="mb-3">Soma,San Francisco, CA</p>
@@ -104,13 +81,8 @@
                 </div>
             </div> <!-- End of second column-->
         </div> <!-- end of row containing columns -->
-    </div>
+    </section>
 
-
-
-    <footer>
-        <div class="" id="footer"></div>
-    </footer>
 </body>
 
 </html>

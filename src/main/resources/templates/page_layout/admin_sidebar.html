@@ -2,15 +2,20 @@
 	This is the side panel on the left hand side of admin pages
 	It allows for quick movement between the different admin pages
 -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="page_layout/layout">
 
-<div id="admin-side-panel" class="app-sidepanel pt-3 mt-5">
+
+<div th:fragment="admin-sidebar" class="app-sidepanel pt-3 mt-5">
 	<div class="sidepanel-inner d-flex flex-column">
 
 		<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 
 
 		<div class="app-branding">
-			<a class="app-logo" href="index.html"><img class="logo-icon me-2" src="./img/youtube_icon_48x48.png"
+			<a class="app-logo" href="index.html"><img class="logo-icon me-2" th:src="@{img/icons/yt.png}"
 					alt="logo"><span class="logo-text">ADMIN PORTAL</span></a>
 		</div>
 
@@ -23,17 +28,17 @@
 					<thead></thead>
 					<tbody>
 						<tr>
-							<th><a href="admin_sample.html" class="fs-5 fw-normal">admin_sample.html</a></th>
+							<th><a th:href="@{/admin}" class="fs-5 fw-normal">admin_sample.html</a></th>
 						</tr>
 						<tr>
-							<th><a href="admin_user_single.html" class="fs-5 fw-normal">admin_user_single.html</a></th>
+							<th><a th:href="@{/admin_user_single}" class="fs-5 fw-normal">admin_user_single.html</a></th>
 						</tr>
 						<tr>
-							<th><a href="admin_users.html" class="fs-5 fw-normal">admin_users.html</a></th>
+							<th><a th:href="@{/admin_users}" class="fs-5 fw-normal">admin_users.html</a></th>
 						</tr>
 
 						<tr>
-							<th><a href="admin_movies.html" class="fs-5 fw-normal">admin_movies.html</a></th>
+							<th><a th:href="@{/admin_movies}" class="fs-5 fw-normal">admin_movies.html</a></th>
 						</tr>
 					</tbody>
 				</table>

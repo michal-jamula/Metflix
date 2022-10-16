@@ -29,13 +29,16 @@ Note: The program is not meant to represent optimal security measurements, Sprin
 <br><br>
 
 ## Future plans:
-1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ This part is mostly finished now
+1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ Finished
 2. ~~Clean up the HTML, CSS code, comment appropriately and get rid of useless code~~ Finished
-3. Start a spring boot project and setup what i can (jpa entities with h2 database, thymeleaf, spring-boot server, controller etc)
-4. Integrate everything together and make sure the basic functionality is there
-5. Implement spring security to authorise and authenticate users
-6. (maybe) Integrate paypal developer payment systems
-7. (maybe) More to implement in the future 
+3. Start a spring boot project and setup what i can (jpa entities with h2 database, thymeleaf, spring-boot server, controller etc) -- In progress
+   1. ~~Create basic working website with dummy data~~
+   2. Setup basic user functionality
+   3. Setup movie watching functionality
+   4. Setup admin pages functionality
+4. Implement spring security to authorise and authenticate users
+5. (maybe) Integrate paypal developer payment systems
+6. (maybe) More to implement in the future 
 
 
 <br><br>

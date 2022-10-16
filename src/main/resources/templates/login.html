@@ -1,42 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
 
 <head>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Load header -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#header").load("./page_layout/header.html");
-        });
-    </script>
-
-
-
-
-    <!-- Load footer -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#footer").load("./page_layout/footer.html");
-        });
-    </script>
-
-    <title>login.html</title>
-
+    <title>login</title>
 </head>
 
 
-<body class="bg-img" style="background-image: url('img/landing-background.jpg');">
+<body>
 
-    <header>
-        <div id="header"></div>
-    </header>
-
-    <section>
+    <section class="bg-img" th:style="'background-image: url(' + @{img/landing-background.jpg} + ');'" layout:fragment="main-content">
         <!-- Modal -->
         <div class="modal-dialog py-5 my-5 ">
-            <div class="modal-content user-card text-white">
+            <div class="modal-content card-registration user-card text-white">
                 <div class="modal-header text-center login-modal-transparency">
                     <p class="mx-auto display-1 fw-bolder fs-2 " id="loginModalLabel">Login</p>
                 </div>
@@ -71,17 +48,6 @@
         </div> <!-- End of modal -->
         </div>
     </section>
-
-    <footer>
-        <div class="bottom-0" id="footer">
-
-        </div>
-
-    </footer>
-
-
-
-
 </body>
 
 </html>

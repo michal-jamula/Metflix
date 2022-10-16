@@ -1,41 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
 
 <head>
     <title>admin_movies.html</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-    <!-- Load header -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#header").load("./page_layout/header.html");
-        });
-    </script>
-
-
-    <!-- Load admin sidebar -->
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $("#admin-side-panel").load("./page_layout/admin_sidebar.html");
-        });
-    </script>
 </head>
 
 <!-- app class mandatory as it breaks all CSS on admin pages-->
 
-<body class="app">
-
-    <!-- import top navigation and side panel-->
-    <header class="app-header fixed-top" id="admin_sidebar">
-        <div id="header"></div>
-        <div id="admin-side-panel"></div>
-    </header>
-
-
-
-
-
+<body class="app" layout:fragment="main-content">
 
     <!-- Main Content -->
     <div class="app-wrapper pt-5">

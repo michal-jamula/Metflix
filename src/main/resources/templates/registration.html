@@ -4,85 +4,102 @@
       layout:decorate="page_layout/layout">
 
 <head>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-    <title>registration.html</title>
-
+    <title>Registration</title>
 </head>
 
+<!--
+    This is largely finished now, some visuals might change.
+
+    Functionality so far:
+    form sends "user" with the following attributes:
+    name, surname, email, dob, phoneNr, password, password2
+
+    makes a POST request to "registration"
+-->
 
 <body>
 
 
-    <!-- Main content -->
-    <section class="h-100 bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
-        <div class="container py-5 h-100 ">
-            <div class="row d-flex justify-content-center align-items-center h-50">
-                <div class="card card-registration text-light">
-                    <div class="col-xl-10  card-body p-md-5 mx-auto">
+<!-- Main content -->
+<section class="h-100 bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
+    <div class="container py-5 h-100 ">
+        <div class="row d-flex justify-content-center align-items-center h-50">
+            <div class="card card-registration text-light">
+                <div class="col-xl-10 card-body p-md-5 mx-auto">
 
-                        <form>
-                            <h3 class="mb-5 text-uppercase">New user registration form</h3>
+                    <!-- Form Here -->
+                    <form th:action="@{registration}" method="POST" th:object="${user} ">
+                        <h3 class="mt-3 mb-5 text-uppercase text-center">New user registration form</h3>
 
+
+                        <div class="row mx-0">
                             <!-- Name -->
-                            <div class="row">
-                                <div class="form-outline mb-4 col">
-                                    <label class="form-label" for="name">Name</label>
-                                    <input type="text" id="name" class="form-control form-control-lg" />
-                                </div>
-
-                                <!-- Email -->
-                                <div class="form-outline mb-4 col">
-                                    <label class="form-label" for="email">Email</label>
-                                    <input type="text" id="email" class="form-control form-control-lg" />
-                                </div>
+                            <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
+                                <label class="form-label" for="name">Name</label>
+                                <input type="text" id="name" class="form-control" th:field="*{name}" required/>
                             </div>
 
-                            <!-- Address -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="address">Address</label>
-                                <input type="text" id="address" class="form-control form-control-lg" />
+                            <!-- Surname -->
+                            <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
+                                <label class="form-label" for="name">Surname</label>
+                                <input type="text" id="surname" class="form-control" th:field="*{surname}" required/>
+                            </div>
+                        </div>
+
+                        <div class="row mx-0">
+                            <!-- Email -->
+                            <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
+                                <label class="form-label" for="email">Email</label>
+                                <input type="text" id="email" class="form-control" th:field="*{email}" required/>
                             </div>
 
                             <!-- Date of birth -->
-                            <label for="dob">Pick Date</label>
-                            <div class="form-outline mb-4">
-                                <input type="date" class="datepicker_input form-control border-1" id="dob" required
-                                    placeholder="DD/MM/YYYY" />
+                            <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
+                                <label class="form-label" for="dob">Date of Birth</label>
+                                <input type="date" class="datepicker_input form-control" id="dob" required
+                                       placeholder="DD/MM/YYYY" th:field="*{dob}" />
                             </div>
+                        </div>
 
+                        <div class="row mx-0 my-3 my-lg-4">
                             <!--Number -->
-                            <label class="form-label" for="mobile">Mobile number</label>
-                            <div class="form-outline mb-4 d-flex">
-                                <i class="bi bi-calendar-date input-group-text">Hello</i>
-                                <input type="tel" id="mobile" class="form-control form-control-lg" />
+                            <div class="col-12 ">
+                                <label for="phoneNr" class="form-label">Phone number</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">+44</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="phoneNr" th:field="*{phoneNr}" required>
+                                </div>
                             </div>
+                        </div>
 
+
+                        <div class="row mx-0">
                             <!-- password -->
-                            <div class="form-outline mb-4">
+                            <div class="form-outline col-12 col-lg-6 my-4 my-lg-4">
                                 <label class="form-label" for="password">Password</label>
-                                <input type="password" id="password" class="form-control form-control-lg" />
+                                <input type="password" id="password" class="form-control" th:field="*{password}" required/>
                             </div>
 
                             <!-- password confirmation -->
-                            <div class="form-outline mb-4">
+                            <div class="form-outline col-12 col-lg-6 my-4 my-lg-4">
                                 <label class="form-label" for="password2">Confirm Password</label>
-                                <input type="password" id="password2" class="form-control form-control-lg" />
+                                <input type="password" id="password2" name="password2" class="form-control" required/>
                             </div>
+                        </div>
 
-                            <!-- bottom buttons -->
-                            <div class="d-flex justify-content-end pt-3">
-                                <button type="button" class="btn btn-lg ms-2">Submit form</button>
-                            </div>
+                        <!-- bottom buttons -->
+                        <div class="d-flex justify-content-end pt-5">
+                            <button type="submit" class="btn btn-lg ms-2">Submit form</button>
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 </body>

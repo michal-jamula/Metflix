@@ -4,18 +4,21 @@
       layout:decorate="page_layout/layout">
 
 <head>
-	<title>admin_users.html</title>
+	<title>admin_users</title>
 </head>
+
+
+
 
 <body class="app" layout:fragment="main-content">
 
     <!-- Main Content -->
 	<div class="app-wrapper pt-5">
 
-        <h1 class="display-5 fw-bolder">Table 1</h1>
+        <div class="container-fluid pl-5 ml-5"><h1 class="display-5 fs-1 fw-bolder ml-5 pl-5">Users</h1></div>
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">user_id</th>
                     <th scope="col">name</th>
                     <th scope="col">surname</th>
@@ -28,59 +31,20 @@
 
                 </tr>
             </thead>
+            <!--TODO: Remove dob and phoneNr columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>surname</td>
-                    <td>name.surname@googlemail.com</td>
-                    <td>01/01/1999</td>
-                    <td>12345678901</td>
-                    <td>01/01/1999</td>
-                    <td>subscribed</td>
-                    <td><btn class="btn">Edit</btn></td>
+                <tr th:each="user : ${users}" class="text-center">
+                    <td th:text="${user.id}">user_id</td>
+                    <td th:text="${user.name}">name</td>
+                    <td th:text="${user.surname}">surname</td>
+                    <td th:text="${user.email}">email</td>
+                    <td th:text="${user.dob}">dob</td>
+                    <td th:text="${user.phoneNr}">phone_nr</td>
+                    <td th:text="${user.regDate}">reg_date</td>
+                    <td th:text="${user.status}">status</td>
+                    <td><a th:href="@{/admin_user_single(id=${user.id})}"><btn  class="btn mx-auto">Edit</btn></a></td>
                 </tr>
 
-
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>surname</td>
-                    <td>name.surname@googlemail.com</td>
-                    <td>01/01/1999</td>
-                    <td>12345678901</td>
-                    <td>01/01/1999</td>
-                    <td>subscribed</td>
-                    <td><btn class="btn">Edit</btn></td>
-                </tr>
-
-
-
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>surname</td>
-                    <td>name.surname@googlemail.com</td>
-                    <td>01/01/1999</td>
-                    <td>12345678901</td>
-                    <td>01/01/1999</td>
-                    <td>subscribed</td>
-                    <td><btn class="btn">Edit</btn></td>
-                </tr>
-
-
-
-                <tr>
-                    <td>1</td>
-                    <td>name</td>
-                    <td>surname</td>
-                    <td>name.surname@googlemail.com</td>
-                    <td>01/01/1999</td>
-                    <td>12345678901</td>
-                    <td>01/01/1999</td>
-                    <td>subscribed</td>
-                    <td><btn class="btn">Edit</btn></td>
-                </tr>
 
             </tbody>
         </table>
@@ -91,22 +55,6 @@
 
 	</div>
 
-
-
-
-
-
-
-
-
-
-	<!-- Javascript -->
-	<script src="assets/plugins/popper.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-
-	<!-- Page Specific JS -->
-	<script src="assets/js/app.js"></script>
 
 </body>
 

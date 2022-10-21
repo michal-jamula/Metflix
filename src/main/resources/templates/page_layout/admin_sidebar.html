@@ -15,31 +15,33 @@
 
 
 		<div class="app-branding">
-			<a class="app-logo" href="index.html"><img class="logo-icon me-2" th:src="@{img/icons/yt.png}"
+			<a class="app-logo" th:href="index"><img class="logo-icon me-2" th:src="@{img/icons/yt.png}"
 					alt="logo"><span class="logo-text">ADMIN PORTAL</span></a>
 		</div>
 
 		<!-- Admin links -->
 		<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
-			<ul class="app-menu list-unstyled " id="menu-accordion">
+			<ul class="app-menu list-unstyled mt-4" id="menu-accordion">
 
 				<!-- Navigation links -->
 				<table class="table table-hover">
 					<thead></thead>
 					<tbody>
-						<tr>
-							<th><a th:href="@{/admin}" class="fs-5 fw-normal">admin_sample.html</a></th>
-						</tr>
-						<tr>
-							<th><a th:href="@{/admin_user_single}" class="fs-5 fw-normal">admin_user_single.html</a></th>
-						</tr>
-						<tr>
-							<th><a th:href="@{/admin_users}" class="fs-5 fw-normal">admin_users.html</a></th>
+
+<!--						TODO: Try and see if I can fix the onclick attribute and force that to be a thymeleaf attribute.-->
+
+						<tr class="clickable flex-row text-center" onclick="window.location='admin'">
+							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">admin_sample.html</p></th>
 						</tr>
 
-						<tr>
-							<th><a th:href="@{/admin_movies}" class="fs-5 fw-normal">admin_movies.html</a></th>
+						<tr class="clickable flex-row text-center" onclick="window.location='admin_users'">
+							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">admin_users.html</p></th>
 						</tr>
+
+						<tr class="clickable flex-row text-center" onclick="window.location='admin_movies'">
+							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">admin_movies.html</p></th>
+						</tr>
+
 					</tbody>
 				</table>
 			</ul>

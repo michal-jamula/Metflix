@@ -12,8 +12,7 @@
 
 <body class="app" layout:fragment="main-content">
 
-	<!-- THis is also a template, and the visuals and implementation might change over time-->
-    
+
     <div class="app-wrapper">
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -45,82 +44,103 @@
 										    <div class="item-label mb-2"><strong>Photo</strong></div>
 										    <div class="item-data"><img class="profile-image" th:src="@{img/icons/face_image_male.png}" alt=""></div>
 									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
 								    </div>
 							    </div>
 
 								<!-- Name row -->
-							    <div class="item border-bottom py-3">
-								    <div class="row justify-content-between align-items-center">
-									    <div class="col-auto">
-										    <div class="item-label"><strong>Name</strong></div>
-									        <div class="item-data" th:text="${user.name}">User's name</div>
-									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
-								    </div>
-							    </div>
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Name</strong></div>
+											<div class="item-data" th:text="${user.name}">Name</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
+								<!--Surname row -->
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Surname</strong></div>
+											<div class="item-data" th:text="${user.surname}">Surname</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
+
+
 
 								<!--Email row -->
-							    <div class="item border-bottom py-3">
-								    <div class="row justify-content-between align-items-center">
-									    <div class="col-auto">
-										    <div class="item-label"><strong>Email</strong></div>
-									        <div class="item-data" th:text="${user.email}">michal@website.com</div>
-									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
-								    </div>
-							    </div>
-
-								<!-- Address row -->
-							    <div class="item border-bottom py-3">
-								    <div class="row justify-content-between align-items-center">
-									    <div class="col-auto">
-										    <div class="item-label"><strong>Address</strong></div>
-									        <div class="item-data">
-										        1 Home Address, Glasgow
-									        </div>
-									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
-								    </div>
-							    </div>
-
-								<!-- Postcode row -->
 								<div class="item border-bottom py-3">
-								    <div class="row justify-content-between align-items-center">
-									    <div class="col-auto">
-										    <div class="item-label"><strong>Postcode</strong></div>
-									        <div class="item-data">
-										        GL1 1GL
-									        </div>
-									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
-								    </div>
-							    </div>
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Email</strong></div>
+											<div class="item-data" th:text="${user.email}">Email</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
 
-								<!-- Location Row -->
-							    <div class="item border-bottom py-3">
-								    <div class="row justify-content-between align-items-center">
-									    <div class="col-auto">
-										    <div class="item-label"><strong>Location</strong></div>
-									        <div class="item-data">
-										        New York
-									        </div>
-									    </div>
-									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
-									    </div>
-								    </div>
-							    </div>
+								<!--Birthday row -->
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Date of birth</strong></div>
+											<div class="item-data" th:text="${user.dob}">Date of Birth</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
+								<!--Phone number row -->
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Phone number</strong></div>
+											<div class="item-data" th:text="${user.phoneNr}">Phone number</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
+								<!--Registration date  -->
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Registration date</strong></div>
+											<div class="item-data"th:text="${user.regDate}">Registration date</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
+								<!--Status   -->
+								<div class="item border-bottom py-3">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-auto">
+											<div class="item-label"><strong>Status</strong></div>
+											<div class="item-data"th:text="${user.status}">Registration date</div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-secondary p-1 px-2" href="#">edit</a>
+										</div>
+									</div>
+								</div>
+
 						    </div>
 
 							<!-- Card footer-->
@@ -133,6 +153,7 @@
 	                </div><!-- end of column -->
 
 
+					<!-- Second Card -->
 	                <div class="col-12 col-lg-6">
 		                <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
 
@@ -160,7 +181,7 @@
 									        <div class="item-data">1234*******5678</div>
 									    </div>
 									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Edit</a>
+										    <a class="btn btn-secondary p-1 px-2" href="#">Edit</a>
 									    </div>
 								    </div>
 							    </div><!-- end of cc row -->
@@ -173,7 +194,7 @@
 									        <div class="item-data">Not connected</div>
 									    </div>
 									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Connect</a>
+										    <a class="btn btn-secondary p-1 px-2" href="#">Connect</a>
 									    </div>
 								    </div>
 							    </div> <!-- end of paypal row -->
@@ -193,18 +214,6 @@
 	    
 	    
     </div>
-
-
-	<!-- Javascript -->
-	<script src="assets/plugins/popper.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-
-	<!-- Page Specific JS -->
-	<script src="assets/js/app.js"></script>
-
-	
-
 </body>
 </html> 
 

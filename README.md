@@ -14,7 +14,13 @@ For the backend I'm using Java, Spring, thymeleaf, hibernate, jpa and other rela
 
 
 The motivation for this project comes from the willingness to show off my skills and use them outside of the courses that I've completed. The point is to cement my knowledge and become more confident in using this technology.
+<br>
 
+## How to run:
+ + Import into any IDE (I use Intellij), build the maven project and run. 
+ + Project uses an in-memory H2 database on startup
+ + Project injects data from SQL files
+ + I use Java 11
 
 <br>
 
@@ -34,10 +40,10 @@ The motivation for this project comes from the willingness to show off my skills
 ## Future plans:
 1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ Finished
 2. ~~Clean up the HTML, CSS code, comment appropriately and get rid of useless code~~ Finished
-3. Start a spring boot project and setup what I can (jpa entities with a database, thymeleaf, spring-boot server, controller etc) -- In progress
+3. ~~Start a spring boot project and setup what I can (jpa entities with a database, thymeleaf, spring-boot server, controller etc)~~
    1. ~~Create basic working website with dummy data~~
    2. ~~Setup basic user functionality~~
-   3. Give user a response if registration process went wrong
+   3. ~~Give user a response if registration process went wrong~~
 4. REST functionality:
    1. Create a REST Controller
    2. Make admin tables interactive and able to sort data
@@ -60,16 +66,17 @@ The motivation for this project comes from the willingness to show off my skills
 
 
 ## Update History:
-+ 10/10/2022 
-    - HTML CSS mostly finished, looking like the end product is likely to look.
-+ 16/10/2022 
-    - Created basic Spring-boot + thymeleaf application which is able to serve all the web pages
-+ 21/10/2022 
+- 10/10/2022 
+    - HTML CSS mostly finished, looking like the end product is likely to look. 
+- 16/10/2022 
+  - Created basic Spring-boot + thymeleaf application which is able to serve all the web pages 
+- 21/10/2022
     - Implemented a PostgreSQL database (settings for that are within application.properties file)
     - Connected to the database, creating tables and injecting data every time the app starts
     - Created user registration (and basic form-verification) functionality
     - Made admin_users and admin_user_single pages display data dynamically based on database data
-
+- 23/10/2022
+  - Fixed errors given to the user while registering
 
 
 <br><br>

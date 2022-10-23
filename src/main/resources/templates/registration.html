@@ -19,6 +19,7 @@
 
 <body>
 
+<!-- TODO: Show user a message when user registers successfully. -->
 
 <!-- Main content -->
 <section class="h-100 bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
@@ -36,13 +37,15 @@
                             <!-- Name -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="name">Name</label>
-                                <input type="text" id="name" class="form-control" th:field="*{name}" required/>
+                                <input type="text" id="name" class="form-control" th:field="*{name}" />
+                                <i th:text="${name}" style="color:red;" ></i>
                             </div>
 
                             <!-- Surname -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="name">Surname</label>
-                                <input type="text" id="surname" class="form-control" th:field="*{surname}" required/>
+                                <input type="text" id="surname" class="form-control" th:field="*{surname}" />
+                                <i th:text="${surname}" style="color:red;" ></i>
                             </div>
                         </div>
 
@@ -50,14 +53,15 @@
                             <!-- Email -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="text" id="email" class="form-control" th:field="*{email}" required/>
+                                <input type="text" id="email" class="form-control" th:field="*{email}" />
+                                <i th:text="${email}" style="color:red;" ></i>
                             </div>
 
                             <!-- Date of birth -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="dob">Date of Birth</label>
-                                <input type="date" class="datepicker_input form-control" id="dob" required
-                                       placeholder="DD/MM/YYYY" th:field="*{dob}" />
+                                <input type="date" class="datepicker_input form-control" id="dob" th:field="*{dob}" />
+                                <i th:text="${dob}" style="color:red;" ></i>
                             </div>
                         </div>
 
@@ -69,8 +73,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">+44</span>
                                     </div>
-                                    <input type="text" class="form-control" id="phoneNr" th:field="*{phoneNr}" required>
+                                    <input type="number" class="form-control" id="phoneNr" th:field="*{phoneNr}" >
                                 </div>
+                                <i th:text="${phoneNr}" style="color:red;" ></i>
                             </div>
                         </div>
 
@@ -80,6 +85,7 @@
                             <div class="form-outline col-12 col-lg-6 my-4 my-lg-4">
                                 <label class="form-label" for="password">Password</label>
                                 <input type="password" id="password" class="form-control" th:field="*{password}" required/>
+                                <i th:text="${password}" style="color:red;" ></i>
                             </div>
 
                             <!-- password confirmation -->

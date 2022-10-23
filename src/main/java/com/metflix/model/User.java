@@ -29,7 +29,7 @@ public class User {
     private String surname;
     private String email;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date dob;
+    private LocalDate dob;
     @Column(name="phone_nr")
     private String phoneNr;
     @Column(name="reg_date")
@@ -51,7 +51,7 @@ public class User {
     @Nullable
     private Set<CreditCard> addresses;
 
-    public User(String name, String surname, String email, Date dob, String phoneNr, String password) {
+    public User(String name, String surname, String email, LocalDate dob, String phoneNr, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;

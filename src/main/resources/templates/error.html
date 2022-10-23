@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
+
+<head>
+    <title>error</title>
+
+</head>
+
+
+<body >
+
+
+<section layout:fragment="main-content">
+    <div class="bg-image pt-0" style="background-image: url('img/landing-background.jpg'); height: 80vh;">
+    <div class="mask pt-5" style=" background-color: rgba(0, 0, 0, 0.675); height:80vh;">
+        <!-- Modal -->
+        <div class="modal-dialog py-5 my-5">
+            <div class="modal-content user-card text-white">
+                <div class="modal-header text-center login-modal-transparency">
+                    <p class="mx-auto display-1 fw-bolder fs-1 " id="loginModalLabel">OOPS!</p>
+                </div>
+
+
+                <div class="modal-body login-modal-transparency py-4 text-center">
+
+                    <div>
+                        <p class="display-1 fs-4"> Something has went wrong! Please try again</p>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div> <!-- End of modal -->
+    </div>
+    </div>
+</section>
+
+</body>
+
+</html>

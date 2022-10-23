@@ -5,9 +5,17 @@ import com.metflix.exceptions.EmailAlreadyExistsException;
 import com.metflix.exceptions.PasswordsDontMatchException;
 import com.metflix.exceptions.RegistrationFieldEmptyException;
 import com.metflix.model.User;
+import com.metflix.model.UserStatus;
 import com.metflix.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -18,57 +26,66 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // TODO: try and see if I can tidy up the validateUser and associated methods
 
-    /*
+
+
+
+    /**
         This method validates the user registration, currently it does 3 things:
             1. checks if email already exists
             2. checks if there's any empty fields passed through
             3. checks if the passwords match
+
+        In the future this will probably get replaced by spring-boot-validator
      */
-    public void validateUser (User user, String password2) throws Exception {
+    public List<String> validateUser (User user, String password2) {
 
-        if (!emailExists(user.getEmail())) {
-            throw new EmailAlreadyExistsException("User validation failure, entered email already exists");
+        HashMap<String, String> map = new HashMap<>();
+        List<String> fieldCheckAnswer = checkUserContainsEmptyFields(user);
 
-        } else if (checkUserContainsEmptyFields(user)){
-            throw new RegistrationFieldEmptyException("User validation failure, one of the checked fields is empty");
+
+        if (!fieldCheckAnswer.get(0).equals("success")) {
+            return fieldCheckAnswer;
+
+        } else if (emailExists(user.getEmail())){
+            return List.of("email", "Email already exists");
 
         } else if (!checkPasswordsMatch(user.getPassword(), password2)) {
-            throw new PasswordsDontMatchException("User validation failure, passwords dont match ");
+            return List.of("password", "Passwords do not match");
         }
-
+        return List.of("success", "true");
     }
 
     /** Returns true when email is already in a database */
     public boolean emailExists (String email) {
-        return userRepository.findByEmail(email).isEmpty();
+        return userRepository.findByEmail(email).isPresent();
     }
 
-
-    /** returns true when at least one field is empty */
-    public boolean checkUserContainsEmptyFields (User user) {
+    //TODO: Currently the dob only gets checked if empty or not, it doesn't check the format of the string
+    /** returns "success" when fields are completed, otherwise returns a <field, error message> both as String */
+    public List<String> checkUserContainsEmptyFields (User user) {
         try{
-            String[] fieldsToCheck = new String[]{
-                    user.getName(),
-                    user.getSurname(),
-                    user.getEmail(),
-                    user.getDob().toString(),
-                    user.getPhoneNr(),
-                    user.getPassword()
-            };
+            HashMap<String, String> fieldsToCheck = new HashMap<String, String>();
+            fieldsToCheck.put("name", user.getName());
+            fieldsToCheck.put("surname", user.getSurname());
+            fieldsToCheck.put("email", user.getEmail());
+            fieldsToCheck.put("dob", user.getDob().toString());
+            fieldsToCheck.put("phoneNr", user.getPhoneNr());
+            fieldsToCheck.put("password", user.getPassword());
 
-            for (String field : fieldsToCheck) {
-                if (field.trim().length() == 0) {
-                    return true;
+
+            for (Map.Entry<String, String> set: fieldsToCheck.entrySet()) {
+                if (set.getValue().trim().isEmpty()) {
+                    System.out.println(set.getKey() + " field is empty. Caught in UserService field checker");
+                    return List.of(set.getKey(), "Field is empty");
                 }
             }
-            return false;
+            return List.of("success", "true");
 
-        } catch (NullPointerException e) {
-            return true;
+        } catch (Exception e) {
+            System.err.println(e + "\nUnknown error thrown during field check, please fix asap");
+            return List.of("success", "true");
         }
-
     }
 
     /** Returns true if passwords match */
@@ -77,8 +94,17 @@ public class UserService {
     }
 
 
-
+    /** Saves a new user, if the status and registration date are empty, it gives them default ones */
     public void save (User user) {
+
+        if (user.getRegDate() == null) {
+            user.setRegDate(LocalDate.now());
+        }
+
+        if(user.getStatus() == null) {
+            user.setStatus(UserStatus.unsubscribed);
+        }
+
         userRepository.save(user);
         System.out.println("user added to database successfully");
     }

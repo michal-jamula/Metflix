@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -108,16 +110,14 @@ public class WebController {
         return "registration";
     }
 
-    /*
+    /**
         Right now the form validation consists of:
             1. Checking whether the email is already registered
             2.  Checking if any fields are empty
             3. Checking if the passwords match
 
-        TODO: Give the user feedback on the type of error. The next method seems messy, try to tidy up
+        Form currently does not check the Date entered, so bad format can still be passed through
      */
-
-
     @PostMapping("registration")
     public String registration(@ModelAttribute("user")Optional<User> userOptional, Model model, @ModelAttribute("password2")String password2) {
 
@@ -126,23 +126,28 @@ public class WebController {
         }
         User user = userOptional.get();
 
+
         try {
-            userService.validateUser(user, model.getAttribute("password2").toString());
+            List<String> message = userService.validateUser(user, model.getAttribute("password2").toString());
+            System.out.println("list received from user service into controller: " + message);
+            model.addAttribute(message.get(0), message.get(1));
+
+
+            if (message.get(0).equals("success")) {
+                userService.save(user);
+                return "registration";
+            }
         }
-        // Validate empty fields                Validate Email is new           Validate passwords match
-         catch (RegistrationFieldEmptyException | EmailAlreadyExistsException | PasswordsDontMatchException e) {
-             System.out.println(e);
-            return "registration";
-        }
+
 
         catch (Exception e) {
             System.out.println(e);
-            System.err.println("Default Exception thrown, Either form was empty or other problem occured, fix asap pls");
+            System.err.println("Unknown error thrown during user registration, please check asap");
             return "registration";
         }
-        userService.save(user);
 
-        model.addAttribute("validated", "true");
+
+
         return "registration";
     }
 

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CreditCardRepository extends JpaRepository<CreditCard, Integer> {
+
+    //This interface isn't currently used anywhere in the program
 }

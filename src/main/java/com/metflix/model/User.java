@@ -1,24 +1,19 @@
 package com.metflix.model;
 
-
 import com.sun.istack.Nullable;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 
 @Entity
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="users")
-
 
 public class User {
 
@@ -28,13 +23,13 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private LocalDate dob;
     @Column(name="phone_nr")
     private String phoneNr;
     @Column(name="reg_date")
     private LocalDate regDate;
-    private UserStatus status;
+    private UserStatusEnum status;
     @Column (name="pwd")
     private String password;
 
@@ -58,7 +53,7 @@ public class User {
         this.dob = dob;
         this.phoneNr = phoneNr;
         this.password = password;
-        this.status = UserStatus.unsubscribed;
+        this.status = UserStatusEnum.unsubscribed;
         this.regDate = LocalDate.now();
     }
 }

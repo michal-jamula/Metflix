@@ -13,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Address {
 
+    //This table isn't currently used anywhere in the program
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

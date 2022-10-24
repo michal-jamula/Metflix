@@ -37,14 +37,14 @@
                             <!-- Name -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="name">Name</label>
-                                <input type="text" id="name" class="form-control" th:field="*{name}" />
+                                <input type="text" id="name" class="form-control" th:field="*{name}" required/>
                                 <i th:text="${name}" style="color:red;" ></i>
                             </div>
 
                             <!-- Surname -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="name">Surname</label>
-                                <input type="text" id="surname" class="form-control" th:field="*{surname}" />
+                                <input type="text" id="surname" class="form-control" th:field="*{surname}" required/>
                                 <i th:text="${surname}" style="color:red;" ></i>
                             </div>
                         </div>
@@ -53,14 +53,14 @@
                             <!-- Email -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="text" id="email" class="form-control" th:field="*{email}" />
+                                <input type="text" id="email" class="form-control" th:field="*{email}" required/>
                                 <i th:text="${email}" style="color:red;" ></i>
                             </div>
 
                             <!-- Date of birth -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="dob">Date of Birth</label>
-                                <input type="date" class="datepicker_input form-control" id="dob" th:field="*{dob}" />
+                                <input type="date" class="datepicker_input form-control" id="dob" th:field="*{dob}" required/>
                                 <i th:text="${dob}" style="color:red;" ></i>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">+44</span>
                                     </div>
-                                    <input type="number" class="form-control" id="phoneNr" th:field="*{phoneNr}" >
+                                    <input type="number" class="form-control" id="phoneNr" th:field="*{phoneNr}" required>
                                 </div>
                                 <i th:text="${phoneNr}" style="color:red;" ></i>
                             </div>

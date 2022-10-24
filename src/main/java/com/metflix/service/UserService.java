@@ -1,18 +1,16 @@
 package com.metflix.service;
 
 
-import com.metflix.exceptions.EmailAlreadyExistsException;
-import com.metflix.exceptions.PasswordsDontMatchException;
-import com.metflix.exceptions.RegistrationFieldEmptyException;
 import com.metflix.model.User;
-import com.metflix.model.UserStatus;
+import com.metflix.model.UserStatusEnum;
 import com.metflix.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +26,34 @@ public class UserService {
 
 
 
+    /*
+        Finds users based on pagination and sort variables
+     */
+    public Page<User> findPaginated(final int pageNumber, final int pageSize,
+                                        final String sortField, final String sortDirection) {
+
+
+        Sort sort;
+        if( sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())) {
+             sort = Sort.by(sortField).ascending();
+        } else {
+            sort = Sort.by(sortField).descending();
+        }
+
+
+        final Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
+        return userRepository.findAll(pageable);
+    }
+
+
+
+
+
 
 
     /**
-        This method validates the user registration, currently it does 3 things:
+        This method validates the user registration, it calls other methods,
+        Currently it calls 3 methods:
             1. checks if email already exists
             2. checks if there's any empty fields passed through
             3. checks if the passwords match
@@ -40,7 +62,6 @@ public class UserService {
      */
     public List<String> validateUser (User user, String password2) {
 
-        HashMap<String, String> map = new HashMap<>();
         List<String> fieldCheckAnswer = checkUserContainsEmptyFields(user);
 
 
@@ -62,7 +83,7 @@ public class UserService {
     }
 
     //TODO: Currently the dob only gets checked if empty or not, it doesn't check the format of the string
-    /** returns "success" when fields are completed, otherwise returns a <field, error message> both as String */
+    /** returns <"success", "true"> when fields are completed, otherwise returns a <field, error message> both as String */
     public List<String> checkUserContainsEmptyFields (User user) {
         try{
             HashMap<String, String> fieldsToCheck = new HashMap<String, String>();
@@ -102,7 +123,7 @@ public class UserService {
         }
 
         if(user.getStatus() == null) {
-            user.setStatus(UserStatus.unsubscribed);
+            user.setStatus(UserStatusEnum.unsubscribed);
         }
 
         userRepository.save(user);

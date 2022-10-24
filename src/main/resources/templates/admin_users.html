@@ -13,27 +13,27 @@
 <body class="app" layout:fragment="main-content">
 
     <!-- Main Content -->
-	<div class="app-wrapper pt-5">
+	<div class="app-wrapper p-5 ">
 
-        <div class="container-fluid pl-5 ml-5"><h1 class="display-5 fs-1 fw-bolder ml-5 pl-5">Users</h1></div>
-        <table class="table table-striped table-hover">
+        <div class="container-fluid pl-5 ml-5"><h1 class="display-5 fw-bolder fs-1 ps-4 pb-2">Users</h1></div>
+        <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr class="text-center">
-                    <th scope="col">user_id</th>
-                    <th scope="col">name</th>
-                    <th scope="col">surname</th>
-                    <th scope="col">email</th>
-                    <th scope="col">dob</th>
-                    <th scope="col">phone_nr</th>
-                    <th scope="col">reg_date</th>
-                    <th scope="col">status</th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=id&sort-dir=' + ${reverseSortDir}}">Id</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=name&sort-dir=' + ${reverseSortDir}}">Name</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=surname&sort-dir=' + ${reverseSortDir}}">Surname</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=email&sort-dir=' + ${reverseSortDir}}">Email</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=dob&sort-dir=' + ${reverseSortDir}}">Dob</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=phoneNr&sort-dir=' + ${reverseSortDir}}">Phone nr</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=dob&sort-dir=' + ${reverseSortDir}}">Reg date</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin_users/' + ${currentPage} + '?sort-field=status&sort-dir=' + ${reverseSortDir}}">Status</a></th>
                     <th scope="col">edit</th>
 
                 </tr>
             </thead>
             <!--TODO: Remove dob and phoneNr columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
             <tbody>
-                <tr th:each="user : ${users}" class="text-center">
+                <tr th:each="user : ${listUsers}" class="text-center">
                     <td th:text="${user.id}">user_id</td>
                     <td th:text="${user.name}">name</td>
                     <td th:text="${user.surname}">surname</td>
@@ -44,16 +44,80 @@
                     <td th:text="${user.status}">status</td>
                     <td><a th:href="@{/admin_user_single(id=${user.id})}"><btn  class="btn mx-auto">Edit</btn></a></td>
                 </tr>
-
-
             </tbody>
+
         </table>
 
+        <nav aria-label="..." class="d-flex" th:if="${totalPages > 1}">
+            <ul class="pagination ps-5">
 
+                <!-- First button -->
+                <li class="page-item">
+                    <a class="page-link" th:text="First" th:if="${currentPage != 1}"
+                    th:href="@{'/admin_users/1?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
 
+                <!-- Previous button -->
+                <li class="page-item">
+                    <a class="page-link" th:text="Previous" th:if="${currentPage != 1}"
+                       th:href="@{'/admin_users/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
 
+                <!-- -2 button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage > 2}" th:text="${currentPage - 2}"
+                       th:href="@{'/admin_users/' + ${currentPage - 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
 
-	</div>
+                <!-- -1 button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage > 1}" th:text="${currentPage - 1}"
+                                         th:href="@{'/admin_users/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
+
+                <!-- Current button -->
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#" th:text="${currentPage}"> Active middle button</a>
+                </li>
+
+                <!-- +1 button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${totalPages - currentPage > 0}" th:text="${currentPage + 1}"
+                       th:href="@{'/admin_users/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
+
+                <!-- +2 button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${totalPages - currentPage > 1}" th:text="${currentPage + 2}"
+                       th:href="@{'/admin_users/' + ${currentPage + 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                    </a>
+                </li>
+
+                <!-- Next button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage < totalPages}"
+                    th:href="@{'/admin_users/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Next</a>
+                </li>
+
+                <!-- Last Button -->
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage < totalPages}"
+                       th:href="@{'/admin_users/' + ${totalPages} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Last</a>
+                </li>
+            </ul>
+            <!-- User count -->
+            <div class="container-fluid d-flex justify-content-end">
+                <p class="pe-5 fs-5"> Total Users: <strong>[[${totalItems}]]</strong></p>
+            </div>
+        </nav>
+
+    </div>
+
 
 
 </body>

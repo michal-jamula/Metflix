@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name="c_card")
 public class CreditCard {
 
+    //This table isn't currently used anywhere in the program
 
     @NonNull
     private Integer userId;

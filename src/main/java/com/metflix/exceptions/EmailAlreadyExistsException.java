@@ -1,7 +1,5 @@
 package com.metflix.exceptions;
 
-import lombok.experimental.StandardException;
-
 public class EmailAlreadyExistsException extends Exception{
     public EmailAlreadyExistsException() {
     }

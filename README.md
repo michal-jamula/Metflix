@@ -20,7 +20,7 @@ The motivation for this project comes from the willingness to show off my skills
  + Import into any IDE (I use Intellij), build the maven project and run. 
  + Project uses an in-memory H2 database on startup
  + Project injects data from SQL files
- + I use Java 11
+ + Project is built on Java 11
 
 <br>
 
@@ -38,15 +38,15 @@ The motivation for this project comes from the willingness to show off my skills
 <br>
 
 ## Future plans:
-1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ Finished
-2. ~~Clean up the HTML, CSS code, comment appropriately and get rid of useless code~~ Finished
-3. ~~Start a spring boot project and setup what I can (jpa entities with a database, thymeleaf, spring-boot server, controller etc)~~
+1. ~~Finish working on the basic HTML and CSS files. Aim to create a finished website look~~ --  Finished
+2. ~~Clean up the HTML, CSS code, comment appropriately and get rid of useless code~~ -- Finished
+3. ~~Start a spring boot project and setup what I can (jpa entities with a database, thymeleaf, spring-boot server, controller etc)~~ -- Finished
    1. ~~Create basic working website with dummy data~~
    2. ~~Setup basic user functionality~~
    3. ~~Give user a response if registration process went wrong~~
-4. REST functionality:
-   1. Create a REST Controller
-   2. Make admin tables interactive and able to sort data
+4. ~~REST functionality~~ -- REST controller was not needed to create interactive admin tables.
+   1. ~~Create a REST Controller~~
+   2. ~~Make admin tables interactive and able to sort data~~
 5. Admin Functionality:
    1. Create all the other databases
    2. Create all other admin tables
@@ -76,7 +76,12 @@ The motivation for this project comes from the willingness to show off my skills
     - Created user registration (and basic form-verification) functionality
     - Made admin_users and admin_user_single pages display data dynamically based on database data
 - 23/10/2022
-  - Fixed errors given to the user while registering
+  - Fixed errors given to the user while registering - now the user is able to see which field contains errors.
+- 24/10/2022
+  - Made the "User" table interactable by implementing pagination and sorting, admin is also able to access information about single user (that page is still to be completed)
+  - Implemented H2 database instead of PostgreSQL to make it easier for anyone trying this program on their own computer
+    - The H2 database runs in-memory, injects data from .SQL files and drops data when program is shut down
+  - Implemented "live reload" from devtools
 
 
 <br><br>

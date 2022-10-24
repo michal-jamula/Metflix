@@ -1,7 +1,5 @@
 package com.metflix.exceptions;
 
-import lombok.experimental.StandardException;
-
 public class RegistrationFieldEmptyException extends Exception{
     public RegistrationFieldEmptyException() {
     }

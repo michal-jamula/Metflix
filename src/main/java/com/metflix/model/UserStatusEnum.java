@@ -1,6 +1,6 @@
 package com.metflix.model;
 
-public enum UserStatus {
+public enum UserStatusEnum {
     unsubscribed,
     subscribed,
     admin

@@ -1,6 +1,5 @@
 package com.metflix.exceptions;
 
-import lombok.experimental.StandardException;
 
 public class PasswordsDontMatchException extends Exception{
     public PasswordsDontMatchException() {

@@ -1,8 +1,8 @@
 
 /* Hibernate requires the code to be on the same line to work properly */
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('michal', 'jamula', 'michal@gmail.com', '1996-01-01', '1231231233', now(), 2, 'asdqwe');
-INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES('bob', 'bobson', 'bob@gmail.com', '2000-10-12', '3213213211', now(), 0, 'asdqwe');
-INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES('john', 'johnson', 'john@gmail.com', '2000-10-27', '0909090909', now(), 0, 'asdqwe');
+INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('bob', 'bobson', 'bob@gmail.com', '2000-10-12', '3213213211', now(), 0, 'asdqwe');
+INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('john', 'johnson', 'john@gmail.com', '2000-10-27', '0909090909', now(), 0, 'asdqwe');
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('jane', 'janeson', 'jane@subscribed.com', '1986-12-21', '2758403639', now(), 1, 'asdqwe');
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('drake', 'drakeson', 'drake@subscribed.wealthy', '1994-06-19', '5675643729', now(), 1, 'asdqwe');
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('katie', 'brown', 'kate@subscribed.com', '2004-06-28', '1231231230', now(), 1, 'asdqwe');
@@ -21,8 +21,6 @@ INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VA
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('amanda', 'taylor', 'amanda@email.com', '1985-03-01', '5691290157', now(), 0, 'asdqwe');
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('brian', 'walker', 'brian@email.com', '2001-06-07', '2484445060', now(), 1, 'asdqwe');
 INSERT INTO users(name, surname, email, dob, phone_nr, reg_date, status, pwd) VALUES ('james', 'townsend', 'james@email.com', '1992-11-04', '1984445060', now(), 1, 'asdqwe');
-
-
 
 
 

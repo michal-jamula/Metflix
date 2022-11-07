@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/admin}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('admin')
+                    <a th:href="@{'/admin_users/1?sort-field=id&sort-dir=asc'}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('admin')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Admin</a>
                 </li>
 

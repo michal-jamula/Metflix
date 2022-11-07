@@ -33,7 +33,9 @@ The motivation for this project comes from the willingness to show off my skills
    1. Able to register a user
 4. Admin functionality - 
    1. Read multiple user data from database
-   2. Able to access single user information from admin panel
+   2. Read movies, credit cards and addresses from database
+   3. Able to access single user information from admin panel
+   4. Able to edit and save single user information from admin panel
    
 <br>
 
@@ -47,14 +49,15 @@ The motivation for this project comes from the willingness to show off my skills
 4. ~~REST functionality~~ -- REST controller was not needed to create interactive admin tables.
    1. ~~Create a REST Controller~~
    2. ~~Make admin tables interactive and able to sort data~~
-5. Admin Functionality:
-   1. Create all the other databases
-   2. Create all other admin tables
-   3. Create an SQL script to inject data into all these tables
-   4. Make all admin tables display data dynamically and implement sort functionality
+5. Admin Functionality: - Tables created, still need to add more information, make other tables editable through admin GUI
+   1. ~~Create all the other databases~~
+   2. ~~Create all other admin tables~~
+   3. ~~Create an SQL script to inject data into all these tables~~
+   4. ~~Make all admin tables display data dynamically and implement sort functionality~~
+   5. Make admins able to manipulate data in all the tables
 6. Movie functionality
-   1. Create more database tables to handle movies
-   2. Create SQL scripts to inject data
+   1. ~~Create more database tables to handle movies~~
+   2. ~~Create SQL scripts to inject data~~
    3. Fix the user_main website to display data dynamically
    4. Make the movie_single page work by allowing all users to watch movies
 7. Implement spring security to authorise and authenticate users
@@ -82,6 +85,14 @@ The motivation for this project comes from the willingness to show off my skills
   - Implemented H2 database instead of PostgreSQL to make it easier for anyone trying this program on their own computer
     - The H2 database runs in-memory, injects data from .SQL files and drops data when program is shut down
   - Implemented "live reload" from devtools
+- 07/11/2022
+  - Created 'Address', 'Credit card' and 'Movie' Tables. Also:
+    - Respective repositories
+    - Respective services
+    - Respective data through SQL inject files
+  - SQL Inject files are now in resources/data repositories, Spring automatically scans and runs any .sql files in that directory
+  - admin_user page is now (almost) fully functional. Admins are able to edit information regarding any registered user.
+
 
 
 <br><br>

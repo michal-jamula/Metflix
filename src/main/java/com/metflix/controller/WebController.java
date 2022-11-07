@@ -1,16 +1,23 @@
 package com.metflix.controller;
 
 
+import com.metflix.model.Address;
+import com.metflix.model.CreditCard;
+import com.metflix.model.Movie;
 import com.metflix.model.User;
-import com.metflix.repositories.AddressRepository;
 import com.metflix.repositories.CreditCardRepository;
+import com.metflix.repositories.MovieRepository;
 import com.metflix.repositories.UserRepository;
+import com.metflix.service.AddressService;
+import com.metflix.service.CreditCardService;
+import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -21,18 +28,20 @@ import java.util.Optional;
 public class WebController {
 
     private final UserRepository userRepository;
-    private final AddressRepository addressRepository;
-    private final CreditCardRepository creditCardRepository;
     private final UserService userService;
+    private final MovieRepository movieRepository;
+    private final MovieService movieService;
+    private final CreditCardService creditCardService;
+    private final AddressService addressService;
 
-
-    public WebController(final UserRepository userRepository, final AddressRepository addressRepository, final CreditCardRepository creditCardRepository, UserService userService) {
+    public WebController(UserRepository userRepository, UserService userService, MovieRepository movieRepository, MovieService movieService, CreditCardService creditCardService, AddressService addressService) {
         this.userRepository = userRepository;
-        this.addressRepository = addressRepository;
-        this.creditCardRepository = creditCardRepository;
         this.userService = userService;
+        this.movieRepository = movieRepository;
+        this.movieService = movieService;
+        this.creditCardService = creditCardService;
+        this.addressService = addressService;
     }
-
 
     @GetMapping("/")
     public String index (Model model) {
@@ -44,11 +53,6 @@ public class WebController {
         return "index";
     }
 
-
-    @GetMapping("admin")
-    public String admin() {
-        return "admin_sample";
-    }
 
     @GetMapping("user")
     public String user( Model model) {
@@ -71,7 +75,7 @@ public class WebController {
     }
 
 
-    /** Redirects user to /error if the user ID doesn't match anything in the database */
+    /** Requires "id" parameter. Redirects user to /error if the user ID doesn't match anything in the database */
     @GetMapping("admin_user_single")
     public String admin_user_single(@RequestParam("id") int userId, Model model) {
 
@@ -81,7 +85,7 @@ public class WebController {
             User user = userOptional.get();
             model.addAttribute("user", user);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this ID does not exist!");
         }
         return "admin_user_single";
     }
@@ -90,10 +94,11 @@ public class WebController {
         Utilises pagination and sorting, pageSize is hard-coded to 10 atm
      */
     @GetMapping(value = "/admin_users/{page-number}")
-    public String findPaginated(@PathVariable(name = "page-number") final int pageNo,
-                                @RequestParam(name = "sort-field") final String sortField,
-                                @RequestParam(name = "sort-dir") final String sortDir,
-                                final Model model) {
+    public String findPaginatedUsers(@PathVariable(name = "page-number") final int pageNo,
+                                    @RequestParam(name = "sort-field") final String sortField,
+                                    @RequestParam(name = "sort-dir") final String sortDir,
+                                    final Model model
+                                    ) {
 
         final int pageSize = 10;
         final Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
@@ -117,8 +122,28 @@ public class WebController {
 
 
 
-    @GetMapping("admin_movies")
-    public String admin_movies() {
+    @GetMapping(value = "/admin_movies/{page-number}")
+    public String findPaginatedMovies(@PathVariable(name = "page-number") final int pageNo,
+                                    @RequestParam(name = "sort-field") final String sortField,
+                                    @RequestParam(name = "sort-dir") final String sortDir,
+                                    final Model model) {
+
+        final int pageSize = 10;
+        final Page<Movie> page = movieService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final List<Movie> listMovies = page.getContent();
+
+        // In ideal cases the response should be encapsulated in a class.
+        // That's to keep pagination & sorting separate from other variables
+        // pagination parameters
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        // sorting parameters
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        // Users list
+        model.addAttribute("listMovies", listMovies);
         return "admin_movies";
     }
 
@@ -128,6 +153,62 @@ public class WebController {
         model.addAttribute("user", new User());
         return "registration";
     }
+
+
+    @GetMapping(value = "/admin_cc/{page-number}")
+    public String findPaginatedCreditCards(@PathVariable(name = "page-number") final int pageNo,
+                                           @RequestParam(name = "sort-field") final String sortField,
+                                           @RequestParam(name = "sort-dir") final String sortDir,
+                                           final Model model) {
+
+        final int pageSize = 10;
+        final Page<CreditCard> page = creditCardService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final List<CreditCard> listCards = page.getContent();
+
+        // In ideal cases the response should be encapsulated in a class.
+        // That's to keep pagination & sorting separate from other variables
+        // pagination parameters
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        // sorting parameters
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        // Users list
+        model.addAttribute("listCards", listCards);
+        return "admin_credit_cards";
+    }
+
+
+
+    @GetMapping(value = "/admin_addr/{page-number}")
+    public String findPaginatedAddresses(@PathVariable(name = "page-number") final int pageNo,
+                                           @RequestParam(name = "sort-field") final String sortField,
+                                           @RequestParam(name = "sort-dir") final String sortDir,
+                                           final Model model) {
+
+        final int pageSize = 10;
+        final Page<Address> page = addressService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final List<Address> listAddresses = page.getContent();
+
+        // In ideal cases the response should be encapsulated in a class.
+        // That's to keep pagination & sorting separate from other variables
+        // pagination parameters
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        // sorting parameters
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        // Users list
+        model.addAttribute("listAddresses", listAddresses);
+        return "admin_addresses";
+    }
+
+
+
 
 
     /**
@@ -144,22 +225,25 @@ public class WebController {
         if(userOptional.isEmpty()) {
             return "registration";
         }
+
         User user = userOptional.get();
 
+        System.err.println(user);
         try {
             List<String> message = userService.validateUser(user, model.getAttribute("password2").toString());
-            System.out.println("list received from user service into controller: " + message);
             model.addAttribute(message.get(0), message.get(1));
 
             if (message.get(0).equals("success")) {
                 userService.save(user);
                 return "registration";
+            } else {
+                System.err.println("Success not received from userService, please check... " + message.get(0) + " " + message.get(1) );
             }
         }
 
         catch (Exception e) {
             System.out.println(e);
-            System.err.println("Unknown error thrown during user registration, please check asap");
+            System.err.println("Unknown error during registration, please fix ASAP!!");
             return "registration";
         }
 
@@ -167,8 +251,22 @@ public class WebController {
     }
 
 
+    //TODO: Fix the functionality of saving a user
+    @PostMapping("admin_user_single")
+    public String adminUpdateUser (@ModelAttribute("user") Optional<User> userOptional,
+                                    @RequestParam("id") int userId,
+                                    Model model) {
 
+        if (userOptional.isEmpty()) {
+            return "error";
+        }
+        User user = userOptional.get();
 
+        userService.updateUserWithId(user, user.getId());
+        System.out.println("WebController: User updated successfully");
+
+        return "admin_user_single";
+    }
 
 
 }

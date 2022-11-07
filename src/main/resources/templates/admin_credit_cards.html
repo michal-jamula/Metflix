@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
+
+<head>
+  <title>admin_cc</title>
+</head>
+
+<!-- app class mandatory as it breaks all CSS on admin pages-->
+
+<body class="app" layout:fragment="main-content">
+
+<!-- Main Content -->
+<div class="app-wrapper p-5 ">
+
+  <div class="container-fluid pl-5 ml-5"><h1 class="display-5 fw-bolder fs-1 ps-4 pb-2">Movie Links</h1></div>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr class="text-center">
+      <th scope="col"><a class="text-dark" th:href="@{'/admin_cc/' + ${currentPage} + '?sort-field=userId&sort-dir=' + ${reverseSortDir}}">userId</a></th>
+      <th scope="col"><a class="text-dark" th:href="@{'/admin_cc/' + ${currentPage} + '?sort-field=cardNumber&sort-dir=' + ${reverseSortDir}}">cardNumber</a></th>
+      <th scope="col"><a class="text-dark" th:href="@{'/admin_cc/' + ${currentPage} + '?sort-field=expDate&sort-dir=' + ${reverseSortDir}}">expDate</a></th>
+      <th scope="col"><a class="text-dark" th:href="@{'/admin_cc/' + ${currentPage} + '?sort-field=cvc&sort-dir=' + ${reverseSortDir}}">cvc</a></th>
+      <th scope="col">edit</th>
+
+    </tr>
+    </thead>
+    <!--TODO: Remove dob and releaseYear columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
+    <tbody>
+    <tr th:each="card : ${listCards}" class="text-center">
+      <td th:text="${card.userId}">movie_id</td>
+      <td th:text="${card.cardNumber}">title</td>
+      <td th:text="${card.expDate}">movie type</td>
+      <td th:text="${card.cvc}">description</td>
+      <td><a th:href="@{/credit_card_single(id=${card.cardNumber})}"><btn  class="btn mx-auto">Edit</btn></a></td>
+    </tr>
+    </tbody>
+
+  </table>
+
+  <nav aria-label="..." class="d-flex" th:if="${totalPages > 1}">
+    <ul class="pagination ps-5">
+
+      <!-- First button -->
+      <li class="page-item">
+        <a class="page-link" th:text="First" th:if="${currentPage != 1}"
+           th:href="@{'/admin_cc/1?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- Previous button -->
+      <li class="page-item">
+        <a class="page-link" th:text="Previous" th:if="${currentPage != 1}"
+           th:href="@{'/admin_cc/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- -2 button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${currentPage > 2}" th:text="${currentPage - 2}"
+           th:href="@{'/admin_cc/' + ${currentPage - 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- -1 button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${currentPage > 1}" th:text="${currentPage - 1}"
+           th:href="@{'/admin_cc/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- Current button -->
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#" th:text="${currentPage}"> Active middle button</a>
+      </li>
+
+      <!-- +1 button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${totalPages - currentPage > 0}" th:text="${currentPage + 1}"
+           th:href="@{'/admin_cc/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- +2 button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${totalPages - currentPage > 1}" th:text="${currentPage + 2}"
+           th:href="@{'/admin_cc/' + ${currentPage + 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+        </a>
+      </li>
+
+      <!-- Next button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${currentPage < totalPages}"
+           th:href="@{'/admin_cc/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Next</a>
+      </li>
+
+      <!-- Last Button -->
+      <li class="page-item">
+        <a class="page-link" th:if="${currentPage < totalPages}"
+           th:href="@{'/admin_cc/' + ${totalPages} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Last</a>
+      </li>
+    </ul>
+    <!-- movie count -->
+    <div class="container-fluid d-flex justify-content-end">
+      <p class="pe-5 fs-5"> Total Cards: <strong>[[${totalItems}]]</strong></p>
+    </div>
+  </nav>
+
+
+</div>
+
+
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-package com.metflix.model;
+package com.metflix.model.modelEnum;
 
 public enum UserStatusEnum {
     unsubscribed,

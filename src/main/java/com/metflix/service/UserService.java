@@ -2,7 +2,7 @@ package com.metflix.service;
 
 
 import com.metflix.model.User;
-import com.metflix.model.UserStatusEnum;
+import com.metflix.model.modelEnum.UserStatusEnum;
 import com.metflix.repositories.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -26,9 +24,9 @@ public class UserService {
 
 
 
-    /*
-        Finds users based on pagination and sort variables
-     */
+
+    //TODO: Pretty sure this method is meant to be part of a DTO.
+
     public Page<User> findPaginated(final int pageNumber, final int pageSize,
                                         final String sortField, final String sortDirection) {
 
@@ -63,7 +61,6 @@ public class UserService {
     public List<String> validateUser (User user, String password2) {
 
         List<String> fieldCheckAnswer = checkUserContainsEmptyFields(user);
-
 
         if (!fieldCheckAnswer.get(0).equals("success")) {
             return fieldCheckAnswer;
@@ -128,5 +125,49 @@ public class UserService {
 
         userRepository.save(user);
         System.out.println("user added to database successfully");
+    }
+
+
+    public User updateUserWithId(User user, Integer userId) {
+
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if(userOptional.isEmpty()) {
+            System.err.println("Tried to find user with ID, but no user with id: " + userId + " exists!");
+            return null;
+        }
+
+        User userDb = userOptional.get();
+
+        if (!user.getName().isBlank()) {
+            userDb.setName(user.getName());
+        }
+
+        if (!user.getSurname().isBlank()) {
+            userDb.setSurname((user.getSurname()));
+        }
+
+        if (!user.getEmail().isBlank()) {
+            userDb.setEmail(user.getEmail());
+        }
+
+        if (!user.getDob().equals(null)) {
+            userDb.setDob(user.getDob());
+        }
+
+        if (!user.getPhoneNr().isBlank()) {
+            userDb.setPhoneNr(user.getPhoneNr());
+        }
+
+        if (!user.getRegDate().equals(null)) {
+            userDb.setRegDate(user.getRegDate());
+        }
+
+        if (user.getStatus() != null) {
+            userDb.setStatus(user.getStatus());
+        }
+
+
+        return userRepository.save(userDb);
     }
 }

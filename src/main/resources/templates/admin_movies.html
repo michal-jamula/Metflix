@@ -11,152 +11,112 @@
 
 <body class="app" layout:fragment="main-content">
 
-    <!-- Main Content -->
-    <div class="app-wrapper pt-5">
+<!-- Main Content -->
+<div class="app-wrapper p-5 ">
 
-        <!-- First Table-->
-        <h1 class="display-5 fw-bolder">Template Movie Table</h1>
-        <table class="table table-striped table-hover text-center align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">movie_id</th>
-                    <th scope="col">movie_title</th>
-                    <th scope="col">movie_description</th>
-                    <th scope="col">movie_legth</th>
-                    <th scope="col">movie_type</th>
-                    <th scope="col">release_year</th>
-                    <th scope="col">edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Short Movie Title</td>
-                    <td class="text-box">Movie Description Movie Description Movie Description Movie Description</td>
-                    <td>192 min</td>
-                    <td>Action</td>
-                    <td>2004</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Short Movie Title</td>
-                    <td class="text-box">Movie Description Movie Description Movie Description Movie Description</td>
-                    <td>192 min</td>
-                    <td>Action</td>
-                    <td>2004</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Short Movie Title</td>
-                    <td class="text-box">Movie Description Movie Description Movie Description Movie Description</td>
-                    <td>192 min</td>
-                    <td>Action</td>
-                    <td>2004</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Short Movie Title</td>
-                    <td class="text-box">Movie Description Movie Description Movie Description Movie Description</td>
-                    <td>192 min</td>
-                    <td>Action</td>
-                    <td>2004</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Short Movie Title</td>
-                    <td class="text-box">Movie Description Movie Description Movie Description Movie Description</td>
-                    <td>192 min</td>
-                    <td>Action</td>
-                    <td>2004</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container-fluid pl-5 ml-5"><h1 class="display-5 fw-bolder fs-1 ps-4 pb-2">Movies</h1></div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr class="text-center">
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=id&sort-dir=' + ${reverseSortDir}}">Id</a></th>
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=title&sort-dir=' + ${reverseSortDir}}">title</a></th>
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=type&sort-dir=' + ${reverseSortDir}}">movie_type</a></th>
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=description&sort-dir=' + ${reverseSortDir}}">description</a></th>
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=length&sort-dir=' + ${reverseSortDir}}">length</a></th>
+            <th scope="col"><a class="text-dark" th:href="@{'/admin_movies/' + ${currentPage} + '?sort-field=releaseYear&sort-dir=' + ${reverseSortDir}}">release_year</a></th>
+            <th scope="col">edit</th>
+
+        </tr>
+        </thead>
+        <!--TODO: Remove dob and releaseYear columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
+        <tbody>
+        <tr th:each="movie : ${listMovies}" class="text-center">
+            <td th:text="${movie.id}">movie_id</td>
+            <td th:text="${movie.title}">title</td>
+            <td th:text="${movie.type}">movie type</td>
+            <td th:text="${#strings.abbreviate(movie.description, 50)}">description</td>
+            <td th:text="${movie.length}">length</td>
+            <td th:text="${movie.releaseYear}">release year</td>
+
+            <td><a th:href="@{/admin_movie_single(id=${movie.id})}"><btn  class="btn mx-auto">Edit</btn></a></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <nav aria-label="..." class="d-flex" th:if="${totalPages > 1}">
+        <ul class="pagination ps-5">
+
+            <!-- First button -->
+            <li class="page-item">
+                <a class="page-link" th:text="First" th:if="${currentPage != 1}"
+                   th:href="@{'/admin_movies/1?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- Previous button -->
+            <li class="page-item">
+                <a class="page-link" th:text="Previous" th:if="${currentPage != 1}"
+                   th:href="@{'/admin_movies/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- -2 button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage > 2}" th:text="${currentPage - 2}"
+                   th:href="@{'/admin_movies/' + ${currentPage - 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- -1 button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage > 1}" th:text="${currentPage - 1}"
+                   th:href="@{'/admin_movies/' + ${currentPage - 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- Current button -->
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#" th:text="${currentPage}"> Active middle button</a>
+            </li>
+
+            <!-- +1 button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${totalPages - currentPage > 0}" th:text="${currentPage + 1}"
+                   th:href="@{'/admin_movies/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- +2 button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${totalPages - currentPage > 1}" th:text="${currentPage + 2}"
+                   th:href="@{'/admin_movies/' + ${currentPage + 2} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">
+                </a>
+            </li>
+
+            <!-- Next button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage < totalPages}"
+                   th:href="@{'/admin_movies/' + ${currentPage + 1} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Next</a>
+            </li>
+
+            <!-- Last Button -->
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage < totalPages}"
+                   th:href="@{'/admin_movies/' + ${totalPages} + '?sort-field=' + ${sortField} + '&sort-dir=' + ${sortDir}}">Last</a>
+            </li>
+        </ul>
+        <!-- movie count -->
+        <div class="container-fluid d-flex justify-content-end">
+            <p class="pe-5 fs-5"> Total Movies: <strong>[[${totalItems}]]</strong></p>
+        </div>
+    </nav>
+
+
+</div>
 
 
 
-
-        <!-- Second Table -->
-        <h1 class="display-5 pt-5 fw-bolder"> Template Movie Links Table</h1>
-        <table class="table table-striped table-hover text-center align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">movie_id</th>
-                    <th scope="col">trailer_link</th>
-                    <th scope="col">movie_link</th>
-                    <th scope="col">img_preview</th>
-                    <th scope="col">img_main</th>
-                    <th scope="col">edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>C:\dev\projects\Java\Metflix\metflix HTML\img\family-1-wide.jpg</td>
-                    <td>
-                        <btn class="btn">Edit</btn>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </body>
 
 </html>

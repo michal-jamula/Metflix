@@ -1,11 +1,14 @@
 package com.metflix.model;
 
+import com.metflix.model.modelEnum.UserStatusEnum;
 import com.sun.istack.Nullable;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Set;
 
 
@@ -15,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name="users")
 
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +26,12 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dob;
     @Column(name="phone_nr")
     private String phoneNr;
     @Column(name="reg_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate regDate;
     private UserStatusEnum status;
     @Column (name="pwd")
@@ -35,16 +39,20 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Column(name="c_card")
     @Nullable
     private Set<CreditCard> creditCards;
 
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Column(name="address")
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinTable(joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "userId"))
     @Nullable
-    private Set<CreditCard> addresses;
+    private Collection<Address> Address;
+
+
+
+
 
     public User(String name, String surname, String email, LocalDate dob, String phoneNr, String password) {
         this.name = name;

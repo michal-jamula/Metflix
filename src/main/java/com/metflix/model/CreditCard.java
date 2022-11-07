@@ -20,14 +20,15 @@ public class CreditCard {
     private Integer userId;
 
     @Id
-    @Column(name="c_number")
+    @Column(name="c_number", length = 16)
     @NonNull
     private String cardNumber;
 
-    @Column(name="exp_date")
+    @Column(name="exp_date", length = 4)
     @NonNull
     private String expDate;
 
     @NonNull
+    @Column(length = 3)
     private String cvc;
 }

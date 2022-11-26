@@ -13,8 +13,8 @@
 <section layout:fragment="main-content">
 
   <!-- Main content 1 -->
-  <div class="bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + '); height: 80vh;'">
-    <div class="mask" style=" background-color: rgba(0, 0, 0, 0.675); height:80vh;">
+  <div class="bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');  max-height: 80vh;'">
+    <div class="mask" style=" background-color: rgba(0, 0, 0, 0.675); max-height:80vh;">
 
 
       <!-- Set padding and/or margin on x-axis to 0 as this causes extra whitespace
@@ -24,46 +24,45 @@
         <p class="display-6 text-outline-gray fw-semibold my-5 py-5">Ready to start watching?</p>
         <h4 class="display-6 text-outline-gray fw-semibold my-5 pt-3">Register now!</h4>
 
-        <div class="input-group mb-5 mx-0 px-0">
-          <div class="col-md-1 col-lg-2"></div>
-          <input type="text" class="form-control" placeholder="Email Address" aria-label="Register Email"
-                 aria-describedby="Email address input">
-          <button class="btn btn-danger">START NOW</button>
-          <div class="col-md-1 col-lg-2"></div>
-
+        <div class="input-group mb-5 mx-auto px-5 " style="max-width: 1440px;">
+            <input type="text" class="form-control" placeholder="Email Address" aria-label="Register Email"
+                   aria-describedby="Email address input">
+            <button class="btn btn-danger">START NOW</button>
         </div>
       </div>
     </div>
   </div><!-- end of main content 1-->
 
 
+  <!-- TODO: Get rid of the borders and make the 2nd section wider -->
   <!-- Main content 2 -->
-  <div class="container my-5 py-4">
-    <div class="row mt-5 pt-5 text-light text-center">
-      <div class="col-md-6 px-5 ">
+  <div class="container-fluid px-0 py-4" style="max-width: 1440px;">
+
+    <!-- row 1 -->
+    <div class="row mx-0 mt-5 py-5 text-light text-center">
+      <div class="col-md-7 px-5 ">
         <h6 class="display-5 mb-4 fw-bolder">Enjoy all our movies for free</h6>
         <p class="fs-4 text-white-50">Watch anything, anywhere, free of charge. Only for registered users!</p>
       </div>
-      <div class="col-md-6 col-sm-12 px-5 ">
-        <img src="./img/streaming-1-wide.jpg" alt="TV image" srcset="" class="img-fluid" style="max-height:250px;">
+      <div class="col-md-5 px-5 ">
+        <img src="./img/streaming-1-wide.jpg" alt="TV image" srcset="" class="img-fluid my-3" style="max-height:250px;">
       </div>
-    </div>
+    </div> <!-- end of row 1 -->
 
 
 
-
+    <!-- row 2 -->
     <div class="row mt-5 pt-5 text-light text-center">
-
-      <div class="col-md-6 col-sm-12 p-5">
-        <img src="./img/family-1-wide.jpg" alt="Family by the TV" srcset="" class="img-fluid"
+      <div class="col-md-5 px-5 ">
+        <img src="./img/family-1-wide.jpg" alt="Family by the TV" srcset="" class="img-fluid my-3"
              style="max-height:250px;">
       </div>
 
-      <div class="col-md-6 order-first order-md-last p-5">
+      <div class="col-md-7 px-5 order-first order-md-last ">
         <h6 class="display-5 mb-4 fw-bolder">Share your account with family</h6>
         <p class="fs-4 text-white-50">Always free of charge for any member of your family</p>
       </div>
-    </div>
+    </div><!-- end of row 2 -->
   </div> <!-- End of main content 2 -->
 
 
@@ -74,8 +73,9 @@
     <div class="row text-light text-center">
       <h3 class="display-3 mb-4">Frequently Asked Questions</h3>
 
-      <!-- First FAQ-->
-      <div class="accordion pt-5" id="accordionExample">
+
+      <div class="accordion pt-5" id="faqExample">
+        <!-- 1st FAQ-->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -83,8 +83,8 @@
               FAQ Question 1
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-               data-bs-parent="#accordionExample">
+          <div id="collapseOne" class="accordion-collapse collapse my-2" aria-labelledby="headingOne"
+               data-bs-parent="#faqExample">
             <div class="accordion-body">
               <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
               plugin adds the appropriate classes that we use to style each element. These classes control the overall
@@ -93,9 +93,9 @@
               within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
           </div>
-        </div>
+        </div><!-- End of 1st FAQ -->
 
-        <!-- Second FAQ -->
+        <!-- 2nd FAQ -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -104,7 +104,7 @@
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-               data-bs-parent="#accordionExample">
+               data-bs-parent="#faqExample">
             <div class="accordion-body">
               <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse
               plugin adds the appropriate classes that we use to style each element. These classes control the overall
@@ -113,9 +113,9 @@
               within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
           </div>
-        </div>
+        </div><!-- End of 2nd FAQ -->
 
-        <!-- Third FAQ-->
+        <!-- 3rd FAQ-->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -124,7 +124,7 @@
             </button>
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-               data-bs-parent="#accordionExample">
+               data-bs-parent="#faqExample">
             <div class="accordion-body">
               <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
               plugin adds the appropriate classes that we use to style each element. These classes control the overall
@@ -133,7 +133,7 @@
               within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
           </div>
-        </div>
+        </div> <!-- End of 3rd FAQ -->
       </div>
     </div>
   </div> <!-- End main content 3 FAQ-->

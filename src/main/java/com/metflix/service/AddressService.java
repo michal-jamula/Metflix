@@ -1,7 +1,6 @@
 package com.metflix.service;
 
 import com.metflix.model.Address;
-
 import com.metflix.repositories.AddressRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +27,6 @@ public class AddressService {
         } else {
             sort = Sort.by(sortField).descending();
         }
-
 
         final Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
         return addressRepository.findAll(pageable);

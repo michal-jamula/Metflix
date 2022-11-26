@@ -18,7 +18,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
 
-        <a href="" class="navbar-brand justify-content-center">
+        <a th:href="@{/index}" class="navbar-brand justify-content-center">
             <!--suppress RequiredAttributes -->
             <img th:src="@{/img/icons/yt.png}"  width="38" height="38" class="d-inline-block"
                  alt="website icon">
@@ -37,19 +37,18 @@
                        th:class="${#httpServletRequest.getRequestURL().toString().endsWith('index')
                                ? 'nav-link active bg-dark' : 'nav-link'}"  >Home</a>
                 </li>
-
                 <li class="nav-item">
                     <a th:href="@{/registration}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('registration')
                                ? 'nav-link active bg-dark' : 'nav-link'}">Register</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{'/admin_users/1?sort-field=id&sort-dir=asc'}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('admin')
+                    <a th:href="@{/admin/users/1?sort-field=id&sort-dir=asc}" th:class="${#httpServletRequest.getRequestURL().toString().contains('admin')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Admin</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/user}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('user')
+                    <a th:href="@{/user/account}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('account')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">User</a>
                 </li>
 
@@ -59,14 +58,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/user_main}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('user_main')
-                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">user_main</a>
+                    <a th:href="@{/user/movies}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movies')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Movies</a>
                 </li>
 
-                <li class="nav-item">
-                    <a th:href="@{/movie_single}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movie_single')
-                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">movie_single</a>
-                </li>
             </ul>
 
         </div>

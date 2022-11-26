@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page_layout/layout">
+<head>
+     <title>index.html</title>
+</head>
+
+
+
+<body>
+
+    <section layout:fragment="main-content">
+
+        <!-- Main content 1 -->
+        <div class="bg-image ratio ratio-16x9" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');min-height:40vh; max-height: 80vh;'">
+            <div class="mask " style=" background-color: rgba(0, 0, 0, 0.675); min-height:40vh; max-height:70vh;">
+                <div class="d-flex container-flex justify-content-center align-content-start">
+                    <div class="container-fluid p-0 m-0" style="">
+                        <video class="mask" style="min-height: 40vh; max-height: 80vh; width:100%; background-color: rgba(0, 0, 0, 1); top: 0;" controls autoplay>
+                            <source th:src="@{${movie.movieLink}}"  type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end of main content 1-->
+
+
+        <!-- Movie Description-->
+        <div class="container text-white my-5 py-5">
+            <div class="row px-lg-5 mx-lg-5">
+
+                <!-- Fist Column-->
+                <div class="col-12 col-md-5 flex  pb-5 mb-3">
+                    <div class="d-flex justify-content-center justify-content-md-start row">
+                        <p class="fs-5 text-white-50 col-5">Title:</p>
+                        <p class=" fw-bolder fs-5 col-7" th:text="${movie.title}">Movie title</p>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-md-start row">
+                        <p class="fs-5 text-white-50 col-5">Duration:</p>
+                        <p class=" fw-bolder fs-5 col-7" th:text="${movie.length} + ' min'">Movie Duration</p>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-md-start row">
+                        <p class="fs-5 text-white-50 col-5">Type:</p>
+                        <p class=" fw-bolder fs-5 col-7" th:text="${movie.type}">Movie type</p>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-md-start row">
+                        <p class="fs-5 text-white-50 col-5">Release year:&emsp;</p>
+                        <p class=" fw-bolder fs-5 col-7" th:text="${movie.releaseYear}">Release Year</p>
+                    </div>
+                </div> <!-- End of First Column-->
+
+
+                <!-- Second Column -->
+                <div class="col-12 col-md-7 text-center order-md-last">
+                    <h3 class="mb-3">Description:</h3>
+                    <p th:text="${movie.description}"></p>
+                </div> <!-- End of second column-->
+            </div>
+        </div> <!-- end of movie description container-->
+    </section>
+</body>
+
+</html>

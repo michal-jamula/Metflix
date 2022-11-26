@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href = "@{/css/style.css}" >
 
-    <title layout:title-pattern="$LAYOUT_TITLE-$CONTENT_TITLE">layout</title>
+    <title layout:title-pattern="layout- $CONTENT_TITLE">layout</title>
 </head>
-
 
 
 <body>
@@ -27,7 +26,7 @@
 
 
 <section layout:fragment="main-content"> </section>
-<section role="main" layout:fragment="main-content2"></section>
+<section layout:fragment="main-content2"></section>
 
 
 

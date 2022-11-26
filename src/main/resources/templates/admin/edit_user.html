@@ -243,9 +243,11 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Edit User:</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{admin_user_single}" method="POST" th:object="${user} ">
+            <form th:action="@{/admin/user}" method="POST" th:object="${user} ">
+
+                <input type="text" id="name" class="form-control" th:text="${user.id}" th:field="*{id}" th:hidden="true"/>
+
                 <div class="modal-body">
-                    <input type="text" id="id", class="form-control" th:field="*{id}" hidden>
                     <div class="py-3">
                         <label class="form-label" for="name">Name:</label>
                         <input type="text" id="name" class="form-control" th:field="*{name}" required/>

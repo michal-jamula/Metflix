@@ -11,7 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,10 +25,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
-
-
-    //TODO: Pretty sure this method is meant to be part of a DTO.
 
     public Page<User> findPaginated(final int pageNumber, final int pageSize,
                                         final String sortField, final String sortDirection) {
@@ -128,6 +127,7 @@ public class UserService {
     }
 
 
+    //TODO: Currently the system accepts spaces as valid, create better validation for received info
     public User updateUserWithId(User user, Integer userId) {
 
         Optional<User> userOptional = userRepository.findById(userId);

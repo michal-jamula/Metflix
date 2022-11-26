@@ -15,12 +15,12 @@
 
 
 		<div class="app-branding">
-			<a class="app-logo" th:href="index"><img class="logo-icon me-2" th:src="@{/img/icons/yt.png}"
+			<a class="app-logo" th:href="@{/index}"><img class="logo-icon me-2" th:src="@{/img/icons/yt.png}"
 					alt="logo"><span class="logo-text">ADMIN PORTAL</span></a>
 		</div>
 
 		<!-- Admin links -->
-		<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+		<nav id="app-nav-main" class="flex-grow-1">
 			<ul class="app-menu list-unstyled mt-4" id="menu-accordion">
 
 				<!-- Navigation links -->
@@ -28,19 +28,19 @@
 					<thead></thead>
 					<tbody>
 
-						<tr class="clickable flex-row text-center" onclick="window.location='/admin_users/1?sort-field=id&sort-dir=asc'">
+						<tr class="clickable flex-row text-center" onclick="window.location='/admin/users/1?sort-field=id&sort-dir=asc'">
 							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">Users</p></th>
 						</tr>
 
-						<tr class="clickable flex-row text-center" onclick="window.location='/admin_movies/1?sort-field=id&sort-dir=asc'">
+						<tr class="clickable flex-row text-center" onclick="window.location='/admin/movies/1?sort-field=id&sort-dir=asc'">
 							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">Movies</p></th>
 						</tr>
 
-						<tr class="clickable flex-row text-center" onclick="window.location='/admin_cc/1?sort-field=cardNumber&sort-dir=asc'">
+						<tr class="clickable flex-row text-center" onclick="window.location='/admin/cc/1?sort-field=cardNumber&sort-dir=asc'">
 							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">Credit Cards</p></th>
 						</tr>
 
-						<tr class="clickable flex-row text-center" onclick="window.location='/admin_addr/1?sort-field=addressId&sort-dir=asc'">
+						<tr class="clickable flex-row text-center" onclick="window.location='/admin/address/1?sort-field=addressId&sort-dir=asc'">
 							<th class="flex-row py-3 "><p class=" display-1 fs-5 fw-normal m-0 align-self-center" style="cursor:pointer;">Addresses</p></th>
 						</tr>
 

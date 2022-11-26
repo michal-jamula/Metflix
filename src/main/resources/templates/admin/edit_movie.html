@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+        <html lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="page_layout/layout">
+
+        <head>
+        <title>admin_user_single</title>
+</head>
+
+
+<body class="app" layout:fragment="main-content">
+
+
+<div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <h1 class="app-page-title display-5 py-3">Movie Edit</h1>
+            <div class="row justify-content-around gy-4">
+                <div class="col-12 col-lg-10">
+
+                    <!-- First card -->
+                    <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+
+                        <!-- Header -->
+                        <div class="app-card-header p-3 border-bottom-0 mx-auto">
+                            <h4 class="app-card-title fs-2 ">Profile</h4>
+                        </div> <!-- End of card header-->
+
+
+                        <!-- Card main content-->
+                        <div class="app-card-body p-4 w-100">
+
+                            <!-- type row -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Movie title:</strong></div>
+                                        <div class="text-box col-5 offset-1 fs-5 text-center" th:text="${movie.title}">Title</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Type row -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Type:</strong></div>
+                                        <div class="text-box col-5 offset-1 fs-5 text-center" th:text="${movie.type}">Type
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Description -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Description:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.description}">Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Date of birth -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Length:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.length}">Date of
+                                            Birth
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Release year -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Release year:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.releaseYear}">Phone
+                                            number
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Trailer link  -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Trailer link:
+                                            date:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.trailerLink}">
+                                            Registration date
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Movie link  -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Movie link:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.movieLink}">Status
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Image preview  -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Preview image:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.imgPreview}">Status
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Image main  -->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="row">
+                                        <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Main image:</strong></div>
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${movie.imgMain}">Status
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card footer-->
+                        <div class="app-card-footer p-4 mt-auto mx-auto">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Edit Profile
+                            </button>
+                        </div> <!-- end of card footer-->
+
+
+                    </div><!--end of card-->
+                </div><!-- end of column -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Movie Data:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/admin/movie}" method="POST" th:object="${movie} ">
+
+                <input type="text" th:text="${movie.id}" th:field="*{id}" th:hidden="true"/>
+
+                <div class="modal-body">
+                    <div class="py-3">
+                        <label class="form-label" for="title">title:</label>
+                        <input type="text" id="title" class="form-control" th:field="*{title}" required/>
+                    </div>
+
+                    <div class="py-3">
+                        <label class="form-label" for="type">type:</label>
+                        <input type="text" id="type" class="form-control" th:field="*{type}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="description">description:</label>
+                        <input type="text" id="description" class="form-control" th:field="*{description}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="length">length:</label>
+                        <input type="text" id="length" class="form-control" th:field="*{length}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="releaseYear">releaseYear:</label>
+                        <input type="text" id="releaseYear" class="form-control" th:field="*{releaseYear}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="trailerLink">trailerLink:</label>
+                        <input type="text" id="trailerLink" class="form-control" th:field="*{trailerLink}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="movieLink">movieLink:</label>
+                        <input type="text" id="movieLink" class="form-control" th:field="*{movieLink}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="imgPreview">imgPreview:</label>
+                        <input type="text" id="imgPreview" class="form-control" th:field="*{imgPreview}" required/>
+                    </div>
+
+
+                    <div class="py-3">
+                        <label class="form-label" for="imgMain">imgMain:</label>
+                        <input type="text" id="imgMain" class="form-control" th:field="*{imgMain}" required/>
+                    </div>
+
+
+
+
+
+                </div>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-lg ms-2">Save Changes</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

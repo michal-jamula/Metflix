@@ -2,11 +2,12 @@ package com.metflix.model;
 
 import com.metflix.model.modelEnum.UserStatusEnum;
 import com.sun.istack.Nullable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
@@ -39,6 +40,7 @@ public class User{
 
 
 
+/*
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Column(name="c_card")
     @Nullable
@@ -49,6 +51,7 @@ public class User{
     @JoinTable(joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "userId"))
     @Nullable
     private Collection<Address> Address;
+*/
 
 
 

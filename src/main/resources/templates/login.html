@@ -8,16 +8,16 @@
 </head>
 
 
-<body>
+<body class="m-0 p-0">
 
-    <section class="bg-img" th:style="'background-image: url(' + @{img/landing-background.jpg} + ');'" layout:fragment="main-content">
+    <section class="bg-image container-fluid py-5" th:style="'background-image: url(' + @{img/landing-background.jpg} + ');'" layout:fragment="main-content">
         <!-- Modal -->
-        <div class="modal-dialog py-5 my-5 ">
-            <div class="modal-content card-registration user-card text-white">
-                <div class="modal-header text-center login-modal-transparency">
+        <div class="modal-dialog px-3 py-5">
+            <div class="modal-content card card-registration card-body text-white">
+                <div class="modal-header text-center ">
                     <p class="mx-auto display-1 fw-bolder fs-2 " id="loginModalLabel">Login</p>
                 </div>
-                <div class="modal-body login-modal-transparency py-4">
+                <div class="modal-body  py-4">
                     <form>
                         <label for="inputEmail" class="form-label pt-3">Email:</label>
                         <input type="email" id="inputEmail" class="form-control">
@@ -39,9 +39,9 @@
                         <div class="d-flex justify-content-end pe-4 pb-3">
                             <button type="button" class="btn btn-lg">Login</button>
                         </div>
-                        <p class="text-center pt-3 ">Don't have an account? <a href="registration.html">Sign Up</a></p>
+                        <p class="text-center pt-3 ">Don't have an account? <a href="registration">Sign Up</a></p>
 
-                        <p class="text-center pt-1 ">Forgot your password? <a href="registration.html">Reset here</a>
+                        <p class="text-center pt-1 ">Forgot your password? <a href="#">Reset here</a>
                     </div>
                 </div> <!-- End of modal footer-->
             </div>

@@ -1,14 +1,12 @@
 package com.metflix.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity(name = "Address")
 @Getter
@@ -21,7 +19,6 @@ public class Address{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
-
     private Integer userId;
     private String street;
     private Integer houseNumber;

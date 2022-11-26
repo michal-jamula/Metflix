@@ -23,6 +23,7 @@ public class Movie {
     @Column(name="title")
     private String title;
     @Column(name="movie_type")
+    @Enumerated(EnumType.STRING)
     private MovieTypeEnum type;
     private String description;
     private Integer length;

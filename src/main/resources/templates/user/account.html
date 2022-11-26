@@ -5,13 +5,12 @@
 
 
 <head>
-    <title>user.html</title>
+    <title>account.html</title>
 </head>
 
 
 
 <body>
-
     <section class="container" layout:fragment="main-content">
 
         <!-- Row containing columns -->
@@ -21,7 +20,7 @@
             <div class="col-md-5">
                 <div class="row">
 
-                    <!-- First card-->
+                    <!-- Icon card-->
                     <div class="col-12 p-0 px-3 py-3 my-4 mb-5 user-card text-white">
                         <div class="d-flex flex-column align-items-center">
                             <img class="photo" th:src="@{/img/icons/face_image_male.png}" alt="user photo">
@@ -31,7 +30,7 @@
                         </div>
                     </div>
 
-                    <!-- Second card-->
+                    <!-- Subscription card-->
                     <div class="col-12 px-2 pb-3 my-2 mb-4 user-card text-white">
 
                         <div class="d-flex justify-content-center border-bottom py-2 px-3">
@@ -45,14 +44,20 @@
                         <div class="d-flex justify-content-center py-2 px-3">
                             <button class="btn">Change subscription</button>
                         </div>
-                    </div>
+                    </div> <!-- end of Subscription card -->
                 </div>
             </div> <!-- End of first column -->
 
             <!-- Second Column-->
             <div class="col-md-7 ps-md-4 my-4 mb-5">
+                <!-- User details card -->
                 <div class="row offset-lg-1">
                     <div class="col-12 px-3 mb-3 pb-3 user-card text-white">
+
+                        <div class="d-flex justify-content-center border-bottom py-2 px-3">
+                            <p class="display-5 fs-1">Account details</p>
+                        </div>
+
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2">Full Name</p>
                             <p class="py-2">Kenneth valdez</p>
@@ -78,9 +83,40 @@
                             <button class="btn">Update Details</button>
                         </div>
                     </div>
-                </div>
+                </div> <!-- end of user details card -->
+
+                <!-- addresses card -->
+                <div class="row offset-lg-1 my-4">
+                    <div class="col-12 px-3 mb-3 pb-3 user-card text-white">
+
+                        <div class="d-flex justify-content-center border-bottom py-2 px-3">
+                            <p class="display-5 fs-1">Payment Methods</p>
+                        </div>
+
+
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2">Card1</p>
+                            <p class="py-2">****1234</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2">Card2</p>
+                            <p class="py-2">****9876</p>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2">Card3</p>
+                            <p class="py-2">****5656</p>
+                        </div>
+                    </div>
+                </div> <!-- end of addresses card -->
+
             </div> <!-- End of second column-->
-        </div> <!-- end of row containing columns -->
+
+
+
+
+
+        </div> <!-- End of row containing columns -->
     </section>
 
 </body>

@@ -20,13 +20,14 @@
 <body>
 
 <!-- TODO: Show user a message when user registers successfully. -->
+<!-- TODO: make the registration page more responsive instead of using columns -->
 
 <!-- Main content -->
-<section class="h-100 bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
-    <div class="container py-5 h-100 ">
-        <div class="row d-flex justify-content-center align-items-center h-50">
+<section class="bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
             <div class="card card-registration text-light">
-                <div class="col-xl-10 card-body p-md-5 mx-auto">
+                <div class="col-lg-12 col-xl-10 card-body p-md-5 mx-auto">
 
                     <!-- Form Here -->
                     <form th:action="@{registration}" method="POST" th:object="${user} ">
@@ -61,7 +62,7 @@
                             <!-- Date of birth -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
                                 <label class="form-label" for="dob">Date of Birth</label>
-                                <input type="date" class="datepicker_input form-control" id="dob" th:field="*{dob}" required/>
+                                <input type="date" class="form-control" id="dob" th:field="*{dob}" required/>
                                 <i th:text="${dob}" style="color:red;" ></i>
                             </div>
                         </div>
@@ -106,8 +107,8 @@
             </div>
         </div>
     </div>
-</section>
 
+</section>
 
 </body>
 

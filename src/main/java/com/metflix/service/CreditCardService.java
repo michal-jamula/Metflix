@@ -17,9 +17,6 @@ public class CreditCardService {
         this.creditCardRepository = creditCardRepository;
     }
 
-
-    //TODO: Pretty sure this is meant to be part of a DTO
-
     public Page<CreditCard> findPaginated(final int pageNumber, final int pageSize,
                                      final String sortField, final String sortDirection) {
 

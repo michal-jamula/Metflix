@@ -78,7 +78,7 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    //TODO: Currently the dob only gets checked if empty or not, it doesn't check the format of the string
+    //TODO: Currently the dateOfBirth only gets checked if empty or not, it doesn't check the format of the string
     /** returns <"success", "true"> when fields are completed, otherwise returns a <field, error message> both as String */
     public List<String> checkUserContainsEmptyFields (User user) {
         try{
@@ -86,8 +86,8 @@ public class UserService {
             fieldsToCheck.put("name", user.getName());
             fieldsToCheck.put("surname", user.getSurname());
             fieldsToCheck.put("email", user.getEmail());
-            fieldsToCheck.put("dob", user.getDob().toString());
-            fieldsToCheck.put("phoneNr", user.getPhoneNr());
+            fieldsToCheck.put("dateOfBirth", user.getDateOfBirth().toString());
+            fieldsToCheck.put("phoneNumber", user.getPhoneNumber());
             fieldsToCheck.put("password", user.getPassword());
 
 
@@ -114,12 +114,12 @@ public class UserService {
     /** Saves a new user, if the status and registration date are empty, it gives them default ones */
     public void save (User user) {
 
-        if (user.getRegDate() == null) {
-            user.setRegDate(LocalDate.now());
+        if (user.getRegistrationDate() == null) {
+            user. setRegistrationDate(LocalDate.now());
         }
 
         if(user.getStatus() == null) {
-            user.setStatus(UserStatusEnum.unsubscribed);
+            user.setStatus(UserStatusEnum.UNSUBSCRIBED);
         }
 
         userRepository.save(user);
@@ -151,16 +151,16 @@ public class UserService {
             userDb.setEmail(user.getEmail());
         }
 
-        if (!user.getDob().equals(null)) {
-            userDb.setDob(user.getDob());
+        if (!user.getDateOfBirth().equals(null)) {
+            userDb.setDateOfBirth(user.getDateOfBirth());
         }
 
-        if (!user.getPhoneNr().isBlank()) {
-            userDb.setPhoneNr(user.getPhoneNr());
+        if (!user.getPhoneNumber().isBlank()) {
+            userDb.setPhoneNumber(user.getPhoneNumber());
         }
 
-        if (!user.getRegDate().equals(null)) {
-            userDb.setRegDate(user.getRegDate());
+        if (!user.getRegistrationDate().equals(null)) {
+            userDb. setRegistrationDate(user.getRegistrationDate());
         }
 
         if (user.getStatus() != null) {

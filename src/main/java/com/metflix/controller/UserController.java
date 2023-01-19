@@ -5,12 +5,15 @@ import com.metflix.model.Movie;
 import com.metflix.model.modelEnum.MovieTypeEnum;
 import com.metflix.repositories.MovieRepository;
 import com.metflix.service.MovieService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +68,10 @@ public class UserController {
 
         return "user/movie_single";
     }
+
+
+
+
 
 
 

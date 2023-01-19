@@ -12,7 +12,7 @@
 
     Functionality so far:
     form sends "user" with the following attributes:
-    name, surname, email, dob, phoneNr, password, password2
+    name, surname, email, dateOfBirth, phoneNumber, password, password2
 
     makes a POST request to "registration"
 -->
@@ -61,23 +61,23 @@
                             <!-- TODO: Please check if datepicker_input is actually needed -->
                             <!-- Date of birth -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
-                                <label class="form-label" for="dob">Date of Birth</label>
-                                <input type="date" class="form-control" id="dob" th:field="*{dob}" required/>
-                                <i th:text="${dob}" style="color:red;" ></i>
+                                <label class="form-label" for="dateOfBirth">Date of Birth</label>
+                                <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}" required/>
+                                <i th:text="${dateOfBirth}" style="color:red;" ></i>
                             </div>
                         </div>
 
                         <div class="row mx-0 my-3 my-lg-4">
                             <!--Number -->
                             <div class="col-12 ">
-                                <label for="phoneNr" class="form-label">Phone number</label>
+                                <label for="phoneNumber" class="form-label">Phone number</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">+44</span>
                                     </div>
-                                    <input type="number" class="form-control" id="phoneNr" th:field="*{phoneNr}" required>
+                                    <input type="number" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
                                 </div>
-                                <i th:text="${phoneNr}" style="color:red;" ></i>
+                                <i th:text="${phoneNumber}" style="color:red;" ></i>
                             </div>
                         </div>
 

@@ -23,24 +23,24 @@
                     <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=name&sort-dir=' + ${reverseSortDir}}">Name</a></th>
                     <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=surname&sort-dir=' + ${reverseSortDir}}">Surname</a></th>
                     <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=email&sort-dir=' + ${reverseSortDir}}">Email</a></th>
-                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=dob&sort-dir=' + ${reverseSortDir}}">Dob</a></th>
-                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=phoneNr&sort-dir=' + ${reverseSortDir}}">Phone nr</a></th>
-                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=dob&sort-dir=' + ${reverseSortDir}}">Reg date</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=dateOfBirth&sort-dir=' + ${reverseSortDir}}">Dob</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=phoneNumber&sort-dir=' + ${reverseSortDir}}">Phone nr</a></th>
+                    <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=dateOfBirth&sort-dir=' + ${reverseSortDir}}">Reg date</a></th>
                     <th scope="col"><a class="text-dark" th:href="@{'/admin/users/' + ${currentPage} + '?sort-field=status&sort-dir=' + ${reverseSortDir}}">Status</a></th>
                     <th scope="col">edit</th>
 
                 </tr>
             </thead>
-            <!--TODO: Remove dob and phoneNr columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
+            <!--TODO: Remove dateOfBirth and phoneNumber columns, create padding around the table and header. Also implement sorting technology based on column clicks-->
             <tbody>
                 <tr th:each="user : ${listUsers}" class="text-center">
                     <td th:text="${user.id}">user_id</td>
                     <td th:text="${user.name}">name</td>
                     <td th:text="${user.surname}">surname</td>
                     <td th:text="${user.email}">email</td>
-                    <td th:text="${user.dob}">dob</td>
-                    <td th:text="${user.phoneNr}">phone_nr</td>
-                    <td th:text="${user.regDate}">reg_date</td>
+                    <td th:text="${user.dateOfBirth}">dateOfBirth</td>
+                    <td th:text="${user.phoneNumber}">phone_nr</td>
+                    <td th:text="${user.registrationDate}">reg_date</td>
                     <td th:text="${user.status}">status</td>
                     <td><a th:href="@{/admin/user/(id=${user.id})}"><btn  class="btn mx-auto">Edit</btn></a></td>
                 </tr>

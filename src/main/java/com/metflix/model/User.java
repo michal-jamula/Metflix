@@ -5,12 +5,14 @@ import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Set;
 
 
 @Entity
@@ -19,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name="users")
 
-public class User{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +30,12 @@ public class User{
     private String surname;
     private String email;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate dob;
-    @Column(name="phone_nr")
-    private String phoneNr;
-    @Column(name="reg_date")
+    private LocalDate dateOfBirth;
+    private String phoneNumber;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate regDate;
+    private LocalDate registrationDate;
     private UserStatusEnum status;
-    @Column (name="pwd")
     private String password;
-
-
 
 /*
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -54,17 +51,44 @@ public class User{
 */
 
 
+//    public User(String name, String surname, String email, LocalDate dateOfBirth, String phoneNumber, String password) {
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.dateOfBirth = dateOfBirth;
+//        this.phoneNumber = phoneNumber;
+//        this.password = password;
+//        this.status = UserStatusEnum.UNSUBSCRIBED;
+//        this.registrationDate = LocalDate.now();
+//    }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 
-    public User(String name, String surname, String email, LocalDate dob, String phoneNr, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.dob = dob;
-        this.phoneNr = phoneNr;
-        this.password = password;
-        this.status = UserStatusEnum.unsubscribed;
-        this.regDate = LocalDate.now();
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

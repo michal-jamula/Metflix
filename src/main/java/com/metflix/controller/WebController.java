@@ -1,24 +1,38 @@
 package com.metflix.controller;
 
 
+import com.metflix.auth.AuthenticationRequest;
+import com.metflix.auth.AuthenticationResponse;
+import com.metflix.auth.AuthenticationService;
+import com.metflix.model.LoginRequest;
 import com.metflix.model.User;
 import com.metflix.repositories.MovieRepository;
 import com.metflix.repositories.UserRepository;
-import com.metflix.service.AddressService;
-import com.metflix.service.CreditCardService;
-import com.metflix.service.MovieService;
-import com.metflix.service.UserService;
+import com.metflix.service.*;
+import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.buf.Utf8Decoder;
+import org.springframework.http.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
 @Controller
+@RequiredArgsConstructor
 public class WebController {
 
     private final UserRepository userRepository;
@@ -27,15 +41,10 @@ public class WebController {
     private final MovieService movieService;
     private final CreditCardService creditCardService;
     private final AddressService addressService;
+    private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
+    private final AuthenticationService authenticationService;
 
-    public WebController(UserRepository userRepository, UserService userService, MovieRepository movieRepository, MovieService movieService, CreditCardService creditCardService, AddressService addressService) {
-        this.userRepository = userRepository;
-        this.userService = userService;
-        this.movieRepository = movieRepository;
-        this.movieService = movieService;
-        this.creditCardService = creditCardService;
-        this.addressService = addressService;
-    }
 
     @GetMapping("/")
     public String index (Model model) {
@@ -46,13 +55,6 @@ public class WebController {
     public String index () {
         return "index";
     }
-
-
-    @GetMapping("login")
-    public String login() {
-        return "login";
-    }
-
 
 
     @GetMapping("registration")
@@ -70,7 +72,7 @@ public class WebController {
         Form currently does not check the Date entered, so bad format can still be passed through
      */
     @PostMapping("registration")
-    public String registration(@ModelAttribute("user")Optional<User> userOptional, Model model, @ModelAttribute("password2")String password2) {
+    public String registerUser(@ModelAttribute("user")Optional<User> userOptional, Model model, @ModelAttribute("password2")String password2) {
 
         if(userOptional.isEmpty()) {
             return "registration";
@@ -103,5 +105,72 @@ public class WebController {
 
 
 
+    @GetMapping("login")
+    public String login(Model model) {
+//        model.addAttribute("username", "");
+//        model.addAttribute("password", "");
+        model.addAttribute("authenticationRequest", new AuthenticationRequest());
+        return "login";
+    }
+
+
+    @PostMapping(value = "/login" , consumes =  MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+                produces = MediaType.APPLICATION_JSON_VALUE
+//            ,produces = {
+//            MediaType.APPLICATION_ATOM_XML_VALUE,
+//            MediaType.APPLICATION_JSON_VALUE}
+    )
+    public String login (@RequestBody MultiValueMap<String, String> authenticationRequest, final HttpServletResponse response) {
+        AuthenticationRequest request = new AuthenticationRequest(authenticationRequest.get("email").get(0), authenticationRequest.get("password").get(0));
+
+        Cookie cookie = new Cookie("Authorization", authenticationService.authenticate(request).getToken());
+        response.addCookie(cookie);
+
+        return "user/account";
+
+    }
+
+
+
+//    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//    public String postToken(@ModelAttribute("loginRequest") LoginRequest loginData, HttpServletResponse response) {
+//
+//        String username = loginData.getUsername();
+//        String password = loginData.getPassword();
+//
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//
+//
+//        if(authentication.isAuthenticated()) {
+//
+//            String token = tokenService.generateToken(authentication);
+//
+//
+//
+//            //create a cookie with a JWT token
+//            Cookie cookie = new Cookie("Authorization", token);
+//            cookie.setHttpOnly(true);
+//            cookie.setMaxAge(3600);
+//
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Authorization", cookie.getValue());
+//
+//
+//            response.addCookie(cookie);
+//
+//            System.out.println(response.getHeaderNames());
+//            System.out.println(token);
+//            System.out.println(response.getHeader("Set-Cookie"));
+//
+//            return "user/account";
+//        } else {
+//            return "login";
+//        }
+//
+//    }
+
+
 
 }
+

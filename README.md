@@ -63,7 +63,7 @@ The motivation for this project comes from my willingness to show off my skills 
    2. Create SQL scripts to inject data ✔
    3. Fix the user_main website to display data dynamically ✔
    4. Make the movie_single page work by allowing all users to watch movies ✔
-7. Implement spring security to authorise and authenticate users
+7. Implement spring security to authorise and authenticate users ✔
 8. Testing:
    1. Unit tests
    2. Integration tests

@@ -1,33 +1,17 @@
 package com.metflix.controller;
 
 
-import com.metflix.auth.AuthenticationRequest;
-import com.metflix.auth.AuthenticationResponse;
-import com.metflix.auth.AuthenticationService;
-import com.metflix.model.Address;
-import com.metflix.model.CreditCard;
-import com.metflix.model.Movie;
-import com.metflix.model.User;
-import com.metflix.repositories.AddressRepository;
-import com.metflix.repositories.CreditCardRepository;
-import com.metflix.repositories.MovieRepository;
-import com.metflix.repositories.UserRepository;
-import com.metflix.service.TokenService;
-import com.sun.security.auth.UserPrincipal;
+import com.metflix.model.*;
+import com.metflix.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 
 @org.springframework.web.bind.annotation.RestController
@@ -39,9 +23,7 @@ public class RestController {
     private final UserRepository userRepository;
     private final MovieRepository movieRepository;
     private final CreditCardRepository creditCardRepository;
-    private final TokenService tokenService;
-    private final AuthenticationManager authenticationManager;
-    private final AuthenticationService authenticationService;
+    private final AuthorityRepository authorityRepository;
 
 
 
@@ -49,6 +31,7 @@ public class RestController {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
 
     @GetMapping("allmovies")
     public List<Movie> getAllMovies() {
@@ -65,30 +48,16 @@ public class RestController {
         return addressRepository.findAll();
     }
 
+    @GetMapping("allauthorities")
+    public List<Authority> getAllAuthorities() {return authorityRepository.findAll();}
 
-    @GetMapping("/authenticate")
-    public String getToken(HttpServletRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
-        System.out.println(tokenService.getJwtFromCookies(request));
-        return "Welcome, ";
+    @GetMapping("getuser/{id}")
+    public User getUser(@PathVariable Integer id) {
+        return userRepository.findById(id).get();
     }
 
 
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
-
-        try {
-            authenticationService.authenticate(request);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return ResponseEntity.ok(authenticationService.authenticate(request));
-    }
 
 
 }

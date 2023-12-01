@@ -17,15 +17,15 @@
 
             <div class="modal-content card card-registration card-body text-white">
 
-                <form th:action="@{login}" th:method="POST" th:object="${authenticationRequest}">
+                <form th:action="@{login}" method="POST" th:object="${authenticationRequest}">
 
                 <div class="modal-header text-center ">
                     <p class="mx-auto display-1 fw-bolder fs-2 " id="loginModalLabel">Login</p>
                 </div>
                 <div class="modal-body  py-4">
 
-                        <label for="inputEmail" class="form-label pt-3">Email or username:</label>
-                        <input type="text" id="inputEmail" class="form-control" th:field="*{email}">
+                        <label for="inputUsername" class="form-label pt-3">Email or username:</label>
+                        <input type="text" id="inputUsername" class="form-control" th:field="*{username}">
 
                         <label for="inputPassword" class="form-label pt-4">Password:</label>
                         <input type="password" id="inputPassword" class="form-control" pattern=".{6,}" th:field="*{password}">
@@ -40,7 +40,7 @@
                 <div class="modal-footer login-modal-transparency">
                     <div class="flex-column flex-fill">
                         <div class="d-flex justify-content-end pe-4 pb-3">
-                            <button type="button" th:type="submit" class="btn btn-lg">Login</button>
+                            <button type="submit" class="btn btn-lg">Login</button>
                         </div>
                         <p class="text-center pt-3 ">Don't have an account? <a href="registration">Sign Up</a></p>
 
@@ -51,7 +51,7 @@
             </div>
 
         </div> <!-- End of modal -->
-        </div>
+
     </section>
 </body>
 

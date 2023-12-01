@@ -1,29 +1,47 @@
 package com.metflix.service;
 
 
+import com.metflix.model.Authority;
+import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
-import com.metflix.model.modelEnum.UserStatusEnum;
+import com.metflix.repositories.AuthorityRepository;
 import com.metflix.repositories.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
+//TODO: Currently this class isn't being used. Either delete this or change everything so the controllers dont have access to repositories directly
 
     private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
+        this.authorityRepository = authorityRepository;
     }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        var userOptional = userRepository.findByUsername(username);
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException(String.format("Tried to find {%s} email but didn't find in the database", username));
+        } else {
+            return userOptional.get();
+        }
+    }
+
+
 
 
     public Page<User> findPaginated(final int pageNumber, final int pageSize,
@@ -64,7 +82,7 @@ public class UserService {
         if (!fieldCheckAnswer.get(0).equals("success")) {
             return fieldCheckAnswer;
 
-        } else if (emailExists(user.getEmail())){
+        } else if (emailExists(user.getUsername())){
             return List.of("email", "Email already exists");
 
         } else if (!checkPasswordsMatch(user.getPassword(), password2)) {
@@ -75,7 +93,7 @@ public class UserService {
 
     /** Returns true when email is already in a database */
     public boolean emailExists (String email) {
-        return userRepository.findByEmail(email).isPresent();
+        return userRepository.findByUsername(email).isPresent();
     }
 
     //TODO: Currently the dateOfBirth only gets checked if empty or not, it doesn't check the format of the string
@@ -85,7 +103,7 @@ public class UserService {
             HashMap<String, String> fieldsToCheck = new HashMap<String, String>();
             fieldsToCheck.put("name", user.getName());
             fieldsToCheck.put("surname", user.getSurname());
-            fieldsToCheck.put("email", user.getEmail());
+            fieldsToCheck.put("email", user.getUsername());
             fieldsToCheck.put("dateOfBirth", user.getDateOfBirth().toString());
             fieldsToCheck.put("phoneNumber", user.getPhoneNumber());
             fieldsToCheck.put("password", user.getPassword());
@@ -118,9 +136,9 @@ public class UserService {
             user. setRegistrationDate(LocalDate.now());
         }
 
-        if(user.getStatus() == null) {
-            user.setStatus(UserStatusEnum.UNSUBSCRIBED);
-        }
+//        if (user.getAuthorities().isEmpty()) {
+//            user.addAuthority(new Authority(Integer.toUnsignedLong(user.getId()), 22, "MEMBER"));
+//        }
 
         userRepository.save(user);
         System.out.println("user added to database successfully");
@@ -128,13 +146,13 @@ public class UserService {
 
 
     //TODO: Currently the system accepts spaces as valid, create better validation for received info
-    public User updateUserWithId(User user, Integer userId) {
+    public void updateUserWithId(User user, Integer userId) {
 
         Optional<User> userOptional = userRepository.findById(userId);
 
         if(userOptional.isEmpty()) {
             System.err.println("Tried to find user with ID, but no user with id: " + userId + " exists!");
-            return null;
+            return;
         }
 
         User userDb = userOptional.get();
@@ -147,8 +165,8 @@ public class UserService {
             userDb.setSurname((user.getSurname()));
         }
 
-        if (!user.getEmail().isBlank()) {
-            userDb.setEmail(user.getEmail());
+        if (!user.getUsername().isBlank()) {
+            userDb.setUsername(user.getUsername());
         }
 
         if (!user.getDateOfBirth().equals(null)) {
@@ -163,11 +181,26 @@ public class UserService {
             userDb. setRegistrationDate(user.getRegistrationDate());
         }
 
-        if (user.getStatus() != null) {
-            userDb.setStatus(user.getStatus());
+        if (user.getAuthorities().isEmpty()) {
+            user.setAuthorities(List.of(new Authority(AuthoritiesEnum.ROLE_MEMBER)));
         }
 
 
-        return userRepository.save(userDb);
+        userRepository.save(userDb);
+        System.out.println("User updated successfully");
     }
+
+
+    public void addAuthority(Authority authority) {
+        //authorityRepository.addAuthority(authority.getUserId(), authority.getAuthority());
+        authorityRepository.save(authority);
+    }
+
+    public List<Authority> getUserAuthorities (User user) {
+        return this.authorityRepository.findAuthoritiesByUserId(user.getId());
+        }
+
+
+
+
 }

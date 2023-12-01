@@ -11,8 +11,11 @@ import com.metflix.service.AddressService;
 import com.metflix.service.CreditCardService;
 import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +30,7 @@ import java.util.Optional;
 public class AdminController {
 
     private final UserRepository userRepository;
+
     private final UserService userService;
     private final AddressService addressService;
     private final MovieService movieService;

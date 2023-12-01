@@ -1,33 +1,21 @@
 package com.metflix.controller;
 
 
+
 import com.metflix.auth.AuthenticationRequest;
-import com.metflix.auth.AuthenticationResponse;
-import com.metflix.auth.AuthenticationService;
-import com.metflix.model.LoginRequest;
+import com.metflix.model.Authority;
 import com.metflix.model.User;
+import com.metflix.repositories.AuthorityRepository;
 import com.metflix.repositories.MovieRepository;
 import com.metflix.repositories.UserRepository;
 import com.metflix.service.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.buf.Utf8Decoder;
-import org.springframework.http.*;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.net.HttpCookie;
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -41,9 +29,12 @@ public class WebController {
     private final MovieService movieService;
     private final CreditCardService creditCardService;
     private final AddressService addressService;
-    private final AuthenticationManager authenticationManager;
-    private final TokenService tokenService;
-    private final AuthenticationService authenticationService;
+//    @GetMapping("addauthority")
+//    public String addauthority() {
+//        User admin = (User)userService.loadUserByUsername("uuser");
+//        userService.addAuthority(new Authority(admin.getId(), "ADMIN-WOLOLOL"));
+//        return index();
+//    }
 
 
     @GetMapping("/")
@@ -60,6 +51,7 @@ public class WebController {
     @GetMapping("registration")
     public String registration(Model model, User user) {
         model.addAttribute("user", new User());
+        System.out.println("REGISTRATION");
         return "registration";
     }
 
@@ -105,70 +97,23 @@ public class WebController {
 
 
 
-    @GetMapping("login")
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
-//        model.addAttribute("username", "");
-//        model.addAttribute("password", "");
-        model.addAttribute("authenticationRequest", new AuthenticationRequest());
+        System.out.println("GET LOGIN");
+        model.addAttribute(new AuthenticationRequest());
         return "login";
     }
 
 
-    @PostMapping(value = "/login" , consumes =  MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-                produces = MediaType.APPLICATION_JSON_VALUE
-//            ,produces = {
-//            MediaType.APPLICATION_ATOM_XML_VALUE,
-//            MediaType.APPLICATION_JSON_VALUE}
-    )
-    public String login (@RequestBody MultiValueMap<String, String> authenticationRequest, final HttpServletResponse response) {
-        AuthenticationRequest request = new AuthenticationRequest(authenticationRequest.get("email").get(0), authenticationRequest.get("password").get(0));
-
-        Cookie cookie = new Cookie("Authorization", authenticationService.authenticate(request).getToken());
-        response.addCookie(cookie);
-
-        return "user/account";
-
-    }
-
-
-
-//    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public String postToken(@ModelAttribute("loginRequest") LoginRequest loginData, HttpServletResponse response) {
-//
-//        String username = loginData.getUsername();
-//        String password = loginData.getPassword();
-//
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//
-//
-//        if(authentication.isAuthenticated()) {
-//
-//            String token = tokenService.generateToken(authentication);
-//
-//
-//
-//            //create a cookie with a JWT token
-//            Cookie cookie = new Cookie("Authorization", token);
-//            cookie.setHttpOnly(true);
-//            cookie.setMaxAge(3600);
-//
-//
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("Authorization", cookie.getValue());
-//
-//
-//            response.addCookie(cookie);
-//
-//            System.out.println(response.getHeaderNames());
-//            System.out.println(token);
-//            System.out.println(response.getHeader("Set-Cookie"));
-//
-//            return "user/account";
-//        } else {
-//            return "login";
-//        }
-//
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login (@RequestBody AuthenticationRequest authenticationRequest) {
+//        System.err.println("POST LOGIN");
+//        System.out.println("user tried to login, here's the details: " + authenticationRequest);
+//        return "index";
 //    }
+
+
+
 
 
 

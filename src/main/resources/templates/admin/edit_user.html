@@ -58,7 +58,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="row">
                                         <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Email:</strong></div>
-                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.email}">Email
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.getUsername}">Email
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="row">
                                         <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Status:</strong></div>
-                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.status}">Status
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.getAuthorities()}">Status
                                         </div>
                                     </div>
                                 </div>
@@ -259,7 +259,7 @@
 
 						<div class="py-3">
                             <label class="form-label" for="email">Email:</label>
-                            <input type="text" id="email" class="form-control" th:field="*{email}" required/>
+                            <input type="text" id="email" class="form-control" th:field="*{getUsername}" required/>
                         </div>
 
 						<div class="py-3">
@@ -281,8 +281,8 @@
 
 						<div class="py-3">
                             <label class="form-label" for="status" >Status:</label>
-                            <select class="form-select" id="status" aria-label="Default select example" th:field="*{status}" required>
-                                <option th:each="statusOption : ${T(com.metflix.model.modelEnum.UserStatusEnum).values()}"
+                            <select class="form-select" id="status" aria-label="Default select example" th:field="*{getAuthorities()}" required>
+                                <option th:each="statusOption : ${T(com.metflix.model.Enums.UserRole).values()}"
                                 th:value="${statusOption}" th:text="${statusOption}"
                                 >Status Options</option>
                             </select>

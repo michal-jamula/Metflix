@@ -2,18 +2,16 @@ package com.metflix.controller;
 
 
 import com.metflix.model.Movie;
-import com.metflix.model.modelEnum.MovieTypeEnum;
+import com.metflix.model.User;
+import com.metflix.model.Enums.MovieTypeEnum;
 import com.metflix.repositories.MovieRepository;
 import com.metflix.service.MovieService;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.AuthenticationException;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +45,14 @@ public class UserController {
     //TODO: Display user data based on logged-in token. This should be done after implementing Spring Security
     @GetMapping("account")
     public String userAccount( Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = new User();
+        if (auth != null && auth.getPrincipal() instanceof User) {
+            user = (User) auth.getPrincipal();
+        }
+
+        model.addAttribute("user", user);
 
         return "user/account";
     }

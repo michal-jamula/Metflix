@@ -1,7 +1,7 @@
 package com.metflix.model;
 
 
-import com.metflix.model.modelEnum.MovieTypeEnum;
+import com.metflix.model.Enums.MovieTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

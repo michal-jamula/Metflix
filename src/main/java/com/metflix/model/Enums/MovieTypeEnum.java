@@ -1,4 +1,4 @@
-package com.metflix.model.modelEnum;
+package com.metflix.model.Enums;
 
 public enum MovieTypeEnum {
     ACTION,

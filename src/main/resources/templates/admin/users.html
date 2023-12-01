@@ -37,11 +37,11 @@
                     <td th:text="${user.id}">user_id</td>
                     <td th:text="${user.name}">name</td>
                     <td th:text="${user.surname}">surname</td>
-                    <td th:text="${user.email}">email</td>
+                    <td th:text="${user.getUsername}">email</td>
                     <td th:text="${user.dateOfBirth}">dateOfBirth</td>
                     <td th:text="${user.phoneNumber}">phone_nr</td>
                     <td th:text="${user.registrationDate}">reg_date</td>
-                    <td th:text="${user.status}">status</td>
+                    <td th:text="${user.getAuthorities()}">status</td>
                     <td><a th:href="@{/admin/user/(id=${user.id})}"><btn  class="btn mx-auto">Edit</btn></a></td>
                 </tr>
             </tbody>

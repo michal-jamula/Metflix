@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CreditCardService {
+//TODO: Currently this class isn't being used. Either delete this or change everything so the controllers dont have access to repositories directly
 
     private final CreditCardRepository creditCardRepository;
 

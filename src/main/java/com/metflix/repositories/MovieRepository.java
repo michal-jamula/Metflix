@@ -1,7 +1,7 @@
 package com.metflix.repositories;
 
 import com.metflix.model.Movie;
-import com.metflix.model.modelEnum.MovieTypeEnum;
+import com.metflix.model.Enums.MovieTypeEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

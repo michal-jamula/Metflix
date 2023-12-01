@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class MovieService {
+//TODO: Currently this class isn't being used. Either delete this or change everything so the controllers dont have access to repositories directly
 
     private final MovieRepository movieRepository;
 

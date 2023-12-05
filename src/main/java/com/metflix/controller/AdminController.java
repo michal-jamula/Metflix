@@ -1,21 +1,16 @@
 package com.metflix.controller;
 
 
-import com.metflix.model.Address;
-import com.metflix.model.CreditCard;
+import com.metflix.model.Authority;
 import com.metflix.model.Movie;
 import com.metflix.model.User;
 import com.metflix.repositories.MovieRepository;
 import com.metflix.repositories.UserRepository;
-import com.metflix.service.AddressService;
-import com.metflix.service.CreditCardService;
+import com.metflix.service.AuthorityService;
 import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,84 +24,17 @@ import java.util.Optional;
 @RequestMapping("/admin/")
 public class AdminController {
 
-    private final UserRepository userRepository;
-
     private final UserService userService;
-    private final AddressService addressService;
     private final MovieService movieService;
-    private final CreditCardService creditCardService;
     private final MovieRepository movieRepository;
+    private final AuthorityService authorityService;
 
-
-    public AdminController(UserRepository userRepository, UserService userService, AddressService addressService, MovieService movieService, CreditCardService creditCardService, MovieRepository movieRepository) {
-        this.userRepository = userRepository;
+    public AdminController(UserService userService, MovieService movieService, MovieRepository movieRepository, AuthorityService authorityService) {
         this.userService = userService;
-        this.addressService = addressService;
         this.movieService = movieService;
-        this.creditCardService = creditCardService;
         this.movieRepository = movieRepository;
+        this.authorityService = authorityService;
     }
-
-
-
-    // TODO: These can probably be combined to make the code easier to read
-
-    @GetMapping(value = "/address/{page-number}")
-    public String findPaginatedAddresses(@PathVariable(name = "page-number") final int pageNo,
-                                         @RequestParam(name = "sort-field") final String sortField,
-                                         @RequestParam(name = "sort-dir") final String sortDir,
-                                         final Model model) {
-
-
-        final int pageSize = 10;
-        final Page<Address> page = addressService.findPaginated(pageNo, pageSize, sortField, sortDir);
-        final List<Address> listAddresses = page.getContent();
-
-        // In ideal cases the response should be encapsulated in a class.
-        // That's to keep pagination & sorting separate from other variables
-        // pagination parameters
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
-        // sorting parameters
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-        // Users list
-        model.addAttribute("listAddresses", listAddresses);
-        return "admin/addresses";
-    }
-
-
-
-
-
-    @GetMapping(value = "/cc/{page-number}")
-    public String findPaginatedCreditCards(@PathVariable(name = "page-number") final int pageNo,
-                                           @RequestParam(name = "sort-field") final String sortField,
-                                           @RequestParam(name = "sort-dir") final String sortDir,
-                                           final Model model) {
-
-        final int pageSize = 10;
-        final Page<CreditCard> page = creditCardService.findPaginated(pageNo, pageSize, sortField, sortDir);
-        final List<CreditCard> listCards = page.getContent();
-
-        // In ideal cases the response should be encapsulated in a class.
-        // That's to keep pagination & sorting separate from other variables
-        // pagination parameters
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
-        // sorting parameters
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-        // Users list
-        model.addAttribute("listCards", listCards);
-        return "admin/credit_cards";
-    }
-
-
 
 
     @GetMapping(value = "/movies/{page-number}")
@@ -183,13 +111,14 @@ public class AdminController {
 
     /** Requires "id" parameter. Redirects user to /error if the user ID doesn't match anything in the database */
     @GetMapping("user")
-    public String adminEditUserGet(@RequestParam("id") int userId, Model model) {
+    public String editUserWithId(@RequestParam("id") int userId, Model model) {
 
-        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<User> userOptional = userService.getUserById(userId);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             model.addAttribute("user", user);
+            System.out.format("Modal contains: %s", model.getAttribute("user"));
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie with this ID does not exist!");
         }
@@ -206,7 +135,6 @@ public class AdminController {
         User user = userOptional.get();
 
         userService.updateUserWithId(user, user.getId());
-        System.out.println("AdminController: User successfully updated by admin");
 
         return "admin/edit_user";
     }
@@ -228,6 +156,62 @@ public class AdminController {
 
 
         return "admin/edit_movie";
+    }
+
+
+
+    @GetMapping(value = "/authorities/{page-number}")
+    public String findPaginatedAuthorities(@PathVariable(name = "page-number") final int pageNo,
+                                     @RequestParam(name = "sort-field") final String sortField,
+                                     @RequestParam(name = "sort-dir") final String sortDir,
+                                     final Model model
+    ) {
+
+        final int pageSize = 10;
+        final Page<Authority> page = authorityService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final List<Authority> listAuthorities = page.getContent();
+
+        // In ideal cases the response should be encapsulated in a class.
+        // That's to keep pagination & sorting separate from other variables
+        // pagination parameters
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        // sorting parameters
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        // Authorities list
+        model.addAttribute("listAuthorities", listAuthorities);
+        return "admin/authorities";
+    }
+
+
+
+    @GetMapping(value = "/userauthorities/{page-number}")
+    public String findPaginatedUserAuthorities(@PathVariable(name = "page-number") final int pageNo,
+                                           @RequestParam(name = "sort-field") final String sortField,
+                                           @RequestParam(name = "sort-dir") final String sortDir,
+                                           final Model model
+    ) {
+
+        final int pageSize = 10;
+        final Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final List<User> listUsers = page.getContent();
+
+        // In ideal cases the response should be encapsulated in a class.
+        // That's to keep pagination & sorting separate from other variables
+        // pagination parameters
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        // sorting parameters
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        // Authorities list
+        model.addAttribute("listUsers", listUsers);
+        return "admin/user_authorities";
     }
 
 

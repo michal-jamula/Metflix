@@ -27,14 +27,6 @@ public class WebController {
     private final UserService userService;
     private final MovieRepository movieRepository;
     private final MovieService movieService;
-    private final CreditCardService creditCardService;
-    private final AddressService addressService;
-//    @GetMapping("addauthority")
-//    public String addauthority() {
-//        User admin = (User)userService.loadUserByUsername("uuser");
-//        userService.addAuthority(new Authority(admin.getId(), "ADMIN-WOLOLOL"));
-//        return index();
-//    }
 
 
     @GetMapping("/")

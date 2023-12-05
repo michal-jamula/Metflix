@@ -181,8 +181,14 @@ public class UserService implements UserDetailsService {
             userDb. setRegistrationDate(user.getRegistrationDate());
         }
 
-        if (user.getAuthorities().isEmpty()) {
+        if (user.getAuthorities().equals(null)) {
             user.setAuthorities(List.of(new Authority(AuthoritiesEnum.ROLE_MEMBER)));
+        } else {
+            while (user.getAuthorities().contains(null)) {
+                System.err.println("User authority contains null. Removing null from the list");
+                user.getAuthorities().remove(null);
+            }
+            userDb.setAuthorities((List<Authority>)user.getAuthorities());
         }
 
 
@@ -197,8 +203,12 @@ public class UserService implements UserDetailsService {
     }
 
     public List<Authority> getUserAuthorities (User user) {
-        return this.authorityRepository.findAuthoritiesByUserId(user.getId());
-        }
+        return List.of((Authority) user.getAuthorities());
+    }
+
+    public Optional<User> getUserById(int id) {
+        return this.userRepository.findById(id);
+    }
 
 
 

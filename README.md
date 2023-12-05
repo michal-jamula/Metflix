@@ -106,6 +106,15 @@ The motivation for this project comes from my willingness to show off my skills 
   - Created the main user landing page
   - Created the ability for users to watch videos
   - Completed the functionality where admins are able to edit user's details and movie details
+- 01/12/2023
+  - Implemented spring-security
+  - Created login verification, user authentication and user authorization
+- 05/12/2023
+  - Deleted user's credit card and addresses fields, services and SQL files. These weren't used and likely won't be used in the future.
+  - Fixed admin's pages, especially pages referencing the authorities. (so far the admin isn't able to add additional authorities)
+  - Buttons which don't have implemented functionality now shake
+
+
 
 
 <br><br>

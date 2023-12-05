@@ -1,4 +1,3 @@
-
 /* Hibernate requires the code to be on the same line to work properly */
 INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('michal', 'jamula', 'michal@gmail.com', '1996-01-01', '1231231233', now(), '$2y$10$wlJVkVpUYM6jyb9w4Lgj3O8YSNUd2vmIBuFZslTNqUgbJ.ZchvB1W');
 INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('bob', 'bobson', 'bob@gmail.com', '2000-10-12', '3213213211', now(), '$2y$10$wlJVkVpUYM6jyb9w4Lgj3O8YSNUd2vmIBuFZslTNqUgbJ.ZchvB1W');
@@ -24,8 +23,8 @@ INSERT INTO users(name, surname, username, date_of_birth, phone_number, registra
 
 
 INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('adminnn', 'administrator', 'admin', '1992-11-04', '1984445060', now(), '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
-INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('userFirstName', 'userSurname', 'uuser', '1992-11-04', '1984445060', now(), '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
-INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('memberFirstName', 'memberSurname', 'member', '1992-11-04', '1984445060', now(), '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('userFirstName', 'userSurname', 'user', '1992-11-04', '1984445060', now(), '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
+INSERT INTO users(name, surname, username, date_of_birth, phone_number, registration_date, password) VALUES ('subscribedFirstName', 'memberSurname', 'subscribed', '1992-11-04', '1984445060', now(), '$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW');
 
 
 

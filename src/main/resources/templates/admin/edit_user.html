@@ -17,11 +17,11 @@
         <div class="container-xl">
 
             <h1 class="app-page-title display-5 py-3">User's account</h1>
-            <div class="row justify-content-around gy-4">
+            <div class="row justify-content-around gy-4 border-red">
                 <div class="col-12 col-lg-6">
 
                     <!-- First card -->
-                    <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+                    <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start border-blue">
 
                         <!-- Header -->
                         <div class="app-card-header p-3 border-bottom-0 mx-auto">
@@ -105,7 +105,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="row">
                                         <div class="item-label col-4 offset-1 fs-4 fw-lighter"><strong>Status:</strong></div>
-                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.getAuthorities()}">Status
+                                        <div class="item-data col-5 offset-1 fs-5 text-center" th:text="${user.authorities}">Status
                                         </div>
                                     </div>
                                 </div>
@@ -122,110 +122,6 @@
 
                     </div><!--end of card-->
                 </div><!-- end of column -->
-
-
-                <!-- Second Card -->
-                <div class="col-12 col-lg-5">
-                    <div class="app-card  shadow-sm d-flex flex-column align-items-start">
-
-                        <!-- Header -->
-                        <div class="app-card-header p-3 border-bottom-0 mx-auto">
-                            <h4 class="app-card-title fs-2 ">Payment Methods</h4>
-                        </div> <!-- End of card header-->
-
-                        <!-- card main content -->
-                        <div class="app-card-body px-4 w-100">
-                            <h4 class="fw-normal fs-4">---Sample data---</h4>
-
-                            <!-- CC row -->
-                            <div class="item border-bottom py-3">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-auto">
-                                        <div class="item-label"><i class="fab fa-cc-visa me-2"></i><strong>Credit/Debit
-                                            Card </strong></div>
-                                        <div class="item-data">1234*******5678</div>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-secondary p-1 px-2" href="#">Edit</a>
-                                    </div>
-                                </div>
-                            </div><!-- end of cc row -->
-
-                            <!-- paypal row-->
-                            <div class="item border-bottom py-3">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-auto">
-                                        <div class="item-label"><i
-                                                class="fab fa-paypal me-2"></i><strong>PayPal</strong></div>
-                                        <div class="item-data">Not connected</div>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-secondary p-1 px-2" href="#">Connect</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of paypal row -->
-                        </div>
-
-                        <!-- footer -->
-                        <div class="app-card-footer p-4 mt-auto">
-                        </div>
-                        <!-- end of footer -->
-                    </div>
-                    <!-- End of second card -->
-
-
-                    <!-- Third Card -->
-                    <div class="app-card my-5 shadow-sm d-flex flex-column align-items-start">
-
-                        <!-- Header -->
-                        <div class="app-card-header p-3 border-bottom-0 mx-auto">
-                            <h4 class="app-card-title fs-2 ">User Addresses</h4>
-                        </div>
-                        <!-- End of card header-->
-
-                        <!-- card main content -->
-                        <div class="app-card-body px-4 w-100">
-                            <h4 class="fw-normal fs-4">---Sample data---</h4>
-
-
-                            <!-- Address 1 -->
-                            <div class="item border-bottom py-3">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-auto">
-                                        <div class="item-label"><i class="fab fa-cc-visa me-2"></i><strong>House
-                                            Number </strong></div>
-                                        <div class="item-data">Example Street</div>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-secondary p-1 px-2" href="#">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End of address row -->
-
-                            <!-- Address 2-->
-                            <div class="item border-bottom py-3">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-auto">
-                                        <div class="item-label"><i class="fab fa-paypal me-2"></i><strong>House number
-                                            2</strong></div>
-                                        <div class="item-data">Example Street #2</div>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-secondary p-1 px-2" href="#">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of address row -->
-                        </div>
-                        <!-- footer -->
-                        <div class="app-card-footer p-4 mt-auto">
-                        </div>
-                        <!-- end of footer -->
-                    </div>
-
-                </div>
-                <!-- End of second card -->
             </div>
 
         </div>
@@ -245,9 +141,13 @@
             </div>
             <form th:action="@{/admin/user}" method="POST" th:object="${user} ">
 
-                <input type="text" id="name" class="form-control" th:text="${user.id}" th:field="*{id}" th:hidden="true"/>
-
                 <div class="modal-body">
+
+                    <div class="py-3">
+                        <label class="form-label" for="id">User Id:</label>
+                        <input type="text" id="id" class="form-control" th:field="*{id}" th:readonly="readonly" th:required/>
+                    </div>
+
                     <div class="py-3">
                         <label class="form-label" for="name">Name:</label>
                         <input type="text" id="name" class="form-control" th:field="*{name}" required/>
@@ -259,7 +159,7 @@
 
 						<div class="py-3">
                             <label class="form-label" for="email">Email:</label>
-                            <input type="text" id="email" class="form-control" th:field="*{getUsername}" required/>
+                            <input type="text" id="email" class="form-control" th:field="*{username}" required/>
                         </div>
 
 						<div class="py-3">
@@ -269,7 +169,7 @@
 
 						<div class="py-3">
                             <label class="form-label" for="phoneNumber">Phone Number:</label>
-                            <input type="number" id="phoneNumber" class="form-control" th:field="*{✔phoneNumber}" required/>
+                            <input type="number" id="phoneNumber" class="form-control" th:field="*{phoneNumber}" required/>
                         </div>
 
                         <!-- TODO: Format the date somehow, so it will be displayed in the modal. One possible error is that the date is a string and needs to be cast into a date -->
@@ -279,14 +179,21 @@
                                    th:placeholder="${registrationDate}" th:field="*{registrationDate}" required/>
                         </div>
 
-						<div class="py-3">
-                            <label class="form-label" for="status" >Status:</label>
-                            <select class="form-select" id="status" aria-label="Default select example" th:field="*{getAuthorities()}" required>
-                                <option th:each="statusOption : ${T(com.metflix.model.Enums.UserRole).values()}"
-                                th:value="${statusOption}" th:text="${statusOption}"
-                                >Status Options</option>
-                            </select>
+<!--						<div class="py-3">-->
+<!--                            <label class="form-label" for="status" >Status:</label>-->
+<!--                            <select class="form-select" id="status" aria-label="Default select example" th:field="*{authorities}" required>-->
+<!--                                <option th:each="statusOption : ${T(com.metflix.model.Enums.UserRole).values()}"-->
+<!--                                th:value="${statusOption}" th:text="${statusOption}"-->
+<!--                                >Status Options</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+                        <div class="py-3" >
+                            <label class="form-label" for="authorities">Authorities:</label>
+                            <input type="text" id="authorities" class="form-control"
+                                   th:placeholder="${authorities}" th:field="*{authorities}" required/>
                         </div>
+
                     </div>
 				</div>
 

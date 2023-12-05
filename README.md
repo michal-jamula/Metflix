@@ -31,15 +31,20 @@ The motivation for this project comes from my willingness to show off my skills 
    1. Use JPA (hibernate) to automatically create database tables at startup
    2. Perform necessary CRUD operations to display requested data
 3. User functionality - 
-   1. Able to register a user
+   1. User is able to register and login
+   2. User is able to view videos
 4. Admin functionality - 
    1. Read multiple user data from database
    2. Able to access single user information from admin panel
    3. Able to edit and save single user information from admin panel 
    4. Able to access, edit and save information about a single movie
-   5. Read credit cards and addresses from database
+   5. Able to view authorities and user authorities
 5. Video functionality - 
    1. Website is able to read mp4 files and play them back to the user.
+6. Security -
+   1. Spring security with JSESSIONID 
+   2. Password hashing with BCrypt 
+   3. Authentication and authorization (admin pages available only for admins, user pages for users and admins)
    
 <br>
 

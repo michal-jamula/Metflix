@@ -118,6 +118,10 @@ The motivation for this project comes from my willingness to show off my skills 
   - Deleted user's credit card and addresses fields, services and SQL files. These weren't used and likely won't be used in the future.
   - Fixed admin's pages, especially pages referencing the authorities. (so far the admin isn't able to add additional authorities)
   - Buttons which don't have implemented functionality now shake
+- 11/12/2023
+  - Fixed the registration page (it wasn't hashing user's password before)
+  - New users get automatically assigned a role of ROLE_MEMBER
+  - Added a logout button
 
 
 

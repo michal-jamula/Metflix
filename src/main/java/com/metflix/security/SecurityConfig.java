@@ -1,28 +1,22 @@
 package com.metflix.security;
 
-import com.metflix.repositories.UserRepository;
 import com.metflix.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +26,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
 
 
-//    @Bean
+    //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        UserDetails user = User.builder()
 //                .username("user")
@@ -52,12 +46,10 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests((auth) -> auth
-                        .antMatchers("/user/**").hasAnyRole("ADMIN", "MEMBER", "SUBSCRIBED")
+                        .antMatchers("/user/*").authenticated()
                         .antMatchers("/user/movie/**").hasAnyRole("SUBSCRIBED", "ADMIN")
                         .antMatchers("/api/").permitAll()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-
-                        .anyRequest().permitAll()
                 )
 
                 .headers().frameOptions().disable().and() // used to make h2 console work in the browser

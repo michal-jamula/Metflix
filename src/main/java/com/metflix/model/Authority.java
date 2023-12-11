@@ -27,10 +27,10 @@ public class Authority implements GrantedAuthority {
 
     }
 
-    public Authority (AuthoritiesEnum authority) {
+    public Authority (int id, AuthoritiesEnum authority) {
+        this.authorityId = id;
         this.authority = authority;
     }
-
 
     @Override
     public String getAuthority() {
@@ -42,8 +42,4 @@ public class Authority implements GrantedAuthority {
         return authority.toString();
     }
 
-//    @Override
-//    public String toString() {
-//        return authority;
-//    }
 }

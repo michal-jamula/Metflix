@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
 
 
     <head>
@@ -59,6 +60,10 @@
                 <li class="nav-item">
                     <a th:href="@{/user/movies}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movies')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Movies</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}" th:class="'nav-link'" class="nav-link">Logout</a>
                 </li>
 
             </ul>

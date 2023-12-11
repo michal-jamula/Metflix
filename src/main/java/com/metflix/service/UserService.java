@@ -141,6 +141,17 @@ public class UserService implements UserDetailsService {
 //        }
 
         userRepository.save(user);
+
+        var userDbOptional = userRepository.findByUsername(user.getUsername());
+
+        if (userDbOptional.isPresent()) {
+            var userDb = userDbOptional.get();
+            if (userDb.getAuthorities() == null) {
+                userDb.addAuthority(new Authority(1, AuthoritiesEnum.ROLE_MEMBER));
+            }
+            this.updateUserWithId(userDb, userDb.getId());
+        }
+
         System.out.println("user added to database successfully");
     }
 
@@ -181,13 +192,9 @@ public class UserService implements UserDetailsService {
             userDb. setRegistrationDate(user.getRegistrationDate());
         }
 
-        if (user.getAuthorities().equals(null)) {
-            user.setAuthorities(List.of(new Authority(AuthoritiesEnum.ROLE_MEMBER)));
+        if (user.getAuthorities().isEmpty() || user.getAuthorities() == null) {
+            userDb.addAuthority(new Authority(1, AuthoritiesEnum.ROLE_MEMBER));
         } else {
-            while (user.getAuthorities().contains(null)) {
-                System.err.println("User authority contains null. Removing null from the list");
-                user.getAuthorities().remove(null);
-            }
             userDb.setAuthorities((List<Authority>)user.getAuthorities());
         }
 
@@ -208,6 +215,20 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> getUserById(int id) {
         return this.userRepository.findById(id);
+    }
+
+    public void addAuthorityToUser(String username, String authorityName) {
+        var userOptional = userRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Authority authority = authorityRepository.findByAuthority(authorityName);
+
+            if (authority != null) {
+                user.addAuthority(authority);
+                userRepository.save(user);
+            }
+        }
+
     }
 
 

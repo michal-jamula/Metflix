@@ -10,6 +10,7 @@ import com.metflix.repositories.MovieRepository;
 import com.metflix.repositories.UserRepository;
 import com.metflix.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class WebController {
     private final UserService userService;
     private final MovieRepository movieRepository;
     private final MovieService movieService;
-
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String index (Model model) {
@@ -43,7 +44,6 @@ public class WebController {
     @GetMapping("registration")
     public String registration(Model model, User user) {
         model.addAttribute("user", new User());
-        System.out.println("REGISTRATION");
         return "registration";
     }
 
@@ -70,6 +70,7 @@ public class WebController {
             model.addAttribute(message.get(0), message.get(1));
 
             if (message.get(0).equals("success")) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userService.save(user);
                 return "registration";
             } else {
@@ -79,7 +80,7 @@ public class WebController {
 
         catch (Exception e) {
             System.out.println(e);
-            System.err.println("Unknown error during registration, please fix ASAP!!");
+            System.err.println("Error during registration, please check");
             return "registration";
         }
 
@@ -91,7 +92,6 @@ public class WebController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
-        System.out.println("GET LOGIN");
         model.addAttribute(new AuthenticationRequest());
         return "login";
     }

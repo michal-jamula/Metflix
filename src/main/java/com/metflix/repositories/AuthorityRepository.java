@@ -12,4 +12,7 @@ import java.util.List;
 
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
+
+    Authority findByAuthority(String authority);
+
 }

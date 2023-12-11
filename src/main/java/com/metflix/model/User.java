@@ -77,4 +77,11 @@ public class User implements UserDetails {
         return true;
     }
 
+    public void addAuthority(Authority authority) {
+        if (authorities == null) {
+            authorities = new ArrayList<>();
+        }
+        authorities.add(authority);
+    }
+
 }

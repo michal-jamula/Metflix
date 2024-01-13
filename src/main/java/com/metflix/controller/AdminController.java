@@ -5,7 +5,6 @@ import com.metflix.model.Authority;
 import com.metflix.model.Movie;
 import com.metflix.model.User;
 import com.metflix.repositories.MovieRepository;
-import com.metflix.repositories.UserRepository;
 import com.metflix.service.AuthorityService;
 import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
@@ -113,7 +112,7 @@ public class AdminController {
     @GetMapping("user")
     public String editUserWithId(@RequestParam("id") int userId, Model model) {
 
-        Optional<User> userOptional = userService.getUserById(userId);
+        Optional<User> userOptional = userService.findById(userId);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -213,7 +212,6 @@ public class AdminController {
         model.addAttribute("listUsers", listUsers);
         return "admin/user_authorities";
     }
-
 
 
 }

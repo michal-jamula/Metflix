@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -32,10 +31,10 @@ public class UserService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         var userOptional = userRepository.findByUsername(username);
         if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(String.format("Tried to find {%s} email but didn't find in the database", username));
+            throw new UsernameNotFoundException(String.format("Tried to find {%s} email but didn't find in the database.", username));
         } else {
             return userOptional.get();
         }
@@ -213,7 +212,7 @@ public class UserService implements UserDetailsService {
         return List.of((Authority) user.getAuthorities());
     }
 
-    public Optional<User> getUserById(int id) {
+    public Optional<User> findById(int id) {
         return this.userRepository.findById(id);
     }
 

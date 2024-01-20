@@ -125,15 +125,17 @@ public class AdminController {
     }
 
     @PostMapping("user")
-    public String adminUpdateUser (@ModelAttribute("user") Optional<User> userOptional,
+    public String adminUpdateUser (@ModelAttribute("user") User user,
                                    @RequestParam("id") int userId,
                                    Model model) {
-        if (userOptional.isEmpty()) {
+
+        //TODO: remove userId from parameters, make sure that @ModelAttribute returns Optional
+        try {
+            //User user = userOptional.get();
+            userService.updateUser(user);
+        } catch (Exception e) {
             return "error";
         }
-        User user = userOptional.get();
-
-        userService.updateUserWithId(user, user.getId());
 
         return "admin/edit_user";
     }

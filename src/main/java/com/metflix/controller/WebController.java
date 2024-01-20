@@ -66,6 +66,7 @@ public class WebController {
 
         System.err.println(user);
         try {
+            //TODO: Learn exception management, this method should throw an exception
             List<String> message = userService.validateUser(user, model.getAttribute("password2").toString());
             model.addAttribute(message.get(0), message.get(1));
 

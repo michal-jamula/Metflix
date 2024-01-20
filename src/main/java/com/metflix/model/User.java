@@ -41,6 +41,17 @@ public class User implements UserDetails {
     private List<Authority> authorities;
     private String password;
 
+    public User(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.surname = user.getSurname();
+        this.dateOfBirth = user.getDateOfBirth();
+        this.phoneNumber = user.getPhoneNumber();
+        this.registrationDate = user.getRegistrationDate();
+        this.authorities = (ArrayList<Authority>)user.getAuthorities();
+        this.password = user.getPassword();
+    }
+
 
 
     @Override

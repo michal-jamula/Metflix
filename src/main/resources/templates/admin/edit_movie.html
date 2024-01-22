@@ -165,9 +165,13 @@
             </div>
             <form th:action="@{/admin/movie}" method="POST" th:object="${movie} ">
 
-                <input type="text" th:text="${movie.id}" th:field="*{id}" th:hidden="true"/>
-
                 <div class="modal-body">
+
+                    <div class="py-3">
+                        <label class="form-label" for="id">Movie ID:</label>
+                        <input type="text" id="id" class="form-control" th:field="*{id}" th:readonly="readonly" th:required/>
+                    </div>
+
                     <div class="py-3">
                         <label class="form-label" for="title">title:</label>
                         <input type="text" id="title" class="form-control" th:field="*{title}" required/>

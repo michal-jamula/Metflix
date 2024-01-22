@@ -1,8 +1,10 @@
 package com.metflix.service;
 
 
+import com.metflix.exceptions.UserNotFoundException;
 import com.metflix.model.Movie;
 import com.metflix.repositories.MovieRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,53 +44,57 @@ public class MovieService {
 
 
     //TODO: Currently the system accepts spaces as valid, create better validation for received info
-    public Movie updateMovieWithId(Movie movie, Integer movieId) {
+    public Movie updateMovie(Movie movie) throws Exception{
 
-        Optional<Movie> movieOptional = movieRepository.findById(movieId);
+        try {
+            int movieId = movie.getId();
+        } catch (Exception e) {
+            throw new Exception("Tried to update a movie which doesn't have any ID");
+        }
+
+        Optional<Movie> movieOptional = movieRepository.findById(movie.getId());
 
         if(movieOptional.isEmpty()) {
-            System.err.println("Tried to find movie with ID, but no movie with id: " + movieId + " exists!");
-            return null;
+            throw new Exception(String.format("Tried to update a movie with id {%s} but couldn't find movie", movie.getId()));
         }
 
         Movie movieDb = movieOptional.get();
 
-        if (!movie.getTitle().equals(null)) {
+        if (StringUtils.isNotBlank(movie.getTitle())) {
             movieDb.setTitle(movie.getTitle());
         }
 
-        if (!movie.getType().equals(null)) {
+        if (movie.getType() != null) {
             movieDb.setType(movie.getType());
         }
 
-        if (!movie.getDescription().trim().isBlank()) {
+        if (StringUtils.isNotBlank(movie.getDescription())) {
             movieDb.setDescription(movie.getDescription());
         }
 
-        if (!movie.getLength().equals(null)) {
+        if (movie.getLength() != null) {
             movieDb.setLength(movie.getLength());
         }
 
-        if (!movie.getReleaseYear().equals(null)) {
+        if (movie.getReleaseYear() != null) {
             movieDb.setReleaseYear(movie.getReleaseYear());
         }
 
-        if (!movie.getTrailerLink().equals(null)) {
+        if (StringUtils.isNotBlank(movie.getTrailerLink())) {
             movieDb.setTrailerLink(movie.getTrailerLink());
         }
 
-        if (movie.getMovieLink().equals(null)) {
+        if (StringUtils.isNotBlank(movie.getMovieLink())) {
             movieDb.setMovieLink(movie.getMovieLink());
         }
 
-        if (movie.getImgPreview().equals(null)) {
+        if (StringUtils.isNotBlank(movie.getImgPreview())) {
             movieDb.setImgPreview(movie.getImgPreview());
         }
 
-        if (movie.getImgMain().equals(null)) {
+        if (StringUtils.isNotBlank(movie.getImgMain())) {
             movieDb.setImgMain(movie.getImgMain());
         }
-
 
         return movieRepository.save(movieDb);
     }

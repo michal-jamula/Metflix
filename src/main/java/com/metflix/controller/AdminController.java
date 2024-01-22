@@ -117,7 +117,6 @@ public class AdminController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             model.addAttribute("user", user);
-            System.out.format("Modal contains: %s", model.getAttribute("user"));
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie with this ID does not exist!");
         }
@@ -143,18 +142,14 @@ public class AdminController {
     /** Requires "id" parameter. Redirects user to /error if the user ID doesn't match anything in the database */
     @PostMapping("movie")
     public String adminMovieEditPost(@ModelAttribute("movie") Optional<Movie> movieOptional,
-                                     @RequestParam("id") int movieId,
                                      Model model) {
 
-        if (movieOptional.isEmpty()) {
-            throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Movie with this ID does not exist");
+
+        try {
+            movieService.updateMovie(movieOptional.get());
+        } catch (Exception e) {
+            return "error";
         }
-
-        Movie movie = movieOptional.get();
-
-        movieService.updateMovieWithId(movie, movie.getId());
-        System.out.println("AdminController: Movie successfully updated by admin");
-
 
         return "admin/edit_movie";
     }

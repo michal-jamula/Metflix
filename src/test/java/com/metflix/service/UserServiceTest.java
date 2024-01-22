@@ -6,6 +6,8 @@ import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
 import com.metflix.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.*;
 
+@Tags({@Tag("service"), @Tag("test")})
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
     @Mock
@@ -41,7 +44,7 @@ class UserServiceTest {
 
 
     @Test
-    @DisplayName("find Paginated")
+    @DisplayName("Find Paginated Users - normal test")
     void findPaginated() {
         //given
         ArgumentCaptor<Pageable> captor = ArgumentCaptor.forClass(Pageable.class);
@@ -57,7 +60,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Load User by username, user should exist")
+    @DisplayName("Load User by username, expected outcome")
     void loadUserByUsernameShouldPass() {
         //given
         User user = new User(testUser);
@@ -72,7 +75,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Load User by username, user doesn't exist. Should throw Exception")
+    @DisplayName("Load User by username. Should throw Exception")
     void loadUserByUsernameShouldThrowException() {
         //given
         given(userRepository.findByUsername(anyString())).willReturn(Optional.empty());
@@ -88,7 +91,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Validate user with normal values")
+    @DisplayName("Validate User - normal values")
     void validateUser() {
         //given
         testUser.setPassword("pass");
@@ -104,7 +107,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Validate user with some nulls - should return errors")
+    @DisplayName("Validate User with some nulls - should return errors")
     void validateUserWithNullsShouldReturnErrors() {
         //given
         User userWithNullUsername = new User(testUser);
@@ -131,7 +134,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("emailExists - returns true if email exists in a database, otherwise false")
+    @DisplayName("Email Exists - returns true if email exists in repo")
     void emailExistsUserDoesNotExist() {
         //given
         String existingEmail = "iExistInTheDatabase@gmail.com";
@@ -150,7 +153,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("checkPasswordsMatch - returns true if passwords match, otherwise false")
+    @DisplayName("Check Passwords Match")
     void checkPasswordsMatch() {
         //given
         String pass1 = "aPassword";
@@ -166,7 +169,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Save user - User has no ID or Authority, gives the user both and saves into repo")
+    @DisplayName("Save user - Adds ID and Authority automatically")
     void saveNewUser() {
         //given
         User user = new User();
@@ -192,13 +195,13 @@ class UserServiceTest {
         assertThat(returnedUser.getId()).isEqualTo(1);
         assertThat(returnedUser.getRegistrationDate()).isNotNull();
         assertThat(returnedUser.getAuthorities()).isNotNull();
+        assertThat(returnedUser.getAuthorities().size()).isNotZero();
 
-        //Cannot assert same hash since different users have been created to mock responses ?!?!?
         assertThat(returnedUser.getUsername()).isEqualTo(user.getUsername());
     }
 
     @Test
-    @DisplayName("update User with normal values")
+    @DisplayName("Update User with normal values")
     void updateUserWithNormalValues() {
 
         //given
@@ -228,7 +231,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("update User with nulls - shouldn't update with nulls or empty strings")
+    @DisplayName("Update User with nulls")
     void updateUserExceptionalValues() {
         //given
         User expectedUser = new User(testUser);
@@ -286,7 +289,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Update User should throw exception if user doesn't exist")
+    @DisplayName("Update User - throw exception if user doesn't exist")
     void updateUserShouldThrowException() {
         //given
         given(userRepository.findById(anyInt())).willReturn(Optional.empty());
@@ -307,6 +310,7 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Find User by id, expected outcome")
     void findById() {
         //when
         userService.findById(1);

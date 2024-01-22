@@ -38,6 +38,18 @@ public class Movie {
     @Column(name="img_main")
     private String imgMain;
 
+    public Movie(Movie movie) {
+        this.title = movie.getTitle();
+        this.type = movie.getType();
+        this.description = movie.getDescription();
+        this.length = movie.getLength();
+        this.releaseYear = movie.getReleaseYear();
+        this.trailerLink = movie.getTrailerLink();
+        this.movieLink = movie.getMovieLink();
+        this.imgPreview = movie.getImgPreview();
+        this.imgMain = movie.getImgMain();
+    }
+
 
     public Movie(String title, MovieTypeEnum type, String description, Integer length, LocalDate releaseYear, String trailerLink, String movieLink, String imgPreview, String imgMain) {
         this.title = title;

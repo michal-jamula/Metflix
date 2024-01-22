@@ -5,12 +5,14 @@ import com.metflix.exceptions.UserNotFoundException;
 import com.metflix.model.Authority;
 import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
+import com.metflix.repositories.AuthorityRepository;
 import com.metflix.repositories.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -218,6 +220,7 @@ public class UserService implements UserDetailsService {
             userDb.setRegistrationDate(user.getRegistrationDate());
         }
 
+        //TODO: Add functionality to ensure that values are unique
         //Adding user authority if both are null
         if (user.getAuthorities() == null && userDb.getAuthorities() == null) {
             userDb.setAuthorities(List.of(new Authority(1, AuthoritiesEnum.ROLE_MEMBER)));
@@ -225,7 +228,7 @@ public class UserService implements UserDetailsService {
             return;
         }
 
-        if (user.getAuthorities() != null) {
+        if (user.getAuthorities() != null && !user.getAuthorities().isEmpty()) {
             userDb.setAuthorities((List<Authority>)user.getAuthorities());
         }
 

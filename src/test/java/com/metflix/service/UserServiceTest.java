@@ -1,14 +1,14 @@
 package com.metflix.service;
 
+import com.metflix.exceptions.EmailAlreadyExistsException;
+import com.metflix.exceptions.PasswordsDontMatchException;
+import com.metflix.exceptions.UserFieldIsEmptyException;
 import com.metflix.exceptions.UserNotFoundException;
 import com.metflix.model.Authority;
 import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
 import com.metflix.repositories.UserRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -92,30 +92,30 @@ class UserServiceTest {
 
     @Test
     @DisplayName("Validate User - normal values")
-    void validateUser() {
+    void validateUser() throws UserFieldIsEmptyException, PasswordsDontMatchException, EmailAlreadyExistsException {
+
         //given
         testUser.setPassword("pass");
-        List<String> SUCCESS_LIST = List.of("success", "true");
-        //UserService userServiceSpy = Mockito.spy(userService);
+
+        User userWithNullRegDate = new User(testUser);
+        userWithNullRegDate.setUsername("validUsername");
+        userWithNullRegDate.setPassword("password");
+        userWithNullRegDate.setRegistrationDate(null);
 
 
         //when
-        List<String> expected = userService.validateUser(testUser, "pass");
+        Assertions.assertDoesNotThrow(() ->userService.validateUser(testUser, "pass"));
+        Assertions.assertDoesNotThrow(() -> userService.validateUser(userWithNullRegDate, "password"));
 
-        //then
-        assertThat(expected).isEqualTo(SUCCESS_LIST);
     }
 
     @Test
     @DisplayName("Validate User with some nulls - should return errors")
-    void validateUserWithNullsShouldReturnErrors() {
+    void validateWithNullsShouldThrowExceptions() throws UserFieldIsEmptyException, PasswordsDontMatchException, EmailAlreadyExistsException {
         //given
         User userWithNullUsername = new User(testUser);
         userWithNullUsername.setUsername(null);
 
-        User userWithNullRegDate = new User(testUser);
-        userWithNullRegDate.setUsername("validUsername");
-        userWithNullRegDate.setRegistrationDate(null);
 
         User userWithFalsePassword = new User(testUser);
         userWithFalsePassword.setUsername("validUsername");
@@ -123,14 +123,11 @@ class UserServiceTest {
         userWithFalsePassword.setPassword("wrongUserPassword");
 
         //when
-        List<String> expected = userService.validateUser(userWithNullUsername, "password");
-        List<String> expected2 = userService.validateUser(userWithNullRegDate, "password");
-        List<String> expected3 = userService.validateUser(userWithFalsePassword, "password");
+        Assertions.assertThrows(UserFieldIsEmptyException.class, () -> userService.validateUser(userWithNullUsername, "password"));
+        Assertions.assertThrows(PasswordsDontMatchException.class, () -> userService.validateUser(userWithFalsePassword, "password"));
+
 
         //then
-        assertThat(expected).isEqualTo(List.of("email", "Field is empty"));
-        assertThat(expected2).isEqualTo(List.of("regDate", "Field is empty"));
-        assertThat(expected3).isEqualTo(List.of("password", "Passwords do not match"));
     }
 
     @Test

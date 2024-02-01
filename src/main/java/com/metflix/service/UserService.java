@@ -1,18 +1,16 @@
 package com.metflix.service;
 
 
-import com.metflix.exceptions.UserNotFoundException;
+import com.metflix.exceptions.*;
 import com.metflix.model.Authority;
 import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
-import com.metflix.repositories.AuthorityRepository;
 import com.metflix.repositories.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -69,30 +67,29 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll(pageable);
     }
 
-    //TODO: this should throw an exception and then exception should be handled in the controller
     /**
-     * Validates a {@link User} by checking for empty fields, existing email and matching password
-     * @param user
-     * @param password2
-     * @return List("success", "true") if valid, or <br> List("email", "Email already exists")
-     * List("password", "... do not match") <br>
-     * List(field, "Field is Empty")
+     * Validates a {@link User} by checking for empty fields, existing email and matching password.<br>
      */
-    public List<String> validateUser (User user, String password2) {
+    public void validateUser (User user, String password2) throws EmailAlreadyExistsException, PasswordsDontMatchException, UserFieldIsEmptyException {
 
-        List<String> emptyFields = checkUserContainsEmptyFields(user);
-
-        if (!emptyFields.get(0).equals("success")) {
-            return emptyFields;
-
-        } else if (emailExists(user.getUsername())){
-            return List.of("email", "Email already exists");
-
-        } else if (!checkPasswordsMatch(user.getPassword(), password2)) {
-            return List.of("password", "Passwords do not match");
+        if (emailExists(user.getUsername())){
+            throw new EmailAlreadyExistsException("Email already exists");
         }
 
-        return List.of("success", "true");
+        if (!checkPasswordsMatch(user.getPassword(), password2)) {
+            throw new PasswordsDontMatchException("Password does not match");
+        }
+
+        try {
+            checkUserContainsEmptyFields(user);
+        } catch (UserFieldIsEmptyException e) {
+            if (e.getMessage().equals("Registration date is empty")) {
+                user.setRegistrationDate(LocalDate.now());
+            } else {
+                throw e;
+            }
+
+        }
     }
 
     /**
@@ -107,39 +104,28 @@ public class UserService implements UserDetailsService {
     //TODO: Currently the dateOfBirth only gets checked if empty or not, it doesn't check the format of the string
 
     /**
-     * Checks if {@link User} contains empty fields, excludes ID. returns List(field, "Field is empty") or List("success", "true")
-     * @param user
-     * @return List("success", "true") if true <br>
-     * List(field, "Field is empty")
+     * Checks if {@link User} contains empty fields, excludes ID. Throws UserRegistrationException if a field is wrong
      */
-    private List<String> checkUserContainsEmptyFields(User user) {
-        try{
-            HashMap<String, String> fieldsToCheck = new HashMap<String, String>();
+    private void checkUserContainsEmptyFields(User user) throws UserFieldIsEmptyException {
+            HashMap<String, String> fieldsToCheck = new HashMap<>();
             fieldsToCheck.put("name", user.getName());
             fieldsToCheck.put("surname", user.getSurname());
             fieldsToCheck.put("email", user.getUsername());
-            fieldsToCheck.put("phoneNumber", user.getPhoneNumber());
+            fieldsToCheck.put("phone", user.getPhoneNumber());
             fieldsToCheck.put("password", user.getPassword());
 
 
             for (Map.Entry<String, String> set: fieldsToCheck.entrySet()) {
                 if (StringUtils.isBlank(set.getValue())) {
-                    return List.of(set.getKey(), "Field is empty");
+                    throw new UserFieldIsEmptyException(String.format("%s field is empty", StringUtils.capitalize(set.getKey())));
                 }
             }
 
             if (user.getDateOfBirth() == null) {
-                return List.of("dob", "Field is empty");
+                throw new UserFieldIsEmptyException("Date of birth is empty");
             } else if (user.getRegistrationDate() == null) {
-                return List.of("regDate", "Field is empty");
+                throw new UserFieldIsEmptyException("Registration date is empty");
             }
-
-            return List.of("success", "true");
-
-        } catch (Exception e) {
-            System.err.println(e + "\nUnknown error thrown during field check, please fix asap");
-            return List.of("success", "true");
-        }
     }
 
     /**

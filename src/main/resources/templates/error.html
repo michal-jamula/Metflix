@@ -27,10 +27,10 @@
 
                     <div>
                         <p class="display-1 fs-4"> Something has went wrong! Please try again</p>
-                        <p th:text="'error: ' + ${error}"></p>
-                        <p th:text="'status: ' + ${status}"></p>
-                        <p th:text="'exception: ' + ${exception}"></p>
-                        <p th:text="'message: ' + ${message}"></p>
+                        <p th:if="${error != null}" th:text="'error: ' + ${error}"></p>
+                        <p th:if="${status != null}" th:text="'status: ' + ${status}"></p>
+                        <p th:if="${exception != null}" th:text="'exception: ' + ${exception}"></p>
+                        <p th:if="${message != null}" th:text="'message: ' + ${message}"></p>
                     </div>
 
                 </div>

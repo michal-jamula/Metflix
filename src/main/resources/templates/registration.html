@@ -5,22 +5,22 @@
 
 <head>
     <title>Registration</title>
+    <script th:inline="javascript">
+        // Check if registration is successful and display the modal
+        $(document).ready(function () {
+            var regStatus = $('#successModal').data('status')
+
+            if (regStatus === true) {
+                $('#successModal').modal('show');
+            }
+        });
+    </script>
+
 </head>
-
-<!--
-    This is largely finished now, some visuals might change.
-
-    Functionality so far:
-    form sends "user" with the following attributes:
-    name, surname, email, dateOfBirth, phoneNumber, password, password2
-
-    makes a POST request to "registration"
--->
 
 <body>
 
 <!-- TODO: Show user a message when user registers successfully. -->
-<!-- TODO: make the registration page more responsive instead of using columns -->
 
 <!-- Main content -->
 <section class="bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
@@ -57,7 +57,6 @@
                                 <input type="text" id="email" class="form-control" th:field="*{username}" required/>
                                 <i th:text="${Email}" style="color:red;" ></i>
                             </div>
-
                             <!-- TODO: Please check if datepicker_input is actually needed -->
                             <!-- Date of birth -->
                             <div class="form-outline col-12 col-lg-6 my-3 my-lg-4">
@@ -81,7 +80,6 @@
                             </div>
                         </div>
 
-
                         <div class="row mx-0">
                             <!-- password -->
                             <div class="form-outline col-12 col-lg-6 my-4 my-lg-4">
@@ -102,13 +100,45 @@
                             <button type="submit" class="btn btn-lg ms-2">Submit form</button>
                         </div>
 
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Launch demo modal
+                        </button>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+<!---->
+
+    <!-- Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" th:attr="data-status=${success}" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="successModalLabel">Registration Successful</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You can now login here
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/login}"> <button type="button" class="btn btn-primary" >Login</button> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </section>
+
+
+
+
 
 </body>
 

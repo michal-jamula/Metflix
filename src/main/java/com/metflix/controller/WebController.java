@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.websocket.server.PathParam;
 import java.util.Optional;
 
 
@@ -64,6 +65,7 @@ public class WebController {
             userService.validateUser(user, model.getAttribute("password2").toString());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.save(user);
+            model.addAttribute("success", true);
             return "registration";
 
         } catch (EmailAlreadyExistsException | PasswordsDontMatchException | UserFieldIsEmptyException e) {

@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="page_layout/layout">
+
 <head>
-     <title>index.html</title>
+     <title>movie_single</title>
 </head>
 
-
-
 <body>
-
     <section layout:fragment="main-content">
 
-        <!-- Main content 1 -->
+        <!-- Movie background + mask -->
         <div class="bg-image ratio ratio-16x9" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');min-height:40vh; max-height: 80vh;'">
-            <div class="mask " style=" background-color: rgba(0, 0, 0, 0.675); min-height:40vh; max-height:70vh;">
+            <div class="mask " style=" background-color: rgba(0, 0, 0, 0.675); min-height:40vh; max-height:80vh;">
                 <div class="d-flex container-flex justify-content-center align-content-start">
-                    <div class="container-fluid p-0 m-0" style="">
-                        <video class="mask" style="min-height: 40vh; max-height: 80vh; width:100%; background-color: rgba(0, 0, 0, 1); top: 0;" controls autoplay>
+
+                    <!-- User can watch movie -->
+                    <div class="ratio ratio-16x9 p-0 m-0 " style="" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SUBSCRIBED')" >
+                        <video class="mask" style="min-height: 46vh; max-height: 85vh; width:100%; background-color: rgba(0, 0, 0, 1); top: 0;" controls autoplay muted>
                             <source th:src="@{${movie.movieLink}}"  type="video/mp4">
                         </video>
                     </div>
+
+                    <!-- User cannot watch movie - show trailer -->
+                    <div class="ratio ratio-16x9 p-0 m-0 " style="max-height: 85vh; min-height: 46vh;"
+                         sec:authorize="!hasRole('ROLE_SUBSCRIBED') && !hasRole('ROLE_ADMIN')" >
+                        <iframe th:src="@{${movie.getTrailerLink()}}"
+                                class="mask"
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
-        </div> <!-- end of main content 1-->
+        </div> <!-- end of Movie background-->
 
 
         <!-- Movie Description-->
@@ -60,5 +70,4 @@
         </div> <!-- end of movie description container-->
     </section>
 </body>
-
 </html>

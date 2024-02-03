@@ -38,28 +38,33 @@
                                ? 'nav-link active bg-dark' : 'nav-link'}"  >Home</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/registration}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('registration')
+                    <a th:href="@{/registration}" sec:authorize="isAnonymous()"
+                       th:class="${#httpServletRequest.getRequestURL().toString().endsWith('registration')
                                ? 'nav-link active bg-dark' : 'nav-link'}">Register</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/admin/users/1?sort-field=id&sort-dir=asc}" th:class="${#httpServletRequest.getRequestURL().toString().contains('admin')
+                    <a th:href="@{/admin/users/1?sort-field=id&sort-dir=asc}" sec:authorize="hasRole('ROLE_ADMIN')"
+                       th:class="${#httpServletRequest.getRequestURL().toString().contains('admin')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Admin</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/user/account}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('account')
-                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">User</a>
+                    <a th:href="@{/user/account}" sec:authorize="isAuthenticated()"
+                       th:class="${#httpServletRequest.getRequestURL().toString().endsWith('account')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Account</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/login}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('login')
-                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Login</a>
-                </li>
-
-                <li class="nav-item">
-                    <a th:href="@{/user/movies}" th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movies')
+                    <a th:href="@{/user/movies}"
+                       th:class="${#httpServletRequest.getRequestURL().toString().endsWith('movies')
                                ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Movies</a>
+                </li>
+
+                <li class="nav-item">
+                    <a th:href="@{/login}" sec:authorize="isAnonymous()"
+                       th:class="${#httpServletRequest.getRequestURL().toString().endsWith('login')
+                               ? 'nav-link active bg-dark' : 'nav-link'}" class="nav-link">Login</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="isAuthenticated()">

@@ -42,7 +42,6 @@ public class UserController {
         return "user/main_movies";
     }
 
-    //TODO: Display user data based on logged-in token. This should be done after implementing Spring Security
     @GetMapping("account")
     public String userAccount( Model model) {
 
@@ -51,7 +50,7 @@ public class UserController {
         if (auth != null && auth.getPrincipal() instanceof User) {
             user = (User) auth.getPrincipal();
         }
-
+        model.addAttribute("success", true);
         model.addAttribute("user", user);
 
         return "user/account";
@@ -70,7 +69,14 @@ public class UserController {
         }
         Movie movie = movieOptional.get();
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = new User();
+        if (auth != null && auth.getPrincipal() instanceof User) {
+            user = (User) auth.getPrincipal();
+        }
+
         model.addAttribute("movie", movie);
+        model.addAttribute("userAuthorities", user.getAuthorities());
 
         return "user/movie_single";
     }

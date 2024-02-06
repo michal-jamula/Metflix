@@ -21,7 +21,7 @@ The motivation for this project comes from my willingness to show off my skills 
  + Project uses an in-memory H2 database on startup
  + Project injects data from SQL files
  + Project is built on Java 11
- + Project requires "video1.mp4" and "video2.mp4" files in the videos directory for user functionality - it works without these files as well.
+ + Project requires "video1.mp4" and "video2.mp4" files in the videos directory for user functionality - it works without these videos too, but nothing loads.
 
 <br>
 
@@ -70,7 +70,7 @@ The motivation for this project comes from my willingness to show off my skills 
    4. Make the movie_single page work by allowing all users to watch movies ✔
 7. Implement spring security to authorise and authenticate users ✔
 8. Testing:
-   1. Unit tests
+   1. Unit tests ✔
    2. Integration tests
    3. Mockito
    4. End-to-end user tests
@@ -119,12 +119,25 @@ The motivation for this project comes from my willingness to show off my skills 
   - Fixed admin's pages, especially pages referencing the authorities. (so far the admin isn't able to add additional authorities)
   - Buttons which don't have implemented functionality now shake
 - 11/12/2023
-  - Fixed the registration page (it wasn't hashing user's password before)
-  - New users get automatically assigned a role of ROLE_MEMBER
-  - Added a logout button
-
-
+    - Fixed the registration page (it wasn't hashing user's password before)
+    - New users get an automatically assigned role of ROLE_MEMBER
+    - Added a logout button
+- 01/02/2024
+  - Added Unit tests for the following services:
+    - Authority Service
+    - Movie Service
+    - User Service
+- 03/02/2024
+  - Unsubscribed users are now able to watch YouTube trailers and not the actual videos.
+- 06/02/2024
+    - Added registration successful notification
+    - Added user not subscribed notifications
+    - Added logout button
+    - Changed colours/gui slightly
 
 
 <br><br>
+Youtube video:
+https://www.youtube.com/watch?v=ChMD7XWumuU
+
 Created by Michal Jamula

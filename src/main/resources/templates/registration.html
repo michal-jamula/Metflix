@@ -19,9 +19,6 @@
 </head>
 
 <body>
-
-<!-- TODO: Show user a message when user registers successfully. -->
-
 <!-- Main content -->
 <section class="bg-image" th:style="'background-image: url(' + @{/img/landing-background.jpg} + ');'" layout:fragment="main-content">
     <div class="container py-5">
@@ -31,7 +28,7 @@
 
                     <!-- Form Here -->
                     <form th:action="@{registration}" method="POST" th:object="${user} ">
-                        <h3 class="mt-3 mb-5 text-uppercase text-center">New user registration form</h3>
+                        <h3 class="mt-3 mb-5 text-uppercase text-center">Registration form</h3>
 
 
                         <div class="row mx-0">
@@ -112,10 +109,7 @@
     </div>
 
 
-
-<!---->
-
-    <!-- Modal -->
+    <!-- Registration Successful Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" th:attr="data-status=${success}" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -135,11 +129,6 @@
 
 
 </section>
-
-
-
-
-
 </body>
 
 </html>

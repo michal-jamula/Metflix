@@ -6,6 +6,18 @@
 
 <head>
     <title>account.html</title>
+
+    <!--    Run the user status modal (from header.html) to notify the user isn't subscribed-->
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var userAuthorities = [[${user.authorities}]]
+
+            if (userAuthorities.length === 1 && userAuthorities[0].authority === 'ROLE_MEMBER') {
+                $('#userStatusModal').modal('show');
+            }
+
+        });
+    </script>
 </head>
 
 
@@ -24,9 +36,9 @@
                     <div class="col-12 p-0 px-3 py-3 my-4 mb-5 user-card text-white">
                         <div class="d-flex flex-column align-items-center">
                             <img class="photo" th:src="@{/img/icons/face_image_male.png}" alt="user photo">
-                            <p class="fw-bold h4 mt-3">John Doe</p>
-                            <p>Full Stack Developer</p>
-                            <p class="mb-3">Soma,San Francisco, CA</p>
+                            <p class="fw-bold h4 mt-3" th:text="(${#strings.capitalize(user.getName())} + ' ' + ${#strings.capitalize(user.getSurname())})">John Doe</p>
+                            <p>--- To be Implemented Later ---</p>
+                            <p class="mb-3">--- To be Implemented Later---</p>
                         </div>
                     </div>
 
@@ -38,7 +50,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center border-bottom py-4 px-3">
-                            <p class=""  >Fully subscribed</p>
+                            <p class="">--- To be Implemented Later ---</p>
                         </div>
 
                         <div class="d-flex justify-content-center py-2 px-3">
@@ -87,7 +99,31 @@
             </div> <!-- End of second column-->
 
         </div> <!-- End of row containing columns -->
+
+
     </section>
+
+    <!-- User Status Modal - Notifies the user that he can't use the service until he's subscribed-->
+    <div class="modal fade" id="userStatusModal" tabindex="-1" aria-labelledby="userStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="userStatusModalLabel">User Status</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p >User is not a subscriber and cannot watch movies. Subscribe to fully enjoy this service</p>
+                    <p>---Subscription method not implemented yet---</p>
+                </div>
+                <div class="modal-footer">
+                    <a> <button th:onclick="|shake(this)|" type="button" class="btn btn-primary" >Subscribe</button> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
+
 
 </html>

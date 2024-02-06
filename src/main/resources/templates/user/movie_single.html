@@ -6,6 +6,16 @@
 
 <head>
      <title>movie_single</title>
+    <!--    Run the user status modal (from header.html) to notify the user isn't subscribed-->
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var userAuthorities = [[${userAuthorities}]]
+
+            if (userAuthorities.length === 1 && userAuthorities[0].authority === 'ROLE_MEMBER') {
+                $('#userStatusModal').modal('show');
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -18,7 +28,7 @@
 
                     <!-- User can watch movie -->
                     <div class="ratio ratio-16x9 p-0 m-0 " style="" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SUBSCRIBED')" >
-                        <video class="mask" style="min-height: 46vh; max-height: 85vh; width:100%; background-color: rgba(0, 0, 0, 1); top: 0;" controls autoplay muted>
+                        <video class="mask" style="min-height: 46vh; max-height: 85vh; width:100%; background-color: rgba(0, 0, 0, 1); top: 0;" controls autoplay>
                             <source th:src="@{${movie.movieLink}}"  type="video/mp4">
                         </video>
                     </div>
@@ -68,6 +78,28 @@
                 </div> <!-- End of second column-->
             </div>
         </div> <!-- end of movie description container-->
+
+
+        <!-- User Status Modal - Notifies the user that he can't use the service until he's subscribed-->
+        <div class="modal fade" id="userStatusModal" tabindex="-1" aria-labelledby="userStatusModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="userStatusModalLabel">User Status</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p >User is not a subscriber and cannot watch movies. Subscribe to fully enjoy this service</p>
+                        <p>---Subscription method not implemented yet---</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a> <button th:onclick="|shake(this)|" type="button" class="btn btn-primary" >Subscribe</button> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 </body>
 </html>

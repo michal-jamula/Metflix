@@ -148,12 +148,12 @@ nav {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #550f65;
+    background-color: rgba(76, 87, 91, 0.95);
     color: white;
 }
 
 .accordion-button:active {
-    background-color: red;
+    background-color: #290916;
 }
 
 

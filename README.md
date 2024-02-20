@@ -1,6 +1,7 @@
 # **Metflix**
 
-
+Showcase  video:
+https://www.youtube.com/watch?v=ChMD7XWumuU
 <br>
 
 ## Program Overview:
@@ -22,7 +23,7 @@ The motivation for this project comes from my willingness to show off my skills 
  + Project injects data from SQL files
  + Project is built on Java 11
  + Project requires "video1.mp4" and "video2.mp4" files in the videos directory for user functionality - it works without these videos too, but nothing loads.
-
+ + Project requires a Stripe test account with a STRIPE_SECRET_KEY environment variable
 <br>
 
 ### Some of the features this program has at this point:
@@ -40,11 +41,15 @@ The motivation for this project comes from my willingness to show off my skills 
    4. Able to access, edit and save information about a single movie
    5. Able to view authorities and user authorities
 5. Video functionality - 
-   1. Website is able to read mp4 files and play them back to the user.
+    1. Website is able to read mp4 files and play them back to the user.
 6. Security -
-   1. Spring security with JSESSIONID 
-   2. Password hashing with BCrypt 
-   3. Authentication and authorization (admin pages available only for admins, user pages for users and admins)
+    1. Spring security with JSESSIONID
+    2. Password hashing with BCrypt
+    3. Authentication and authorization (admin pages available only for admins, user pages for users and admins)
+7. Subscription -
+   1. User can now subscribe to the service (payment provider is Stripe)
+   2. User can also unsubscribe
+
    
 <br>
 
@@ -71,11 +76,12 @@ The motivation for this project comes from my willingness to show off my skills 
 7. Implement spring security to authorise and authenticate users ✔
 8. Testing:
    1. Unit tests ✔
-   2. Integration tests
-   3. Mockito
+   2. ~~Integration tests~~
+   3. Mockito ✔
    4. End-to-end user tests
-9. (maybe) Integrate paypal developer payment systems 
-10. (maybe) More to implement in the future 
+9. Integrate a payment system: 
+   1. User can subscribe ✔
+   2. User can unsubscribe ✔
 
 
 <br><br>
@@ -134,10 +140,12 @@ The motivation for this project comes from my willingness to show off my skills 
     - Added user not subscribed notifications
     - Added logout button
     - Changed colours/gui slightly
+- 20/02/2024
+  - The user is now able to subscribe to the service (using Stripe for processing the payment)
+  - The user is also able to unsubscribe
 
 
 <br><br>
-Youtube video:
-https://www.youtube.com/watch?v=ChMD7XWumuU
+
 
 Created by Michal Jamula

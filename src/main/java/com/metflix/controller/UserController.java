@@ -61,6 +61,7 @@ public class UserController {
     public String movie_single(@PathVariable("id")int id,
                                Model model) {
 
+        //TODO: The controller is directly accessing the repo !?!?!
         Optional<Movie> movieOptional = movieRepository.findById(id);
 
         if (movieOptional.isEmpty()) {
@@ -80,18 +81,5 @@ public class UserController {
 
         return "user/movie_single";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

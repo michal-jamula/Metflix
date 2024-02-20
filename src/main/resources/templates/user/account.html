@@ -49,12 +49,27 @@
                             <p class="display-5 fs-1">Subscription:</p>
                         </div>
 
-                        <div class="d-flex justify-content-center border-bottom py-4 px-3">
-                            <p class="">--- To be Implemented Later ---</p>
+                        <div class="d-flex flex-column border-bottom py-4 px-3"
+                             th:if="${(user.authorities.size() > 1) || (#lists.contains(user.authorities.![authority], 'ROLE_SUBSCRIBED'))}">
+
+                            <p class="">You are subscribed, you can enjoy our full length movies!</p>
                         </div>
 
-                        <div class="d-flex justify-content-center py-2 px-3">
-                            <button th:onclick="|shake(this)|" class="btn">Change subscription</button>
+                        <div class="d-flex flex-column justify-content-center border-bottom py-4 px-3"
+                             th:if="${(user.authorities.size() == 1) && (#lists.contains(user.authorities.![authority], 'ROLE_MEMBER'))}">
+
+                            <div class="d-flex border-bottom pb-5 justify-content-center">
+                                You're an unsubscribed user. Subscribe below to enjoy our content!
+                            </div>
+
+                            <div class="d-flex justify-content-center pt-4">
+                                <stripe-buy-button
+                                        buy-button-id="buy_btn_1OjmaTFVGA9E6Iz5ucPZfGyd"
+                                        publishable-key="pk_test_51Oiyg8FVGA9E6Iz5BHdUvmM1dSqgSXlF4Jp5b5c6UUiWUhz3dbOPSjb9FfdRaO8TuLTR2uVcBURjyeQgiBKSWYZ800nM90NkiJ"
+                                        th:attr="client-reference-id=|${#authentication?.principal.id}|"
+                                >
+                                </stripe-buy-button>
+                            </div>
                         </div>
                     </div> <!-- end of Subscription card -->
                 </div>

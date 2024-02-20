@@ -64,6 +64,8 @@ public class User implements UserDetails {
         return this.username;
     }
 
+    public String getEmail() {return this.username;}
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -93,6 +95,9 @@ public class User implements UserDetails {
             authorities = new ArrayList<>();
         }
         authorities.add(authority);
+    }
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
     }
 
 }

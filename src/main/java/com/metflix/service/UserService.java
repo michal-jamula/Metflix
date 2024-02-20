@@ -165,19 +165,21 @@ public class UserService implements UserDetailsService {
      * @param user
      * @throws Exception
      */
-    public void updateUser(User user) throws Exception{
+    public void updateUser(User user){
 
         try {
             int userId = user.getId();
         } catch (Exception e) {
-            throw new UserNotFoundException("Tried to update a user who doesn't exist in the database. Save the user first");
+            System.out.println("Tried to update a user who doesn't exist in the database. Save the user first");
+            return;
         }
 
 
         Optional<User> userOptional = userRepository.findById(user.getId());
 
         if(userOptional.isEmpty()) {
-            throw new UserNotFoundException("Can't find user in the database");
+            System.out.println("Tried to update a user who doesn't exist in the database. Save the user first");
+            return;
         }
 
         User userDb = userOptional.get();

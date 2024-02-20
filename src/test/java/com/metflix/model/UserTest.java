@@ -36,8 +36,25 @@ class UserTest {
 
         assertThat(userWithAuthorities.getAuthorities().size()).isEqualTo(2);
         assertThat(userWithoutAuthorities.getAuthorities().size()).isEqualTo(1);
+    }
 
+    @Test
+    void removeAuthority() {
+        //given
+        User userWithAuthorities = new User();
 
+        userWithAuthorities.setAuthorities(new ArrayList<>(List.of(new Authority(1, AuthoritiesEnum.ROLE_MEMBER),
+                new Authority(2, AuthoritiesEnum.ROLE_SUBSCRIBED))));
+
+        Authority testAuthority = new Authority(2, AuthoritiesEnum.ROLE_SUBSCRIBED);
+
+        //when
+        userWithAuthorities.removeAuthority(testAuthority);
+
+        //then
+        assertThat(userWithAuthorities.getAuthorities()).isNotNull();
+        assertThat(userWithAuthorities.getAuthorities().size()).isEqualTo(1);
+        assertThat(userWithAuthorities.getAuthorities().contains(testAuthority)).isFalse();
     }
 
 

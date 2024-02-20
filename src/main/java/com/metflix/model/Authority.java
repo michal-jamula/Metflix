@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -42,4 +43,16 @@ public class Authority implements GrantedAuthority {
         return authority.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Authority authority1 = (Authority) o;
+        return Objects.equals(authorityId, authority1.authorityId) && authority == authority1.authority;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(authorityId, authority);
+    }
 }

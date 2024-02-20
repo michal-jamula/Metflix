@@ -89,11 +89,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p >User is not a subscriber and cannot watch movies. Subscribe to fully enjoy this service</p>
-                        <p>---Subscription method not implemented yet---</p>
+                        <p >User is not a subscriber and can only watch trailers, subscribe for full functionality</p>
                     </div>
-                    <div class="modal-footer">
-                        <a> <button th:onclick="|shake(this)|" type="button" class="btn btn-primary" >Subscribe</button> </a>
+                    <div class="modal-footer d-flex justify-content-center">
+                    <stripe-buy-button
+                            buy-button-id="buy_btn_1OjmaTFVGA9E6Iz5ucPZfGyd"
+                            publishable-key="pk_test_51Oiyg8FVGA9E6Iz5BHdUvmM1dSqgSXlF4Jp5b5c6UUiWUhz3dbOPSjb9FfdRaO8TuLTR2uVcBURjyeQgiBKSWYZ800nM90NkiJ"
+                            th:attr="client-reference-id=|${#authentication?.principal.id}|"
+                    >
+                    </stripe-buy-button>
                     </div>
                 </div>
             </div>

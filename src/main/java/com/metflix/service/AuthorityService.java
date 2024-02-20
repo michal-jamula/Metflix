@@ -33,4 +33,6 @@ public class AuthorityService {
         final Pageable pageable = PageRequest.of(pageNumber - 1, pageSize, sort);
         return authorityRepository.findAll(pageable);
     }
+
+
 }

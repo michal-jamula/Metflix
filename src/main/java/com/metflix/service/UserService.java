@@ -1,7 +1,9 @@
 package com.metflix.service;
 
 
-import com.metflix.exceptions.*;
+import com.metflix.exceptions.EmailAlreadyExistsException;
+import com.metflix.exceptions.PasswordsDontMatchException;
+import com.metflix.exceptions.UserFieldIsEmptyException;
 import com.metflix.model.Authority;
 import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.User;
@@ -11,12 +13,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -29,7 +37,8 @@ public class UserService implements UserDetailsService {
 
 
     /**
-     *Locates a {@link User} based on a username
+     * Locates a {@link User} based on a username
+     *
      * @param username the username identifying the user whose data is required.
      * @return {@link User}
      * @throws UsernameNotFoundException
@@ -47,6 +56,7 @@ public class UserService implements UserDetailsService {
 
     /**
      * Returns Paginated users
+     *
      * @param pageNumber
      * @param pageSize
      * @param sortField
@@ -54,11 +64,11 @@ public class UserService implements UserDetailsService {
      * @return {@link Page}&lt{@link User}&gt
      */
     public Page<User> findPaginated(final int pageNumber, final int pageSize,
-                                        final String sortField, final String sortDirection) {
+                                    final String sortField, final String sortDirection) {
 
         Sort sort;
-        if( sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())) {
-             sort = Sort.by(sortField).ascending();
+        if (sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())) {
+            sort = Sort.by(sortField).ascending();
         } else {
             sort = Sort.by(sortField).descending();
         }
@@ -70,9 +80,9 @@ public class UserService implements UserDetailsService {
     /**
      * Validates a {@link User} by checking for empty fields, existing email and matching password.<br>
      */
-    public void validateUser (User user, String password2) throws EmailAlreadyExistsException, PasswordsDontMatchException, UserFieldIsEmptyException {
+    public void validateUser(User user, String password2) throws EmailAlreadyExistsException, PasswordsDontMatchException, UserFieldIsEmptyException {
 
-        if (emailExists(user.getUsername())){
+        if (emailExists(user.getUsername())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
@@ -94,10 +104,11 @@ public class UserService implements UserDetailsService {
 
     /**
      * Returns {@code true} when email is already in a database
+     *
      * @param email
      * @return boolean
      */
-    public boolean emailExists (String email) {
+    public boolean emailExists(String email) {
         return userRepository.findByUsername(email).isPresent();
     }
 
@@ -107,44 +118,46 @@ public class UserService implements UserDetailsService {
      * Checks if {@link User} contains empty fields, excludes ID. Throws UserRegistrationException if a field is wrong
      */
     private void checkUserContainsEmptyFields(User user) throws UserFieldIsEmptyException {
-            HashMap<String, String> fieldsToCheck = new HashMap<>();
-            fieldsToCheck.put("name", user.getName());
-            fieldsToCheck.put("surname", user.getSurname());
-            fieldsToCheck.put("email", user.getUsername());
-            fieldsToCheck.put("phone", user.getPhoneNumber());
-            fieldsToCheck.put("password", user.getPassword());
+        HashMap<String, String> fieldsToCheck = new HashMap<>();
+        fieldsToCheck.put("name", user.getName());
+        fieldsToCheck.put("surname", user.getSurname());
+        fieldsToCheck.put("email", user.getUsername());
+        fieldsToCheck.put("phone", user.getPhoneNumber());
+        fieldsToCheck.put("password", user.getPassword());
 
 
-            for (Map.Entry<String, String> set: fieldsToCheck.entrySet()) {
-                if (StringUtils.isBlank(set.getValue())) {
-                    throw new UserFieldIsEmptyException(String.format("%s field is empty", StringUtils.capitalize(set.getKey())));
-                }
+        for (Map.Entry<String, String> set : fieldsToCheck.entrySet()) {
+            if (StringUtils.isBlank(set.getValue())) {
+                throw new UserFieldIsEmptyException(String.format("%s field is empty", StringUtils.capitalize(set.getKey())));
             }
+        }
 
-            if (user.getDateOfBirth() == null) {
-                throw new UserFieldIsEmptyException("Date of birth is empty");
-            } else if (user.getRegistrationDate() == null) {
-                throw new UserFieldIsEmptyException("Registration date is empty");
-            }
+        if (user.getDateOfBirth() == null) {
+            throw new UserFieldIsEmptyException("Date of birth is empty");
+        } else if (user.getRegistrationDate() == null) {
+            throw new UserFieldIsEmptyException("Registration date is empty");
+        }
     }
 
     /**
      * Returns {@code true} if passwords (or 2 strings) match
+     *
      * @param pass1
      * @param pass2
      * @return boolean
      */
-    public boolean checkPasswordsMatch (String pass1, String pass2) {
+    public boolean checkPasswordsMatch(String pass1, String pass2) {
         return pass1.equals(pass2);
     }
 
 
     /**
      * Saves a user to the repository. Also assigns a role of {@link AuthoritiesEnum#ROLE_MEMBER}
+     *
      * @param user
      * @return {@link User}
      */
-    public User save (User user) {
+    public User save(User user) {
 
         if (user.getRegistrationDate() == null) {
             user.setRegistrationDate(LocalDate.now());
@@ -162,10 +175,11 @@ public class UserService implements UserDetailsService {
     /**
      * Goes through every field (excluding ID and password) and updates user information.
      * Ignores fields which have to be updated to null or empty
+     *
      * @param user
      * @throws Exception
      */
-    public void updateUser(User user){
+    public void updateUser(User user) {
 
         try {
             int userId = user.getId();
@@ -177,7 +191,7 @@ public class UserService implements UserDetailsService {
 
         Optional<User> userOptional = userRepository.findById(user.getId());
 
-        if(userOptional.isEmpty()) {
+        if (userOptional.isEmpty()) {
             System.out.println("Tried to update a user who doesn't exist in the database. Save the user first");
             return;
         }
@@ -217,7 +231,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (user.getAuthorities() != null && !user.getAuthorities().isEmpty()) {
-            userDb.setAuthorities((List<Authority>)user.getAuthorities());
+            userDb.setAuthorities((List<Authority>) user.getAuthorities());
         }
 
         userRepository.save(userDb);
@@ -230,5 +244,41 @@ public class UserService implements UserDetailsService {
      */
     public Optional<User> findById(int id) {
         return userRepository.findById(id);
+    }
+
+    /**
+     * Pulls user's data from the database and updates his Session info
+     *
+     * @param userId user's ID
+     */
+    public void refreshUserSessionDetails(int userId) {
+
+        var userOptional = userRepository.findById(userId);
+
+        if (userOptional.isEmpty()) {
+            System.out.println("Tried to refresh wrong user's information!");
+            return;
+        }
+
+        User user = userOptional.get();
+
+        Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (currentAuthentication != null && currentAuthentication.isAuthenticated()
+                && currentAuthentication.getPrincipal() instanceof User) {
+
+            User authUser = (User) currentAuthentication.getPrincipal();
+            authUser.setAuthorities((List<Authority>) user.getAuthorities());
+
+
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                    (Object) authUser,
+                    currentAuthentication.getCredentials(),
+                    user.getAuthorities()
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+        }
+
     }
 }

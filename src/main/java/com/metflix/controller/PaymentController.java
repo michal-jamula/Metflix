@@ -63,11 +63,9 @@ public class PaymentController {
 
                 subscription = (Subscription) stripeObject;
 
-                System.out.println("subscription id: " + subscription.getId());
-
                 subscriptionService.unsubscribeUser(subscription.getId());
 
-                System.out.println("user canceled their subscription, unsubscribe");
+                System.out.println("user canceled their subscription");
                 return new ResponseEntity<>(HttpStatus.OK);
 
 
@@ -87,8 +85,6 @@ public class PaymentController {
                          subscriptionId = "sub_fakeID";
                      }
 
-                    System.out.println("subscription id: " + subscriptionId);
-                    System.out.println("client reference: " + clientId);
 
                     subscriptionService.subscribeUser(clientId, subscriptionId);
                     System.out.format("Checkout successful. Client with id {%s} should be subscribed now.\n", clientId);

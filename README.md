@@ -1,7 +1,7 @@
 # **Metflix**
 
 Showcase  video:
-https://www.youtube.com/watch?v=ChMD7XWumuU
+https://youtu.be/2OqIiMOBv_I
 <br>
 
 ## Program Overview:
@@ -143,6 +143,8 @@ The motivation for this project comes from my willingness to show off my skills 
 - 20/02/2024
   - The user is now able to subscribe to the service (using Stripe for processing the payment)
   - The user is also able to unsubscribe
+- 21/02/2024
+  - The user's Session info now refreshes, user no longer has to logout to refresh his details (e.g after subscribing)
 
 
 <br><br>

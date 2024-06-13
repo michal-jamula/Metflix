@@ -4,7 +4,6 @@ package com.metflix.controller;
 import com.metflix.model.Authority;
 import com.metflix.model.Movie;
 import com.metflix.model.User;
-import com.metflix.repositories.MovieRepository;
 import com.metflix.service.AuthorityService;
 import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
@@ -25,13 +24,11 @@ public class AdminController {
 
     private final UserService userService;
     private final MovieService movieService;
-    private final MovieRepository movieRepository;
     private final AuthorityService authorityService;
 
-    public AdminController(UserService userService, MovieService movieService, MovieRepository movieRepository, AuthorityService authorityService) {
+    public AdminController(UserService userService, MovieService movieService, AuthorityService authorityService) {
         this.userService = userService;
         this.movieService = movieService;
-        this.movieRepository = movieRepository;
         this.authorityService = authorityService;
     }
 
@@ -56,7 +53,7 @@ public class AdminController {
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-        // Users list
+        // Movies list
         model.addAttribute("listMovies", listMovies);
         return "admin/movies";
     }
@@ -65,7 +62,7 @@ public class AdminController {
     @GetMapping("movie")
     public String adminMovieEditGet(@RequestParam("id") int movieId, Model model) {
 
-        Optional<Movie> movieOptional = movieRepository.findById(movieId);
+        Optional<Movie> movieOptional = movieService.findById(movieId);
 
         if (movieOptional.isPresent()) {
             Movie movie = movieOptional.get();

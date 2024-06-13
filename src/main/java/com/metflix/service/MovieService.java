@@ -1,7 +1,7 @@
 package com.metflix.service;
 
 
-import com.metflix.exceptions.UserNotFoundException;
+import com.metflix.model.Enums.MovieTypeEnum;
 import com.metflix.model.Movie;
 import com.metflix.repositories.MovieRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -11,13 +11,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieService {
-//TODO: Currently this class isn't being used. Either delete this or change everything so the controllers dont have access to repositories directly
 
     private final MovieRepository movieRepository;
+
+    public List<String> findDistinctByType() {
+        return movieRepository.findDistinctByType();
+    }
+
+    public List<Movie> findMoviesByType(MovieTypeEnum type) {
+        return movieRepository.findMoviesByType(type);
+    }
+
+    public Optional<Movie> findById(int id) {
+        return movieRepository.findById(id);
+    }
 
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;

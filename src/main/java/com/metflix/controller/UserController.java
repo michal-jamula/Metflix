@@ -4,7 +4,6 @@ package com.metflix.controller;
 import com.metflix.model.Movie;
 import com.metflix.model.User;
 import com.metflix.model.Enums.MovieTypeEnum;
-import com.metflix.repositories.MovieRepository;
 import com.metflix.service.MovieService;
 import com.metflix.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -20,12 +19,10 @@ import java.util.Optional;
 @RequestMapping("/user/")
 public class UserController {
 
-    private final MovieRepository movieRepository;
     private final MovieService movieService;
     private final UserService userService;
 
-    public UserController(MovieRepository movieRepository, MovieService movieService, UserService userService) {
-        this.movieRepository = movieRepository;
+    public UserController(MovieService movieService, UserService userService) {
         this.movieService = movieService;
         this.userService = userService;
     }
@@ -34,10 +31,10 @@ public class UserController {
     public String user_main(Model model) {
 
 
-        List<String> movieTypeList = movieRepository.findDistinctByType();
+        List<String> movieTypeList = movieService.findDistinctByType();
 
         for (String movieType : movieTypeList) {
-            model.addAttribute(movieType, movieRepository.findMoviesByType(MovieTypeEnum.valueOf(movieType)));
+            model.addAttribute(movieType, movieService.findMoviesByType(MovieTypeEnum.valueOf(movieType)));
         }
         model.addAttribute("listOfMovieTypes", movieTypeList);
 
@@ -67,7 +64,7 @@ public class UserController {
                                Model model) {
 
         //TODO: The controller is directly accessing the repo !?!?!
-        Optional<Movie> movieOptional = movieRepository.findById(id);
+        Optional<Movie> movieOptional = movieService.findById(id);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

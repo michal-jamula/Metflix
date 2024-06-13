@@ -83,9 +83,16 @@ public class AdminController {
                                      @RequestParam(name = "sort-dir") final String sortDir,
                                      final Model model
     ) {
+        String convertedField = sortField;
+
+        if (convertedField.equals("email"))
+            convertedField = "username";
+        if (convertedField.equals("status"))
+            convertedField = "authorities";
+
 
         final int pageSize = 10;
-        final Page<User> page = userService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final Page<User> page = userService.findPaginated(pageNo, pageSize, convertedField, sortDir);
         final List<User> listUsers = page.getContent();
 
         // In ideal cases the response should be encapsulated in a class.

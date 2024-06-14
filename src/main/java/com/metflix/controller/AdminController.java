@@ -2,6 +2,7 @@ package com.metflix.controller;
 
 
 import com.metflix.model.Authority;
+import com.metflix.model.Enums.AuthoritiesEnum;
 import com.metflix.model.Movie;
 import com.metflix.model.User;
 import com.metflix.service.AuthorityService;
@@ -167,8 +168,13 @@ public class AdminController {
                                      final Model model
     ) {
 
+        String convertedSortField = sortField;
+
+        if (convertedSortField.equals("authorityid"))
+            convertedSortField = "authorityId";
+
         final int pageSize = 10;
-        final Page<Authority> page = authorityService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        final Page<Authority> page = authorityService.findPaginated(pageNo, pageSize, convertedSortField, sortDir);
         final List<Authority> listAuthorities = page.getContent();
 
         // In ideal cases the response should be encapsulated in a class.
@@ -178,7 +184,7 @@ public class AdminController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         // sorting parameters
-        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortField", convertedSortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         // Authorities list

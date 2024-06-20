@@ -24,7 +24,7 @@ public class SubscriptionService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.addAuthority(new Authority(2, AuthoritiesEnum.ROLE_SUBSCRIBED));
-            userService.save(user);
+            userService.updateUser(user);
             subscriptionRepository.save(new ActiveSubscription(subscriptionId, userId));
         }
     }
